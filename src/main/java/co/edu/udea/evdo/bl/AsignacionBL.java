@@ -77,7 +77,7 @@ public class AsignacionBL implements Serializable{
                             asignacion.setProg(materia.getPrograma());
                             System.out.println("aprograma: "+asignacion.getPrograma());
                             System.out.println("mprograma"+ materia.getPrograma());
-                           
+                            addAsignacion(asignacion);
             /*System.out.println("1: " + asignacion.getSemestre());
             System.out.println("2: " + asignacion.getMateria());
             System.out.println("3: " + asignacion.getGrupo());
