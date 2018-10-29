@@ -35,7 +35,7 @@ public class Asignacion {
         return programa;
     }
 
-    public void setPrograma(long programa) {
+    public void setProg(long programa) {
         this.programa = programa;
     }
     

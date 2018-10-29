@@ -26,6 +26,17 @@ public class AsignacionDAO extends ConnectionPool{
         ResultSet rs = null;
         try{
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.agregar"));
+            System.out.println("1: " + asignacion.getSemestre());
+            System.out.println("2: " + asignacion.getMateria());
+            System.out.println("3: " + asignacion.getGrupo());
+            System.out.println("4: " + asignacion.getCedula());
+            System.out.println("5: " + asignacion.getProf_compartido());
+            System.out.println("6: " + asignacion.getProf_catedra());
+            System.out.println("7: " + asignacion.getNum_catedra());
+            System.out.println("8: " + asignacion.getTipo_periodo());
+            System.out.println("9: " + asignacion.getNombre_docente());
+            System.out.println("10: " + asignacion.getNombre_materia());
+            System.out.println("11: " + asignacion.getPrograma());
             ps.setLong(1, asignacion.getSemestre());
             ps.setLong(2, asignacion.getMateria());
             ps.setLong(3, asignacion.getGrupo());
@@ -39,6 +50,19 @@ public class AsignacionDAO extends ConnectionPool{
             ps.setLong(11, asignacion.getPrograma());
             ps.executeQuery();
         }catch(Exception e){
+            System.out.println("error");
+            System.out.println(asignacion);
+            System.out.println("1: " + asignacion.getSemestre());
+            System.out.println("2: " + asignacion.getMateria());
+            System.out.println("3: " + asignacion.getGrupo());
+            System.out.println("4: " + asignacion.getCedula());
+            System.out.println("5: " + asignacion.getProf_compartido());
+            System.out.println("6: " + asignacion.getProf_catedra());
+            System.out.println("7: " + asignacion.getNum_catedra());
+            System.out.println("8: " + asignacion.getTipo_periodo());
+            System.out.println("9: " + asignacion.getNombre_docente());
+            System.out.println("10: " + asignacion.getNombre_materia());
+            System.out.println("11: " + asignacion.getPrograma());
             System.err.println(e);
         }finally{
             close(ps,rs);

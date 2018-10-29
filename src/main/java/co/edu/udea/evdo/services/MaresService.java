@@ -130,6 +130,36 @@ public class MaresService {
     }
     
     @GET //Cambiar a tipo post
+    @Path("progs")
+    @Produces(MediaType.APPLICATION_JSON)
+    public static Collection<ProgramaMares> consultaProgramasXMateria(@QueryParam("materia")String materia) {
+
+        OrgSistemasWSRequest result;
+        Collection<ProgramaMares> listaPrograsmaDeRol = new LinkedList<>();
+        String token;
+        boolean esDesarrollo;
+
+        try {
+            OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
+            wsClient.addParam("dodigoMateria", materia);
+            //wsClient.addParam("programa", "504");
+            listaPrograsmaDeRol = wsClient.obtenerBean("consultarprogramasdemateriamares", "5facbdd992ecd3e667df2b544e22a80a8274fd59", ProgramaMares.class);
+            
+            /*for(MateriaMares materia: listaPrograsmaDeRol){
+                if (!materia.getIndicadorVersionActual().equalsIgnoreCase("N")) {
+                    System.out.println(materia.getNombreMateria());
+                    cuenta=cuenta+1;
+                }
+            }
+            System.out.println(cuenta);*/
+        } catch (OrgSistemasSecurityException ex) {
+            return listaPrograsmaDeRol;
+        }
+
+        return listaPrograsmaDeRol;
+    }
+    
+    @GET //Cambiar a tipo post
     @Path("docentes")
     public Collection<DocenteMateriaGrupo> consultaDocentes(@QueryParam("materia")String materia, @QueryParam("grupo")String grupo){
         OrgSistemasWSRequest result;

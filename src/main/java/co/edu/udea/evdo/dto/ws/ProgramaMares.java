@@ -26,6 +26,26 @@ public class ProgramaMares implements Serializable{
     private long versionActual;
     private String versiones;
     private String estado;
+    private String indicadorVersion;
+    private long nivel;
+
+    public String getIndicadorVersion() {
+        return indicadorVersion;
+    }
+
+    public void setIndicadorVersion(String indicadorVersion) {
+        this.indicadorVersion = indicadorVersion;
+    }
+
+    public long getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(long nivel) {
+        this.nivel = nivel;
+    }
+    
+    
 
     public long getPrograma() {
         return programa;

@@ -12,6 +12,7 @@ import co.edu.udea.evdo.dto.Programa;
 import co.edu.udea.evdo.dto.ws.DocenteMateriaGrupo;
 import co.edu.udea.evdo.dto.ws.FacultadMares;
 import co.edu.udea.evdo.dto.ws.MateriaMares;
+import co.edu.udea.evdo.dto.ws.ProgramaMares;
 import co.edu.udea.evdo.services.MaresService;
 import co.edu.udea.evdo.ws.EncuestaClient;
 import java.io.Serializable;
@@ -55,9 +56,10 @@ public class AsignacionBL implements Serializable{
             Grupo grupo;
             GrupoBL gbl = new GrupoBL();
             for(FacultadMares facultad : facultades){
+                System.out.println(facultad.getNombre());
                 materias = ms.consultaMaterias(Long.toString(facultad.getCodigo()));
                 for(MateriaMares materia:materias){
-                    
+                    System.out.println( materia.getNombreMateria() + materia.getMateria());
                     for(int i = 1; i<=10; i++){
                         docentes = ms.consultaDocentes(Long.toString(materia.getMateria()),Integer.toString(i) );
                         for(DocenteMateriaGrupo docente: docentes){
@@ -72,8 +74,21 @@ public class AsignacionBL implements Serializable{
                             asignacion.setTipo_periodo(docente.getTipoPeriodo());
                             asignacion.setNombre_docente(docente.getNombreDocente());
                             asignacion.setNombre_materia(materia.getNombreMateria());
-                            asignacion.setPrograma(materia.getPrograma());
-                            addAsignacion(asignacion);
+                            asignacion.setProg(materia.getPrograma());
+                            System.out.println("aprograma: "+asignacion.getPrograma());
+                            System.out.println("mprograma"+ materia.getPrograma());
+                           
+            /*System.out.println("1: " + asignacion.getSemestre());
+            System.out.println("2: " + asignacion.getMateria());
+            System.out.println("3: " + asignacion.getGrupo());
+            System.out.println("4: " + asignacion.getCedula());
+            System.out.println("5: " + asignacion.getProf_compartido());
+            System.out.println("6: " + asignacion.getProf_catedra());
+            System.out.println("7: " + asignacion.getNum_catedra());
+            System.out.println("8: " + asignacion.getTipo_periodo());
+            System.out.println("9: " + asignacion.getNombre_docente());
+            System.out.println("10: " + asignacion.getNombre_materia());
+            System.out.println("11: " + asignacion.getPrograma());*/
                             grupo = new Grupo();
                             grupo.setSemestre(asignacion.getSemestre());
                             grupo.setMateria(asignacion.getMateria());
