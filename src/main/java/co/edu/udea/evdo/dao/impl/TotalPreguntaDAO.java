@@ -62,8 +62,8 @@ public class TotalPreguntaDAO extends ConnectionPool{
             ps.setDouble(3, tp.getMedia());
             ps.setDouble(4, tp.getDesviacion());
             ps.setDouble(5, tp.getCoeficiente_desv());
-            ps.setInt(6, tp.getSemestre());
-            ps.setInt(7, tp.getMateria());
+            ps.setLong(6, tp.getSemestre());
+            ps.setLong(7, tp.getMateria());
             ps.setInt(8, tp.getGrupo());
             ps.setString(9, tp.getCedula());
             ps.executeQuery();

@@ -20,6 +20,31 @@ import oracle.jdbc.OracleTypes;
  * @author Jonathan
  */
 public class AsignacionDAO extends ConnectionPool{
+    
+    public Asignacion addAsignacion(Asignacion asignacion){
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.agregar"));
+            ps.setLong(1, asignacion.getSemestre());
+            ps.setLong(2, asignacion.getMateria());
+            ps.setLong(3, asignacion.getGrupo());
+            ps.setString(4, asignacion.getCedula());
+            ps.setString(5, asignacion.getProf_compartido());
+            ps.setString(6, asignacion.getProf_catedra());
+            ps.setLong(7, asignacion.getNum_catedra());
+            ps.setString(8, asignacion.getTipo_periodo());
+            ps.setString(9, asignacion.getNombre_docente());
+            ps.setString(10, asignacion.getNombre_materia());
+            ps.setLong(11, asignacion.getPrograma());
+            ps.executeQuery();
+        }catch(Exception e){
+            System.err.println(e);
+        }finally{
+            close(ps,rs);
+        }
+        return asignacion;
+    }
     public Collection<Asignacion> getAsignaciones(){
         CallableStatement ps = null;
         ResultSet rs = null;
@@ -33,8 +58,8 @@ public class AsignacionDAO extends ConnectionPool{
             if(rs!=null){
                 while(rs.next()){
                     asignacion = new Asignacion();
-                    asignacion.setSemestre(rs.getInt("SEMESTRE"));
-                    asignacion.setMateria(rs.getInt("MATERIA"));
+                    asignacion.setSemestre(rs.getLong("SEMESTRE"));
+                    asignacion.setMateria(rs.getLong("MATERIA"));
                     asignacion.setGrupo(rs.getInt("GRUPO"));
                     asignacion.setCedula(rs.getString("CEDULA"));
                     asignacion.setProf_compartido(rs.getString("PROF_COMPARTIDO"));
@@ -72,8 +97,8 @@ public class AsignacionDAO extends ConnectionPool{
         System.out.println(porcentaje);
         try{
            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.porcentaje"));
-           ps.setInt(1, asig.getSemestre());
-           ps.setInt(2, asig.getMateria());
+           ps.setLong(1, asig.getSemestre());
+           ps.setLong(2, asig.getMateria());
            ps.setInt(3, asig.getGrupo());
            ps.setString(4, asig.getCedula());
            ps.setDouble(5, porcentaje);
@@ -101,8 +126,8 @@ public class AsignacionDAO extends ConnectionPool{
         Asignacion asignacion = new Asignacion();
         try{
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.actualizar"));
-            ps.setInt(1, asig.getSemestre());
-            ps.setInt(2, asig.getMateria());
+            ps.setLong(1, asig.getSemestre());
+            ps.setLong(2, asig.getMateria());
             ps.setInt(3, asig.getGrupo());
             ps.setString(4, asig.getCedula());
             ps.setString(5, asig.getEncuesta());

@@ -13,13 +13,13 @@ import java.sql.Date;
  * @author Jonathan
  */
 public class Asignacion {
-    private int semestre;
-    private int materia;
+    private long semestre;
+    private long materia;
     private int grupo;
     private String cedula;
     private String prof_compartido;
     private String prof_catedra;
-    private int num_catedra;
+    private long num_catedra;
     private double porcentaje;
     private String tipo_periodo;
     private String encuesta;
@@ -27,6 +27,36 @@ public class Asignacion {
     private Date fecha_enc_final;
     private int estudiantes;
     private int encuestados;
+    private String nombre_materia;
+    private String nombre_docente;
+    private long programa;
+
+    public long getPrograma() {
+        return programa;
+    }
+
+    public void setPrograma(long programa) {
+        this.programa = programa;
+    }
+    
+
+    public String getNombre_materia() {
+        return nombre_materia;
+    }
+
+    public void setNombre_materia(String nombre_materia) {
+        this.nombre_materia = nombre_materia;
+    }
+
+    public String getNombre_docente() {
+        return nombre_docente;
+    }
+
+    public void setNombre_docente(String nombre_docente) {
+        this.nombre_docente = nombre_docente;
+    }
+    
+    
 
     public int getEncuestados() {
         return encuestados;
@@ -49,19 +79,19 @@ public class Asignacion {
     
     
 
-    public int getSemestre() {
+    public long getSemestre() {
         return semestre;
     }
 
-    public void setSemestre(int semestre) {
+    public void setSemestre(long semestre) {
         this.semestre = semestre;
     }
 
-    public int getMateria() {
+    public long getMateria() {
         return materia;
     }
 
-    public void setMateria(int materia) {
+    public void setMateria(long materia) {
         this.materia = materia;
     }
 
@@ -97,11 +127,11 @@ public class Asignacion {
         this.prof_catedra = prof_catedra;
     }
 
-    public int getNum_catedra() {
+    public long getNum_catedra() {
         return num_catedra;
     }
 
-    public void setNum_catedra(int num_catedra) {
+    public void setNum_catedra(long num_catedra) {
         this.num_catedra = num_catedra;
     }
 

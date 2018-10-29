@@ -39,7 +39,8 @@ public class PreguntaService implements Serializable{
     @Path("poblar")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public void poblarPreguntas(){
+    public String poblarPreguntas(){
         PreguntaBL.getInstance().poblarPreguntas();
+        return "aprobado";
     }
 }

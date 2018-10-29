@@ -12,24 +12,24 @@ import java.io.Serializable;
  * @author Jonathan
  */
 public class Grupo implements Serializable{
-    private int semestre;
-    private int materia;
+    private long semestre;
+    private long materia;
     private int grupo;
     private int num_estudiantes;
 
-    public int getSemestre() {
+    public long getSemestre() {
         return semestre;
     }
 
-    public void setSemestre(int semestre) {
+    public void setSemestre(long semestre) {
         this.semestre = semestre;
     }
 
-    public int getMateria() {
+    public long getMateria() {
         return materia;
     }
 
-    public void setMateria(int materia) {
+    public void setMateria(long materia) {
         this.materia = materia;
     }
 

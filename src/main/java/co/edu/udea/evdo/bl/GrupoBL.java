@@ -33,6 +33,10 @@ public class GrupoBL implements Serializable{
             return obtenerGrupoDAO().getGrupos();
         }
         
+        public Grupo addGrupo(Grupo grupo){
+            return obtenerGrupoDAO().addGrupo(grupo);
+        }
+        
         private GrupoDAO obtenerGrupoDAO() {
         GrupoDAO DAO = new GrupoDAO();
         return DAO;

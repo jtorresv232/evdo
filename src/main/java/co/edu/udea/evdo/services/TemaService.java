@@ -31,8 +31,9 @@ public class TemaService {
     @Path("poblar")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public void poblarTemas(){
+    public String poblarTemas(){
         TemaBL.getInstance().poblarTemas();
+        return "aprobado";
     }
     
     @POST

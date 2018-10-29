@@ -18,8 +18,8 @@ public class TotalTema implements Serializable{
     private double media;
     private double desviacion;
     private double coeficiente_desv;
-    private int semestre;
-    private int materia;
+    private long semestre;
+    private long materia;
     private int grupo;
     private String cedula;
 
@@ -71,19 +71,19 @@ public class TotalTema implements Serializable{
         this.coeficiente_desv = coeficiente_desv;
     }
 
-    public int getSemestre() {
+    public long getSemestre() {
         return semestre;
     }
 
-    public void setSemestre(int semestre) {
+    public void setSemestre(long semestre) {
         this.semestre = semestre;
     }
 
-    public int getMateria() {
+    public long getMateria() {
         return materia;
     }
 
-    public void setMateria(int materia) {
+    public void setMateria(long materia) {
         this.materia = materia;
     }
 

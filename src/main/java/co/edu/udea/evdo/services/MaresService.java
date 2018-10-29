@@ -5,6 +5,7 @@
  */
 package co.edu.udea.evdo.services;
 
+import co.edu.udea.evdo.dto.Grupo;
 import co.edu.udea.evdo.dto.ws.DocenteMateriaGrupo;
 import co.edu.udea.evdo.dto.ws.FacultadMares;
 import co.edu.udea.evdo.dto.ws.MateriaMares;
@@ -20,6 +21,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -58,6 +60,14 @@ public class MaresService {
                 listaPrograsmaDeRol.setEstado(o.get("estado").toString());
                 listaPrograsmaDeRol.setVersionActual(new Long(o.get("versionActual").toString()));
             }*/
+            int cuenta = 0;
+            for(ProgramaMares programa: listaPrograsmaDeRol){
+                if (programa.getEstado().equalsIgnoreCase("FUNC")) {
+                    System.out.println(programa.getNombrePrograma());
+                    cuenta=cuenta+1;
+                }
+            }
+            System.out.println(cuenta);
         } catch (OrgSistemasSecurityException ex) {
             return listaPrograsmaDeRol;
         }
@@ -89,7 +99,8 @@ public class MaresService {
     
     @GET //Cambiar a tipo post
     @Path("materias")
-    public static Collection<MateriaMares> consultaMaterias() {
+    @Produces(MediaType.APPLICATION_JSON)
+    public static Collection<MateriaMares> consultaMaterias(@QueryParam("facultad")String facultad) {
 
         OrgSistemasWSRequest result;
         Collection<MateriaMares> listaPrograsmaDeRol = new LinkedList<>();
@@ -98,17 +109,19 @@ public class MaresService {
 
         try {
             OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
-            wsClient.addParam("facultad", "25");
-            wsClient.addParam("programa", "504");
+            wsClient.addParam("facultad", facultad);
+            //wsClient.addParam("programa", "504");
+            wsClient.addParam("tiposPrograma", "DOCTORAD,ESPECIAL,MAESTRIA");
             listaPrograsmaDeRol = wsClient.obtenerBean("consultarmateriasprogramaversion", "5facbdd992ecd3e667df2b544e22a80a8274fd59", MateriaMares.class);
             int cuenta = 0;
-            for(MateriaMares materia: listaPrograsmaDeRol){
+            listaPrograsmaDeRol.removeIf(x -> x.getIndicadorVersionActual().equalsIgnoreCase("N"));
+            /*for(MateriaMares materia: listaPrograsmaDeRol){
                 if (!materia.getIndicadorVersionActual().equalsIgnoreCase("N")) {
                     System.out.println(materia.getNombreMateria());
                     cuenta=cuenta+1;
                 }
             }
-            System.out.println(cuenta);
+            System.out.println(cuenta);*/
         } catch (OrgSistemasSecurityException ex) {
             return listaPrograsmaDeRol;
         }
@@ -118,7 +131,7 @@ public class MaresService {
     
     @GET //Cambiar a tipo post
     @Path("docentes")
-    public Collection<DocenteMateriaGrupo> consultaDocentes(){
+    public Collection<DocenteMateriaGrupo> consultaDocentes(@QueryParam("materia")String materia, @QueryParam("grupo")String grupo){
         OrgSistemasWSRequest result;
         Collection<DocenteMateriaGrupo> listaPrograsmaDeRol = new LinkedList<>();
         String token;
@@ -127,9 +140,30 @@ public class MaresService {
         try {
             OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
             wsClient.addParam("periodo", "20162");
-            wsClient.addParam("codigoMateria", "2508484");
-            //wsClient.addParam("grupo", "1");
+            wsClient.addParam("codigoMateria", materia);
+            wsClient.addParam("grupo", grupo);
             listaPrograsmaDeRol = wsClient.obtenerBean("consultardocentesmateriagrupomares", "5facbdd992ecd3e667df2b544e22a80a8274fd59", DocenteMateriaGrupo.class);
+        } catch (OrgSistemasSecurityException ex) {
+            return listaPrograsmaDeRol;
+        }
+
+        return listaPrograsmaDeRol;
+    }
+    
+    @GET
+    @Path("estudiantes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<Grupo> getEstudiantes(){
+        OrgSistemasWSRequest result;
+        Collection<Grupo> listaPrograsmaDeRol = new LinkedList<>();
+        String token;
+        boolean esDesarrollo;
+
+        try {
+            OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
+            wsClient.addParam("materia", "2508107");
+            //wsClient.addParam("grupo", "1");
+            listaPrograsmaDeRol = wsClient.obtenerBean("consultaestudiantesmatriculadosmares", "5facbdd992ecd3e667df2b544e22a80a8274fd59", Grupo.class);
         } catch (OrgSistemasSecurityException ex) {
             return listaPrograsmaDeRol;
         }

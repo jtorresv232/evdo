@@ -31,8 +31,8 @@ public class GrupoDAO extends ConnectionPool{
                 while(rs.next()){
                     grupo = new Grupo();
                     
-                    grupo.setSemestre(rs.getInt("SEMESTRE"));
-                    grupo.setMateria(rs.getInt("MATERIA"));
+                    grupo.setSemestre(rs.getLong("SEMESTRE"));
+                    grupo.setMateria(rs.getLong("MATERIA"));
                     grupo.setGrupo(rs.getInt("GRUPO"));
                     grupo.setNum_estudiantes(rs.getInt("NUM_ESTUDIANTES"));
                     listaGrupos.add(grupo);
@@ -44,6 +44,24 @@ public class GrupoDAO extends ConnectionPool{
             close(ps,rs);
         }
         return listaGrupos;
+    }
+    
+    public Grupo addGrupo(Grupo grupo){
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("grupo.agregar"));
+            ps.setLong(1, grupo.getSemestre());
+            ps.setLong(2, grupo.getMateria());
+            ps.setInt(3, grupo.getGrupo());
+            ps.setInt(4, grupo.getNum_estudiantes());
+            ps.executeQuery();
+        }catch(Exception e ){
+            System.err.println(e);
+        }finally{
+            close(ps,rs);
+        }
+        return grupo;
     }
     
 }
