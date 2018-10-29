@@ -27,7 +27,7 @@ import javax.ws.rs.core.Response;
  */
 public class EncuestaClient {
     private static final String REST_URL
-            = "http://localhost:8084/encuesta/webapi/";
+            = "http://172.19.0.204:9085/encuesta/webapi/";
     
     private Client client = ClientBuilder.newClient();
     

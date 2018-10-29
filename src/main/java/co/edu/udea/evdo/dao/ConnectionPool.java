@@ -31,7 +31,7 @@ public class ConnectionPool {
             } else {
                 if (dataSource == null) {
                     InitialContext initContext = new InitialContext();
-                    dataSource = (DataSource) initContext.lookup("java:comp/env/consultaEvaluaciones");
+                    dataSource = (DataSource) initContext.lookup("java:comp/env/consultaevaluaDocen");
                 }
                 con = dataSource.getConnection();
                 con.setAutoCommit(true);
@@ -48,13 +48,13 @@ public class ConnectionPool {
     public Connection getConn(boolean state) throws SQLException, Exception{
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            String host = "localhost";
+            String host = "sinu.udea.red";
             String port = "1521";
-            String sid = "evaldoc";
+            String sid = "udeadev";
             String url = "jdbc:oracle:thin@" + host + ":" + port + ":" + sid;
             Properties props = new Properties();
-            props.put("password", "pamumo2323");
-            props.put("user", "anonymous");
+            props.put("password", "evaluaDocen123");
+            props.put("user", "evaluaDocen");
         }catch(Exception e){
             throw new Exception(e);
         }finally {

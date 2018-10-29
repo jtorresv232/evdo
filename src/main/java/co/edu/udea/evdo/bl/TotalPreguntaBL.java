@@ -86,7 +86,7 @@ public class TotalPreguntaBL implements Serializable{
                     total.setCedula(asignacion.getCedula());
                     total.setCoeficiente_desv(coeficiente_desv);
                     total.setDesviacion(desviacion);
-                    total.setEvaluacion("eval20181");
+                    total.setEvaluacion("eval20162");
                     total.setGrupo(asignacion.getGrupo());
                     total.setMateria(asignacion.getMateria());
                     total.setMedia(promedio);
