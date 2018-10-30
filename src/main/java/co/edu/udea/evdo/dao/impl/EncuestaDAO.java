@@ -58,21 +58,12 @@ public class EncuestaDAO extends ConnectionPool{
             ps.setDate(4, enc.getFechaTerminacion());
             ps.setString(5, enc.getEvaluacion());
             ps.registerOutParameter(6, OracleTypes.CURSOR);
-            ps.executeQuery();
-            rs = (ResultSet) ps.getObject(6);
-            if(rs!=null){
-                rs.next();
-                encuesta.setIdentificacion(rs.getString("IDENTIFICACION"));
-                encuesta.setNombre(rs.getString("NOMBRE"));
-                encuesta.setFechaInicio(rs.getDate("FECHAINICIO"));
-                encuesta.setFechaTerminacion(rs.getDate("FECHATERMINACION"));
-                encuesta.setEvaluacion(rs.getString("EVALUACION"));
-            }
+            rs = ps.executeQuery();
         }catch(Exception e){
             System.out.println(e);
         }finally{
             close(ps,rs);
         }
-        return encuesta;
+        return enc;
     }
 }

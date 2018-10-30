@@ -6,6 +6,7 @@ co\edu\udea\evdo\filters\CORS.class
 co\edu\udea\evdo\services\FacultadService.class
 co\edu\udea\evdo\util\ConstantesStatic.class
 co\edu\udea\evdo\dao\impl\TemaDAO.class
+co\edu\udea\evdo\ws\EncuestaClient$4.class
 co\edu\udea\evdo\dao\impl\EvaluacionDAO.class
 co\edu\udea\evdo\dto\ws\FacultadMares.class
 co\edu\udea\evdo\dao\impl\ProgramaDAO.class

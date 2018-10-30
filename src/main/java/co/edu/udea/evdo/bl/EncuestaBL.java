@@ -10,6 +10,8 @@ import co.edu.udea.evdo.dto.Encuesta;
 import co.edu.udea.evdo.ws.EncuestaClient;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -36,6 +38,17 @@ public class EncuestaBL implements Serializable{
         
         public Encuesta addEncuesta(Encuesta encuesta){
             return obtenerEncuestaDAO().addEncuesta(encuesta);
+        }
+        
+        public String poblarEncuestas(){
+            List<Encuesta> encuestas = new EncuestaClient().obtenerEncuestas();
+            Iterator<Encuesta> iterator = encuestas.iterator();
+            Encuesta encuesta;
+            while(iterator.hasNext()){
+                encuesta = iterator.next();
+                addEncuesta(encuesta);
+            }
+            return "aprobado";
         }
         
         private EncuestaDAO obtenerEncuestaDAO() {

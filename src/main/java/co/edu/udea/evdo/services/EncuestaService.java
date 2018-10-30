@@ -20,13 +20,20 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Jonathan
  */
-@Path("/encuestas")
+@Path("encuestas")
 public class EncuestaService implements Serializable{
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<Encuesta> getEncuestas(){
         return EncuestaBL.getInstance().getEncuestas();
+    }
+        
+    @Path("poblar")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String poblarEncuestas(){
+        return EncuestaBL.getInstance().poblarEncuestas();        
     }
     
     @POST

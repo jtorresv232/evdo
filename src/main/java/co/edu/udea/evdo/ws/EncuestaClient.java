@@ -70,6 +70,13 @@ public class EncuestaClient {
         return temas;
     }
     
+    public List<Encuesta> obtenerEncuestas(){
+        Response serviceResponse = client.target(REST_URL + "encuestas").
+                    request(MediaType.APPLICATION_JSON).get(Response.class);
+        List<Encuesta> encuestas = serviceResponse.readEntity(new GenericType<List<Encuesta>>(){});
+        return encuestas;
+    }
+    
     public List<Pregunta> obtenerPregutnas(){
         Response serviceResponse = client.target(REST_URL + "preguntas").
                     request(MediaType.APPLICATION_JSON).get(Response.class);
