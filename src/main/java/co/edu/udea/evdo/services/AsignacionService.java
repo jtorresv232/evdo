@@ -11,9 +11,11 @@ import java.io.Serializable;
 import java.util.Collection;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -22,10 +24,19 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/asignaciones")
 public class AsignacionService implements Serializable{
-    @GET
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<Asignacion> getAsignaciones(){
-        return AsignacionBL.getInstance().getAsignaciones();
+    public Collection<Asignacion> getAsignaciones(@QueryParam("page")int page,@QueryParam("size")int size, Asignacion asig){
+        System.out.println("servicio" + page + size + asig.getPrograma() + asig.getMateria() + asig.getCedula());
+        return AsignacionBL.getInstance().getAsignaciones(page,size,asig);
+    }
+    
+    @Path("total")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public int getAsigTotal(Asignacion asig){
+        return AsignacionBL.getInstance().getAsigTotal(asig);
     }
     
     @PUT

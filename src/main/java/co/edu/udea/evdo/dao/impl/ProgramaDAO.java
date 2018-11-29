@@ -12,12 +12,38 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.LinkedList;
+import oracle.jdbc.OracleTypes;
+import oracle.jdbc.oracore.OracleType;
 
 /**
  *
  * @author Jonathan
  */
 public class ProgramaDAO extends ConnectionPool{
+    
+    public Programa getNumeros(long programa){
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        Programa prog = new Programa();
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("programas.numeros"));
+            ps.setLong(1, programa);
+            ps.registerOutParameter(2, OracleTypes.CURSOR);
+            ps.executeQuery();
+            rs = (ResultSet) ps.getObject(2);
+            if(rs!=null){
+                rs.next();
+                prog.setEncuestados(rs.getInt("ENCUESTADOS"));
+                prog.setEstudiantes(rs.getInt("ESTUDIANTES"));
+                prog.setNombrePrograma(rs.getString("PROGRAMA"));
+            }
+        }catch(Exception e){
+            System.err.println(e);
+        }finally{
+            close(ps,rs);
+        }
+        return prog;
+                }
     
     public Collection<Programa> getProgramas(){
         CallableStatement ps = null;

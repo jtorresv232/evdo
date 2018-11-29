@@ -40,6 +40,7 @@ public class TotalTemaDAO extends ConnectionPool{
                     total.setMateria(rs.getInt("MATERIA"));
                     total.setGrupo(rs.getInt("GRUPO"));
                     total.setCedula(rs.getString("CEDULA"));
+                    total.setTema(rs.getString("DESCRIPCION"));
                     listaTotales.add(total);
                 }
             }

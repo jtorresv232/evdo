@@ -7,7 +7,10 @@ package co.edu.udea.evdo.dao.impl;
 
 import co.edu.udea.evdo.dao.ConnectionPool;
 import co.edu.udea.evdo.dto.Comentario;
+import co.edu.udea.evdo.dto.Correo;
 import co.edu.udea.evdo.properties.Properties;
+import co.edu.udea.evdo.util.InfoCorreo;
+import co.edu.udea.exception.OrgSistemasSecurityException;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.Collection;
@@ -56,7 +59,7 @@ public class ComentarioDAO extends ConnectionPool{
         return listaComentarios;
     }
     
-    public Comentario addComentario(Comentario comentario){
+    public Comentario addComentario(Comentario comentario) throws OrgSistemasSecurityException{
         CallableStatement ps = null;
         ResultSet rs = null;
         Comentario coment = new Comentario();
@@ -87,7 +90,9 @@ public class ComentarioDAO extends ConnectionPool{
             }
         }catch(Exception e){
             System.out.println(e);
+            return null;
         }finally{
+            
             close(ps,rs);
         }
         return coment;

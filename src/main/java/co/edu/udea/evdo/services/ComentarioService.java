@@ -7,6 +7,8 @@ package co.edu.udea.evdo.services;
 
 import co.edu.udea.evdo.bl.ComentarioBL;
 import co.edu.udea.evdo.dto.Comentario;
+import co.edu.udea.evdo.dto.Correo;
+import co.edu.udea.exception.OrgSistemasSecurityException;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.ws.rs.Consumes;
@@ -33,7 +35,15 @@ public class ComentarioService implements Serializable{
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Comentario addComentario(Comentario comentario){
+    public Comentario addComentario(Comentario comentario) throws OrgSistemasSecurityException{
         return ComentarioBL.getInstance().addComentario(comentario);
+    }
+    
+    @Path("notificar")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String notificar(Correo inCorreo) throws OrgSistemasSecurityException{
+        return ComentarioBL.getInstance().notificar(inCorreo);
     }
 }

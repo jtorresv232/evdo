@@ -69,7 +69,7 @@ public class AsignacionDAO extends ConnectionPool{
         }
         return asignacion;
     }
-    public Collection<Asignacion> getAsignaciones(){
+    public Collection<Asignacion> gettttt(){
         CallableStatement ps = null;
         ResultSet rs = null;
         Collection<Asignacion> listaAsignaciones = new LinkedList<>();
@@ -90,12 +90,113 @@ public class AsignacionDAO extends ConnectionPool{
                     asignacion.setProf_catedra(rs.getString("PROF_CATEDRA"));
                     asignacion.setNum_catedra(rs.getInt("NUM_CATEDRA"));
                     asignacion.setPorcentaje(rs.getDouble("PORCENTAJE"));
-                    asignacion.setTipo_periodo(rs.getString("TIPO_PERIODO"));
+                    //asignacion.setTipo_periodo(rs.getString("TIPO_PERIODO"));
                     asignacion.setEncuesta(rs.getString("ENCUESTA"));
                     asignacion.setFecha_enc_inicio(rs.getDate("FECHA_ENC_INICIO"));
                     asignacion.setFecha_enc_final(rs.getDate("FECHA_ENC_FINAL"));
                     asignacion.setEstudiantes(rs.getInt("NUM_ESTUDIANTES"));
                     asignacion.setEncuestados(rs.getInt("ENCUESTADOS"));
+                    asignacion.setNombre_docente(rs.getString("NOMBRE_DOCENTE"));
+                    asignacion.setNombre_materia(rs.getString("NOMBRE_MATERIA"));
+                    asignacion.setPrograma(rs.getLong("PROGRAMA"));
+                    listaAsignaciones.add(asignacion);
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }finally{
+            close(ps,rs);
+        }
+        return listaAsignaciones;
+    }
+    
+    public int getTotalAsigs(Asignacion objeto){
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        int total = 0;
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.total"));
+            if(objeto.getPrograma() > 0){
+                ps.setLong(1, objeto.getPrograma());
+            }else{
+                ps.setString(1, null);
+            }
+            if(objeto.getMateria()> 0){
+                ps.setLong(2, objeto.getMateria());
+            }else{
+                ps.setString(2, null);
+            }
+            if(objeto.getCedula() != ""){
+                ps.setString(3, objeto.getCedula());
+            }else{
+                ps.setString(3, null);
+            }
+            ps.registerOutParameter(4, OracleTypes.CURSOR);
+            ps.executeQuery();
+            rs = (ResultSet) ps.getObject(4);
+            if(rs!=null){
+                rs.next();
+                total = rs.getInt("TOTAL");
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }finally{
+            close(ps,rs);
+        }
+        return total;
+    }
+    
+    public Collection<Asignacion> getAsignaciones(int page, int size, Asignacion objeto){
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        Collection<Asignacion> listaAsignaciones = new LinkedList<>();
+        Asignacion asignacion;
+                    System.out.println(objeto.getPrograma());
+
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.obtener"));
+            if(objeto.getPrograma() > 0){
+                ps.setLong(3, objeto.getPrograma());
+            }else{
+                ps.setString(3, null);
+            }
+            if(objeto.getMateria()> 0){
+                ps.setLong(4, objeto.getMateria());
+            }else{
+                ps.setString(4, null);
+            }
+            if(objeto.getCedula() != ""){
+                ps.setString(5, objeto.getCedula());
+            }else{
+                ps.setString(5, null);
+            }
+            
+            ps.setInt(1, page);
+            ps.setInt(2, size);
+            ps.registerOutParameter(6, OracleTypes.CURSOR);
+            ps.executeQuery();
+            rs = (ResultSet) ps.getObject(6);
+            if(rs!=null){
+                while(rs.next()){
+                    asignacion = new Asignacion();
+                    asignacion.setSemestre(rs.getLong("SEMESTRE"));
+                    asignacion.setMateria(rs.getLong("MATERIA"));
+                    asignacion.setGrupo(rs.getInt("GRUPO"));
+                    asignacion.setCedula(rs.getString("CEDULA"));
+                    asignacion.setProf_compartido(rs.getString("PROF_COMPARTIDO"));
+                    asignacion.setProf_catedra(rs.getString("PROF_CATEDRA"));
+                    asignacion.setNum_catedra(rs.getInt("NUM_CATEDRA"));
+                    asignacion.setPorcentaje(rs.getDouble("PORCENTAJE"));
+                    //asignacion.setTipo_periodo(rs.getString("TIPO_PERIODO"));
+                    asignacion.setEncuesta(rs.getString("ENCUESTA"));
+                    asignacion.setFecha_enc_inicio(rs.getDate("FECHA_ENC_INICIO"));
+                    asignacion.setFecha_enc_final(rs.getDate("FECHA_ENC_FINAL"));
+                    asignacion.setEstudiantes(rs.getInt("NUM_ESTUDIANTES"));
+                    asignacion.setEncuestados(rs.getInt("ENCUESTADOS"));
+                    asignacion.setNombre_docente(rs.getString("NOMBRE_DOCENTE"));
+                    asignacion.setNombre_materia(rs.getString("NOMBRE_MATERIA"));
+                    asignacion.setPrograma(rs.getLong("PROGRAMA"));
+                    asignacion.setTotal(rs.getInt("TOTAL"));
                     listaAsignaciones.add(asignacion);
                 }
             }

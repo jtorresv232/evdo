@@ -10,6 +10,8 @@ import co.edu.udea.evdo.dto.Facultad;
 import co.edu.udea.evdo.properties.Properties;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
+import java.util.Collection;
+import java.util.LinkedList;
 
 /**
  *
@@ -32,5 +34,47 @@ public class FacultadDAO extends ConnectionPool{
             close(ps,rs);
         }
         return facultad;
+    }
+    
+    public Collection<Facultad> getFacultades(){
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        Collection<Facultad> facultades = new LinkedList<>();
+        Facultad facultad;
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("facultades.obtener"));
+            rs = ps.executeQuery();
+            if(rs!=null){
+                while(rs.next()){
+                    facultad = new Facultad();
+                    facultad.setCodigo(rs.getLong("CODIGO"));
+                    facultad.setNombre(rs.getString("NOMBRE"));
+                    facultad.setEmail(rs.getString("EMAIL"));
+                    facultades.add(facultad);
+                }
+            }
+        }catch(Exception e){
+            System.err.println(e);
+        }finally{
+            close(ps,rs);
+        }
+        return facultades;
+    }
+    
+    public String updateFacultad(Facultad facultad){
+        CallableStatement ps = null;
+        String response = "";
+        ResultSet rs = null;
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("facultad.actualizar"));
+            ps.setLong(1, facultad.getCodigo());
+            ps.setString(2, facultad.getEmail());
+            ps.executeQuery();
+        }catch(Exception e){
+            System.err.println(e);
+        }finally{
+            close(ps,rs);
+        }
+        return "aprobado";
     }
 }

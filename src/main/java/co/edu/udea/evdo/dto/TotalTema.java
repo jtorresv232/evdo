@@ -22,6 +22,17 @@ public class TotalTema implements Serializable{
     private long materia;
     private int grupo;
     private String cedula;
+    private String tema;
+
+    public String getTema() {
+        return tema;
+    }
+
+    public void setTema(String tema) {
+        this.tema = tema;
+    }
+    
+    
 
     public int getCodigo() {
         return codigo;

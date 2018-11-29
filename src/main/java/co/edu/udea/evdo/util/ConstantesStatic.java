@@ -77,8 +77,6 @@ public class ConstantesStatic {
     
     
     // Datos para el envio de correos
-     public static String CORREO_PRUEBAS_GSIS = "gestion.sibu";
-     public static final String ASUNTO_CORREO = "Información importante de SIGP";
-     public static final String NOMBRE_SERVICIO_CORREO = "INFORMACIONSIBU"; 
+     public static String WS_ENVIAR_CORREO = "enviarcorreows";
 
 }

@@ -32,7 +32,7 @@ public class PreguntaDAO extends ConnectionPool{
                     pregunta = new Pregunta();
                     pregunta.setNumero(rs.getInt("NUMERO"));
                     pregunta.setPregunta(rs.getString("PREGUNTA"));
-                    pregunta.setTema(rs.getInt("TEMA"));
+                    pregunta.setTema(rs.getInt("CODIGO_TEMA"));
                     listaPreguntas.add(pregunta);
                 }
             }

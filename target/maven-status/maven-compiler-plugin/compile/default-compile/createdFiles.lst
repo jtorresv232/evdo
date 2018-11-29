@@ -8,8 +8,10 @@ co\edu\udea\evdo\util\ConstantesStatic.class
 co\edu\udea\evdo\dao\impl\TemaDAO.class
 co\edu\udea\evdo\ws\EncuestaClient$4.class
 co\edu\udea\evdo\dao\impl\EvaluacionDAO.class
+co\edu\udea\evdo\util\InfoCorreo.class
 co\edu\udea\evdo\dto\ws\FacultadMares.class
 co\edu\udea\evdo\dao\impl\ProgramaDAO.class
+co\edu\udea\evdo\dto\Correo.class
 co\edu\udea\evdo\dao\impl\FacultadDAO.class
 co\edu\udea\evdo\bl\ComentarioBL.class
 co\edu\udea\evdo\properties\Properties.class
@@ -31,6 +33,7 @@ co\edu\udea\evdo\bl\ProgramaBL.class
 co\edu\udea\evdo\services\MaresService.class
 co\edu\udea\evdo\dto\ws\MateriaMares.class
 co\edu\udea\evdo\bl\AsignacionBL.class
+co\edu\udea\evdo\dto\ws\ResultadoCorreo.class
 co\edu\udea\evdo\dao\impl\TotalPreguntaDAO.class
 co\edu\udea\evdo\ws\EncuestaClient$3.class
 co\edu\udea\evdo\bl\TotalPreguntaBL.class

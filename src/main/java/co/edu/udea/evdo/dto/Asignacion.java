@@ -30,12 +30,23 @@ public class Asignacion {
     private String nombre_materia;
     private String nombre_docente;
     private long programa;
+    private int total;
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+    
+    
 
     public long getPrograma() {
         return programa;
     }
 
-    public void setProg(long programa) {
+    public void setPrograma(long programa) {
         this.programa = programa;
     }
     

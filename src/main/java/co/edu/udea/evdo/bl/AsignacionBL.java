@@ -38,9 +38,13 @@ public class AsignacionBL implements Serializable{
         return singletonInstance;
     }
         
-        public Collection<Asignacion> getAsignaciones(){
-            return obtenerAsignacionDAO().getAsignaciones();
+        public Collection<Asignacion> getAsignaciones(int page, int size, Asignacion asig){
+            return obtenerAsignacionDAO().getAsignaciones(page, size, asig);
         
+        }
+        
+        public int getAsigTotal(Asignacion asig){
+            return obtenerAsignacionDAO().getTotalAsigs(asig);
         }
         
         public Asignacion addAsignacion(Asignacion asignacion){
@@ -74,7 +78,7 @@ public class AsignacionBL implements Serializable{
                             asignacion.setTipo_periodo(docente.getTipoPeriodo());
                             asignacion.setNombre_docente(docente.getNombreDocente());
                             asignacion.setNombre_materia(materia.getNombreMateria());
-                            asignacion.setProg(materia.getPrograma());
+                            asignacion.setPrograma(materia.getPrograma());
                             System.out.println("aprograma: "+asignacion.getPrograma());
                             System.out.println("mprograma"+ materia.getPrograma());
                             addAsignacion(asignacion);

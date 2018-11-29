@@ -22,6 +22,26 @@ public class Programa implements Serializable{
     private long versionActual;
     private String versiones;
     private String estado;
+    private int encuestados;
+    private int estudiantes;
+
+    public int getEncuestados() {
+        return encuestados;
+    }
+
+    public void setEncuestados(int encuestados) {
+        this.encuestados = encuestados;
+    }
+
+    public int getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(int estudiantes) {
+        this.estudiantes = estudiantes;
+    }
+    
+    
 
     public long getPrograma() {
         return programa;

@@ -35,6 +35,14 @@ public class FacultadBL implements Serializable{
             return obtenerFacultadDAO().addFacultad(facultad);
         }
         
+        public Collection<Facultad> getFacultades(){
+            return obtenerFacultadDAO().getFacultades();
+        }
+        
+        public String updateFacultad(Facultad facultad){
+            return obtenerFacultadDAO().updateFacultad(facultad);
+        }
+        
         public void poblarFacultades(){
             MaresService ms = new MaresService();
             Collection<FacultadMares> listaFacultades = ms.consultaFacultades();

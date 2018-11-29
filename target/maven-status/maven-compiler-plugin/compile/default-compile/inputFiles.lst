@@ -18,6 +18,7 @@ C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\se
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\services\TotalPreguntaService.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\dto\Facultad.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\bl\ProgramaBL.java
+C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\dto\Correo.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\filters\CORS.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\dto\TotalPregunta.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\dto\Evaluacion.java
@@ -31,7 +32,9 @@ C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\dt
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\dao\POOLDAOFactory.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\dto\Programa.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\services\ProgramaService.java
+C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\util\InfoCorreo.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\dto\Pregunta.java
+C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\dto\ws\ResultadoCorreo.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\bl\AsignacionBL.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\services\MaresService.java
 C:\Users\nilto\Documents\NetBeansProjects\evdo\src\main\java\co\edu\udea\evdo\services\TemaService.java

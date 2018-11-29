@@ -6,8 +6,12 @@
 package co.edu.udea.evdo.services;
 
 import co.edu.udea.evdo.bl.FacultadBL;
+import co.edu.udea.evdo.dto.Facultad;
 import java.io.Serializable;
+import java.util.Collection;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -25,5 +29,19 @@ public class FacultadService implements Serializable{
     public String poblarFacultades(){
         FacultadBL.getInstance().poblarFacultades();
         return "aprobado";
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<Facultad> getFacultades(){
+        return FacultadBL.getInstance().getFacultades();
+    }
+    
+    @PUT
+    @Path("/{idFacultad}") 
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateFacultad(Facultad facultad){
+        System.out.println("servicio");
+        return FacultadBL.getInstance().updateFacultad(facultad);
     }
 }
