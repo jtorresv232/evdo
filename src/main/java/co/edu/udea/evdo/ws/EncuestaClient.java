@@ -5,9 +5,9 @@
  */
 package co.edu.udea.evdo.ws;
 
-import co.edu.udea.encuesta.dto.Resultados;
 import co.edu.udea.evdo.dto.Encuesta;
 import co.edu.udea.evdo.dto.Pregunta;
+import co.edu.udea.evdo.dto.Resultados;
 import co.edu.udea.evdo.dto.Tema;
 import java.util.ArrayList;
 import java.util.Arrays;

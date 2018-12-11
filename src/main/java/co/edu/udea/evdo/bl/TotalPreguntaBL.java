@@ -5,7 +5,7 @@
  */
 package co.edu.udea.evdo.bl;
 
-import co.edu.udea.encuesta.dto.Resultados;
+import co.edu.udea.evdo.dto.Resultados;
 import co.edu.udea.evdo.dao.impl.TotalPreguntaDAO;
 import co.edu.udea.evdo.dto.Asignacion;
 import co.edu.udea.evdo.dto.Pregunta;

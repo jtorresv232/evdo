@@ -18,6 +18,7 @@ import co.edu.udea.evdo.ws.EncuestaClient;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Random;
+import org.quartz.SchedulerException;
 
 /**
  *
@@ -110,7 +111,7 @@ public class AsignacionBL implements Serializable{
             
         }
         
-        public Asignacion updateAsignacion(Asignacion asignacion){
+        public Asignacion updateAsignacion(Asignacion asignacion) throws SchedulerException{
             return obtenerAsignacionDAO().updateAsignacion(asignacion);
         }
         

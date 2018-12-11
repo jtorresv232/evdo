@@ -8,12 +8,14 @@ package co.edu.udea.evdo.dao.impl;
 import co.edu.udea.evdo.dao.ConnectionPool;
 import co.edu.udea.evdo.dto.Asignacion;
 import co.edu.udea.evdo.properties.Properties;
+import co.edu.udea.evdo.util.Notifications;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.LinkedList;
 import oracle.jdbc.OracleTypes;
+import org.quartz.SchedulerException;
 
 /**
  *
@@ -245,7 +247,7 @@ public class AsignacionDAO extends ConnectionPool{
         return asignacion;
     }
     
-    public Asignacion updateAsignacion(Asignacion asig){
+    public Asignacion updateAsignacion(Asignacion asig) throws SchedulerException{
         CallableStatement ps = null;
         ResultSet rs = null;
         Asignacion asignacion = new Asignacion();
@@ -280,6 +282,8 @@ public class AsignacionDAO extends ConnectionPool{
         }catch(Exception e){
             System.out.println(e);
         }finally{
+            Notifications notifications = new Notifications();
+            notifications.notificar();
             close(ps,rs);
         }
         return asignacion;

@@ -17,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import org.quartz.SchedulerException;
 
 /**
  *
@@ -43,7 +44,7 @@ public class AsignacionService implements Serializable{
     @Path("/{idAsignacion}") 
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Asignacion updateAsignacion(Asignacion asignacion){
+    public Asignacion updateAsignacion(Asignacion asignacion) throws SchedulerException{
         return AsignacionBL.getInstance().updateAsignacion(asignacion);
     }
     
