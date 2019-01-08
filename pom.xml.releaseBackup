@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
     <groupId>co.edu.udea.ciclo-academico</groupId>
 	<artifactId>evaluadocen</artifactId>
-	<version>0.1.16</version>
+	<version>0.1.16-SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
 	<inceptionYear>2018</inceptionYear>
@@ -257,13 +257,6 @@
 			<groupId>com.sun.el</groupId>
 			<artifactId>el-ri</artifactId>
 			<version>1.0</version>
-			<scope>provided</scope>
-		</dependency>
-		
-		<dependency>
-			<groupId>co.edu.udea.apoyo-tecnico</groupId>
-			<artifactId>udea-ws_security</artifactId>
-			<version>0.1.1</version>
 			<scope>provided</scope>
 		</dependency>
 
