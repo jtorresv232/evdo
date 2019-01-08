@@ -12,23 +12,26 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.LinkedList;
-import oracle.jdbc.OracleTypes;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Jonathan
  */
-public class PreguntaDAO extends ConnectionPool{
-    public Collection<Pregunta> getPreguntas(){
+public class PreguntaDAO extends ConnectionPool {
+
+    static final Logger logger = Logger.getLogger(PreguntaDAO.class);
+
+    public Collection<Pregunta> getPreguntas() {
         CallableStatement ps = null;
         ResultSet rs = null;
         Collection<Pregunta> listaPreguntas = new LinkedList<>();
         Pregunta pregunta;
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("pregunta.obtener"));
             rs = ps.executeQuery();
-            if(rs!=null){
-                while(rs.next()){
+            if (rs != null) {
+                while (rs.next()) {
                     pregunta = new Pregunta();
                     pregunta.setNumero(rs.getInt("NUMERO"));
                     pregunta.setPregunta(rs.getString("PREGUNTA"));
@@ -36,49 +39,48 @@ public class PreguntaDAO extends ConnectionPool{
                     listaPreguntas.add(pregunta);
                 }
             }
-        }catch(Exception e){
-            System.out.println(e);
-        }finally{
-            close(ps,rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return listaPreguntas;
     }
-    
-    public Pregunta addPregunta(Pregunta preg){
+
+    public Pregunta addPregunta(Pregunta preg) {
         CallableStatement ps = null;
-        ResultSet rs = null;
         Pregunta pregunta = new Pregunta();
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("pregunta.agregar"));
             ps.setInt(1, preg.getNumero());
             ps.setString(3, preg.getPregunta());
             ps.setInt(2, preg.getTema());
             ps.executeQuery();
-        }catch(Exception e){
-            System.out.println(e);
-        }finally{
-            close(ps,rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return pregunta;
     }
-    
-    public boolean preguntaExiste(int numero){
+
+    public boolean preguntaExiste(int numero) {
         CallableStatement ps = null;
         ResultSet rs = null;
         boolean existe = false;
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("pregunta.existe"));
             ps.setInt(1, numero);
             rs = ps.executeQuery();
-            if(rs!=null){
+            if (rs != null) {
                 existe = true;
             }
-        }catch(Exception e){
-            System.out.println(e);
-        }finally{
-            close(ps,rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return existe;
     }
-    
+
 }

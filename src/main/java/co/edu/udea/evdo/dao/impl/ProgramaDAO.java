@@ -13,48 +13,50 @@ import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.LinkedList;
 import oracle.jdbc.OracleTypes;
-import oracle.jdbc.oracore.OracleType;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Jonathan
  */
-public class ProgramaDAO extends ConnectionPool{
-    
-    public Programa getNumeros(long programa){
+public class ProgramaDAO extends ConnectionPool {
+
+    static final Logger logger = Logger.getLogger(ProgramaDAO.class);
+
+    public Programa getNumeros(long programa) {
         CallableStatement ps = null;
         ResultSet rs = null;
         Programa prog = new Programa();
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("programas.numeros"));
             ps.setLong(1, programa);
             ps.registerOutParameter(2, OracleTypes.CURSOR);
             ps.executeQuery();
             rs = (ResultSet) ps.getObject(2);
-            if(rs!=null){
+            if (rs != null) {
                 rs.next();
                 prog.setEncuestados(rs.getInt("ENCUESTADOS"));
                 prog.setEstudiantes(rs.getInt("ESTUDIANTES"));
                 prog.setNombrePrograma(rs.getString("PROGRAMA"));
             }
-        }catch(Exception e){
-            System.err.println(e);
-        }finally{
-            close(ps,rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return prog;
-                }
-    
-    public Collection<Programa> getProgramas(){
+    }
+
+    public Collection<Programa> getProgramas() {
         CallableStatement ps = null;
         ResultSet rs = null;
         Collection<Programa> listaProgramas = new LinkedList<>();
         Programa prog;
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("programas.obtener"));
             rs = ps.executeQuery();
-            if(rs!=null){
-                while(rs.next()){
+            if (rs != null) {
+                while (rs.next()) {
                     prog = new Programa();
                     prog.setPrograma(rs.getLong("PROGRAMA"));
                     prog.setNombrePrograma(rs.getString("NOMBRE_PROGRAMA"));
@@ -69,19 +71,17 @@ public class ProgramaDAO extends ConnectionPool{
                     listaProgramas.add(prog);
                 }
             }
-        }catch(Exception e){
-            System.err.println(e);
-        }finally{
-            close(ps,rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return listaProgramas;
     }
-    
-    public Programa addPrograma(Programa programa){
+
+    public Programa addPrograma(Programa programa) {
         CallableStatement ps = null;
-        ResultSet rs = null;
-        Programa prog;
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("programas.poblar"));
             ps.setLong(1, programa.getPrograma());
             ps.setString(2, programa.getNombrePrograma());
@@ -94,12 +94,11 @@ public class ProgramaDAO extends ConnectionPool{
             ps.setString(9, programa.getVersiones());
             ps.setString(10, programa.getEstado());
             ps.executeQuery();
-            
-            
-        }catch(Exception e){
-            System.err.println(e);
-        }finally{
-            close(ps,rs);
+
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return programa;
     }

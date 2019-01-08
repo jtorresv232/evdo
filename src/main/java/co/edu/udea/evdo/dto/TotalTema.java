@@ -13,11 +13,11 @@ import java.io.Serializable;
  */
 public class TotalTema implements Serializable{
     private int codigo;
-    private int codigo_tema;
+    private int codigoTema;
     private String evaluacion;
     private double media;
     private double desviacion;
-    private double coeficiente_desv;
+    private double coeficienteDesv;
     private long semestre;
     private long materia;
     private int grupo;
@@ -42,12 +42,12 @@ public class TotalTema implements Serializable{
         this.codigo = codigo;
     }
 
-    public int getCodigo_tema() {
-        return codigo_tema;
+    public int getCodigoTema() {
+        return codigoTema;
     }
 
-    public void setCodigo_tema(int codigo_tema) {
-        this.codigo_tema = codigo_tema;
+    public void setCodigoTema(int codigoTema) {
+        this.codigoTema = codigoTema;
     }
 
     public String getEvaluacion() {
@@ -74,12 +74,12 @@ public class TotalTema implements Serializable{
         this.desviacion = desviacion;
     }
 
-    public double getCoeficiente_desv() {
-        return coeficiente_desv;
+    public double getCoeficienteDesv() {
+        return coeficienteDesv;
     }
 
-    public void setCoeficiente_desv(double coeficiente_desv) {
-        this.coeficiente_desv = coeficiente_desv;
+    public void setCoeficienteDesv(double coeficienteDesv) {
+        this.coeficienteDesv = coeficienteDesv;
     }
 
     public long getSemestre() {

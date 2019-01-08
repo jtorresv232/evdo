@@ -13,22 +13,26 @@ import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.LinkedList;
 import oracle.jdbc.OracleTypes;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Jonathan
  */
-public class EncuestaDAO extends ConnectionPool{
-    public Collection<Encuesta> getEncuestas(){
+public class EncuestaDAO extends ConnectionPool {
+
+    static final Logger logger = Logger.getLogger(EncuestaDAO.class);
+
+    public Collection<Encuesta> getEncuestas() {
         CallableStatement ps = null;
         ResultSet rs = null;
         Collection<Encuesta> listaEncuestas = new LinkedList<>();
         Encuesta encuesta;
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("encuesta.obtener"));
             rs = ps.executeQuery();
-            if(rs!=null){
-                while(rs.next()){
+            if (rs != null) {
+                while (rs.next()) {
                     encuesta = new Encuesta();
                     encuesta.setIdentificacion(rs.getString("IDENTIFICACION"));
                     encuesta.setNombre(rs.getString("NOMBRE"));
@@ -38,19 +42,17 @@ public class EncuestaDAO extends ConnectionPool{
                     listaEncuestas.add(encuesta);
                 }
             }
-        }catch(Exception e){
-            System.out.println(e);
-        }finally{
-            close(ps,rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return listaEncuestas;
     }
-    
-    public Encuesta addEncuesta(Encuesta enc){
+
+    public Encuesta addEncuesta(Encuesta enc) {
         CallableStatement ps = null;
-        ResultSet rs = null;
-        Encuesta encuesta = new Encuesta();
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("encuesta.agregar"));
             ps.setString(1, enc.getIdentificacion());
             ps.setString(2, enc.getNombre());
@@ -58,11 +60,11 @@ public class EncuestaDAO extends ConnectionPool{
             ps.setDate(4, enc.getFechaTerminacion());
             ps.setString(5, enc.getEvaluacion());
             ps.registerOutParameter(6, OracleTypes.CURSOR);
-            rs = ps.executeQuery();
-        }catch(Exception e){
-            System.out.println(e);
-        }finally{
-            close(ps,rs);
+            ps.executeQuery();
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return enc;
     }

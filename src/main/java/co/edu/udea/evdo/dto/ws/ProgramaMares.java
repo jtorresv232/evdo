@@ -6,7 +6,6 @@
 package co.edu.udea.evdo.dto.ws;
 
 import java.io.Serializable;
-import org.eclipse.persistence.sessions.serializers.Serializer;
 
 /**
  *

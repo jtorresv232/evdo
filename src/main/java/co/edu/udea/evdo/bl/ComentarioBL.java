@@ -17,44 +17,45 @@ import java.util.Collection;
  *
  * @author Jonathan
  */
-public class ComentarioBL implements Serializable{
+public class ComentarioBL implements Serializable {
+
     private static ComentarioBL singletonInstance = new ComentarioBL();
 
     public ComentarioBL() {
+        // empty constructor
     }
-        
-        public static ComentarioBL getInstance() {
+
+    public static ComentarioBL getInstance() {
         synchronized (ComentarioBL.class) {
-            if (singletonInstance == null) { 
+            if (singletonInstance == null) {
                 singletonInstance = new ComentarioBL();
             }
         }
         return singletonInstance;
     }
-        
-        public Collection<Comentario> getComentarios(Comentario comentario){
-            return obtenerComentarioDAO().getComentarios(comentario);
-        
-        }
-        
-        public Comentario addComentario(Comentario comentario) throws OrgSistemasSecurityException{
-            return obtenerComentarioDAO().addComentario(comentario);
-        }
-        
-        public String notificar(Correo inCorreo) throws OrgSistemasSecurityException{
-            try{
-            InfoCorreo infoCorreo = new InfoCorreo() ;
+
+    public Collection<Comentario> getComentarios(Comentario comentario) {
+        return obtenerComentarioDAO().getComentarios(comentario);
+
+    }
+
+    public Comentario addComentario(Comentario comentario) throws OrgSistemasSecurityException {
+        return obtenerComentarioDAO().addComentario(comentario);
+    }
+
+    public String notificar(Correo inCorreo) throws OrgSistemasSecurityException {
+        try {
+            InfoCorreo infoCorreo = new InfoCorreo();
             Correo correo = infoCorreo.enviarNotificacion(inCorreo);
             infoCorreo.enviar(correo, "EVALDOCOBSRESULTADOS");
-            }catch(Exception e){
-                return "no enviado";
-            }
-            return "enviado";
+        } catch (Exception e) {
+            return "no enviado";
         }
-        
-        private ComentarioDAO obtenerComentarioDAO() {
-        ComentarioDAO DAO = new ComentarioDAO();
-        return DAO;
+        return "enviado";
+    }
+
+    private ComentarioDAO obtenerComentarioDAO() {
+        return new ComentarioDAO();
     }
 
 }

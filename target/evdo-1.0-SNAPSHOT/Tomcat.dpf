@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/evaluacion">
+  <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="100" maxIdle="30" maxWait="10000" name="consultaevaluaDocen" password="evaluaDocen123" type="javax.sql.DataSource" url="jdbc:oracle:thin:@sinu.udea.red:1521:udeadev" username="evaluaDocen"/>
+</Context>

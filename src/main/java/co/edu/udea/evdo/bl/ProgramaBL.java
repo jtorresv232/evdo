@@ -16,58 +16,59 @@ import java.util.Collection;
  *
  * @author Jonathan
  */
-public class ProgramaBL implements Serializable{
+public class ProgramaBL implements Serializable {
+
     private static ProgramaBL singletonInstance = new ProgramaBL();
 
     public ProgramaBL() {
+        // empty constructor
     }
-        
-        public static ProgramaBL getInstance() {
+
+    public static ProgramaBL getInstance() {
         synchronized (ProgramaBL.class) {
-            if (singletonInstance == null) { 
+            if (singletonInstance == null) {
                 singletonInstance = new ProgramaBL();
             }
         }
         return singletonInstance;
     }
-        
-        public Programa addPrograma(Programa programa){
-            return obtenerProgramaDAO().addPrograma(programa);
-        }
-        
-        public Collection<Programa> getProgramas(){
-            return obtenerProgramaDAO().getProgramas();
-        }
-        
-        public Programa getNumeros(long programa){
-            return obtenerProgramaDAO().getNumeros(programa);
-        }
-        
-        public void poblarProgramaes(){
-            MaresService ms = new MaresService();
-            Collection<ProgramaMares> listaProgramaes = ms.consultaProgramas();
-            Programa programa;
-            for(ProgramaMares prog : listaProgramaes){
-                if (prog.getEstado().equalsIgnoreCase("FUNC")) {
-                    programa = new Programa();
-                    programa.setPrograma(prog.getPrograma());
-                    programa.setNombrePrograma(prog.getNombrePrograma());
-                    programa.setTipoPrograma(prog.getTipoPrograma());
-                    programa.setSede(prog.getSede());
-                    programa.setFacultad(prog.getFacultad());
-                    programa.setNombreFacultad(prog.getNombreFacultad());
-                    programa.setCreditosGrado(prog.getCreditosGrado());
-                    programa.setVersionActual(prog.getVersionActual());
-                    programa.setVersiones(prog.getVersiones());
-                    programa.setEstado(prog.getEstado());
-                    addPrograma(programa);
-                }
+
+    public Programa addPrograma(Programa programa) {
+        return obtenerProgramaDAO().addPrograma(programa);
+    }
+
+    public Collection<Programa> getProgramas() {
+        return obtenerProgramaDAO().getProgramas();
+    }
+
+    public Programa getNumeros(long programa) {
+        return obtenerProgramaDAO().getNumeros(programa);
+    }
+
+    public void poblarProgramaes() {
+        MaresService ms = new MaresService();
+        Collection<ProgramaMares> listaProgramaes = ms.consultaProgramas();
+        Programa programa;
+        for (ProgramaMares prog : listaProgramaes) {
+            if (prog.getEstado().equalsIgnoreCase("FUNC")) {
+                programa = new Programa();
+                programa.setPrograma(prog.getPrograma());
+                programa.setNombrePrograma(prog.getNombrePrograma());
+                programa.setTipoPrograma(prog.getTipoPrograma());
+                programa.setSede(prog.getSede());
+                programa.setFacultad(prog.getFacultad());
+                programa.setNombreFacultad(prog.getNombreFacultad());
+                programa.setCreditosGrado(prog.getCreditosGrado());
+                programa.setVersionActual(prog.getVersionActual());
+                programa.setVersiones(prog.getVersiones());
+                programa.setEstado(prog.getEstado());
+                addPrograma(programa);
             }
         }
-        
-        private ProgramaDAO obtenerProgramaDAO() {
-        ProgramaDAO DAO = new ProgramaDAO();
-        return DAO;
+    }
+
+    private ProgramaDAO obtenerProgramaDAO() {
+        return new ProgramaDAO();
     }
 
 }

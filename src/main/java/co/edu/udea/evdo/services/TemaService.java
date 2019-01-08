@@ -7,6 +7,8 @@ package co.edu.udea.evdo.services;
 
 import co.edu.udea.evdo.bl.TemaBL;
 import co.edu.udea.evdo.dto.Tema;
+import co.edu.udea.evdo.util.Notifications;
+import java.text.ParseException;
 import java.util.Collection;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -14,6 +16,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.quartz.SchedulerException;
 
 /**
  *
@@ -28,6 +31,7 @@ public class TemaService {
         return TemaBL.getInstance().getTemas();
     }
     
+    
     @Path("poblar")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -41,5 +45,12 @@ public class TemaService {
     @Produces(MediaType.APPLICATION_JSON)
     public Tema addTema(Tema tema){
         return TemaBL.getInstance().addTema(tema);
+    }
+    
+    @Path("notificar")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public void notificar() throws SchedulerException, ParseException{
+        Notifications.getInstance().notificar();
     }
 }

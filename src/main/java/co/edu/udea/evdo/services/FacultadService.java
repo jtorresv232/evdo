@@ -21,27 +21,26 @@ import javax.ws.rs.core.MediaType;
  * @author Jonathan
  */
 @Path("facultades")
-public class FacultadService implements Serializable{
-    
+public class FacultadService implements Serializable {
+
     @Path("poblar")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String poblarFacultades(){
+    public String poblarFacultades() {
         FacultadBL.getInstance().poblarFacultades();
         return "aprobado";
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<Facultad> getFacultades(){
+    public Collection<Facultad> getFacultades() {
         return FacultadBL.getInstance().getFacultades();
     }
-    
+
     @PUT
-    @Path("/{idFacultad}") 
+    @Path("/{idFacultad}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String updateFacultad(Facultad facultad){
-        System.out.println("servicio");
+    public String updateFacultad(Facultad facultad) {
         return FacultadBL.getInstance().updateFacultad(facultad);
     }
 }

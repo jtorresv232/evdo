@@ -33,7 +33,6 @@ public class TotalPreguntaService implements Serializable{
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String calcularTotal(){
-        System.out.println("SERVICIO");
         TotalPreguntaBL.getInstance().calcularTotalPregunta();
         return "aprobado";
     }

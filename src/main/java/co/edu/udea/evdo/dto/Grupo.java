@@ -15,7 +15,7 @@ public class Grupo implements Serializable{
     private long semestre;
     private long materia;
     private int grupo;
-    private int num_estudiantes;
+    private int numEstudiantes;
 
     public long getSemestre() {
         return semestre;
@@ -41,13 +41,12 @@ public class Grupo implements Serializable{
         this.grupo = grupo;
     }
 
-    public int getNum_estudiantes() {
-        return num_estudiantes;
+    public int getNumEstudiantes() {
+        return numEstudiantes;
     }
 
-    public void setNum_estudiantes(int num_estudiantes) {
-        this.num_estudiantes = num_estudiantes;
+    public void setNumEstudiantes(int numEstudiantes) {
+        this.numEstudiantes = numEstudiantes;
     }
-    
     
 }

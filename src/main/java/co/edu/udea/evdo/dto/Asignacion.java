@@ -7,28 +7,28 @@ package co.edu.udea.evdo.dto;
 
 import java.sql.Date;
 
-
 /**
  *
  * @author Jonathan
  */
 public class Asignacion {
+
     private long semestre;
     private long materia;
     private int grupo;
     private String cedula;
-    private String prof_compartido;
-    private String prof_catedra;
-    private long num_catedra;
+    private String profCompartido;
+    private String profCatedra;
+    private long numCatedra;
     private double porcentaje;
-    private String tipo_periodo;
+    private String tipoPeriodo;
     private String encuesta;
-    private Date fecha_enc_inicio;
-    private Date fecha_enc_final;
+    private Date fechaEncInicio;
+    private Date fechaEncFinal;
     private int estudiantes;
     private int encuestados;
-    private String nombre_materia;
-    private String nombre_docente;
+    private String nombreMateria;
+    private String nombreDocente;
     private long programa;
     private int total;
 
@@ -39,8 +39,6 @@ public class Asignacion {
     public void setTotal(int total) {
         this.total = total;
     }
-    
-    
 
     public long getPrograma() {
         return programa;
@@ -49,25 +47,22 @@ public class Asignacion {
     public void setPrograma(long programa) {
         this.programa = programa;
     }
-    
 
-    public String getNombre_materia() {
-        return nombre_materia;
+    public String getNombreMateria() {
+        return nombreMateria;
     }
 
-    public void setNombre_materia(String nombre_materia) {
-        this.nombre_materia = nombre_materia;
+    public void setNombreMateria(String nombreMateria) {
+        this.nombreMateria = nombreMateria;
     }
 
-    public String getNombre_docente() {
-        return nombre_docente;
+    public String getNombreDocente() {
+        return nombreDocente;
     }
 
-    public void setNombre_docente(String nombre_docente) {
-        this.nombre_docente = nombre_docente;
+    public void setNombreDocente(String nombreDocente) {
+        this.nombreDocente = nombreDocente;
     }
-    
-    
 
     public int getEncuestados() {
         return encuestados;
@@ -76,10 +71,7 @@ public class Asignacion {
     public void setEncuestados(int encuestados) {
         this.encuestados = encuestados;
     }
-    
-    
-    
-    
+
     public int getEstudiantes() {
         return estudiantes;
     }
@@ -87,8 +79,6 @@ public class Asignacion {
     public void setEstudiantes(int estudiantes) {
         this.estudiantes = estudiantes;
     }
-    
-    
 
     public long getSemestre() {
         return semestre;
@@ -122,28 +112,28 @@ public class Asignacion {
         this.cedula = cedula;
     }
 
-    public String getProf_compartido() {
-        return prof_compartido;
+    public String getProfCompartido() {
+        return profCompartido;
     }
 
-    public void setProf_compartido(String prof_compartido) {
-        this.prof_compartido = prof_compartido;
+    public void setProfCompartido(String profCompartido) {
+        this.profCompartido = profCompartido;
     }
 
-    public String getProf_catedra() {
-        return prof_catedra;
+    public String getProfCatedra() {
+        return profCatedra;
     }
 
-    public void setProf_catedra(String prof_catedra) {
-        this.prof_catedra = prof_catedra;
+    public void setProfCatedra(String profCatedra) {
+        this.profCatedra = profCatedra;
     }
 
-    public long getNum_catedra() {
-        return num_catedra;
+    public long getNumCatedra() {
+        return numCatedra;
     }
 
-    public void setNum_catedra(long num_catedra) {
-        this.num_catedra = num_catedra;
+    public void setNumCatedra(long numCatedra) {
+        this.numCatedra = numCatedra;
     }
 
     public double getPorcentaje() {
@@ -154,12 +144,12 @@ public class Asignacion {
         this.porcentaje = porcentaje;
     }
 
-    public String getTipo_periodo() {
-        return tipo_periodo;
+    public String getTipoPeriodo() {
+        return tipoPeriodo;
     }
 
-    public void setTipo_periodo(String tipo_periodo) {
-        this.tipo_periodo = tipo_periodo;
+    public void setTipoPeriodo(String tipoPeriodo) {
+        this.tipoPeriodo = tipoPeriodo;
     }
 
     public String getEncuesta() {
@@ -170,21 +160,20 @@ public class Asignacion {
         this.encuesta = encuesta;
     }
 
-    public Date getFecha_enc_inicio() {
-        return fecha_enc_inicio;
+    public Date getFechaEncInicio() {
+        return fechaEncInicio;
     }
 
-    public void setFecha_enc_inicio(Date fecha_enc_inicio) {
-        this.fecha_enc_inicio = fecha_enc_inicio;
+    public void setFechaEncInicio(Date fechaEncInicio) {
+        this.fechaEncInicio = fechaEncInicio;
     }
 
-    public Date getFecha_enc_final() {
-        return fecha_enc_final;
+    public Date getFechaEncFinal() {
+        return fechaEncFinal;
     }
 
-    public void setFecha_enc_final(Date fecha_enc_final) {
-        this.fecha_enc_final = fecha_enc_final;
+    public void setFechaEncFinal(Date fechaEncFinal) {
+        this.fechaEncFinal = fechaEncFinal;
     }
-    
-    
+
 }

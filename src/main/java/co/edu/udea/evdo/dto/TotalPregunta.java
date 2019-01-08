@@ -17,7 +17,7 @@ public class TotalPregunta implements Serializable{
     private String evaluacion;
     private double media;
     private double desviacion;
-    private double coeficiente_desv;
+    private double coeficienteDesv;
     private long semestre;
     private long materia;
     private int grupo;
@@ -63,12 +63,12 @@ public class TotalPregunta implements Serializable{
         this.desviacion = desviacion;
     }
 
-    public double getCoeficiente_desv() {
-        return coeficiente_desv;
+    public double getCoeficienteDesv() {
+        return coeficienteDesv;
     }
 
-    public void setCoeficiente_desv(double coeficiente_desv) {
-        this.coeficiente_desv = coeficiente_desv;
+    public void setCoeficienteDesv(double coeficienteDesv) {
+        this.coeficienteDesv = coeficienteDesv;
     }
 
     public long getSemestre() {

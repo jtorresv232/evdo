@@ -12,56 +12,58 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.LinkedList;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Jonathan
  */
-public class GrupoDAO extends ConnectionPool{
-    
-    public Collection<Grupo> getGrupos(){
+public class GrupoDAO extends ConnectionPool {
+
+    static final Logger logger = Logger.getLogger(GrupoDAO.class);
+
+    public Collection<Grupo> getGrupos() {
         CallableStatement ps = null;
         ResultSet rs = null;
         Collection<Grupo> listaGrupos = new LinkedList<>();
         Grupo grupo;
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("grupo.obtener"));
             rs = ps.executeQuery();
-            if(rs!=null){
-                while(rs.next()){
+            if (rs != null) {
+                while (rs.next()) {
                     grupo = new Grupo();
-                    
+
                     grupo.setSemestre(rs.getLong("SEMESTRE"));
                     grupo.setMateria(rs.getLong("MATERIA"));
                     grupo.setGrupo(rs.getInt("GRUPO"));
-                    grupo.setNum_estudiantes(rs.getInt("NUM_ESTUDIANTES"));
+                    grupo.setNumEstudiantes(rs.getInt("NUM_ESTUDIANTES"));
                     listaGrupos.add(grupo);
                 }
             }
-        }catch(Exception e){
-            System.out.println(e);
-        }finally{
-            close(ps,rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return listaGrupos;
     }
-    
-    public Grupo addGrupo(Grupo grupo){
+
+    public Grupo addGrupo(Grupo grupo) {
         CallableStatement ps = null;
-        ResultSet rs = null;
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("grupo.agregar"));
             ps.setLong(1, grupo.getSemestre());
             ps.setLong(2, grupo.getMateria());
             ps.setInt(3, grupo.getGrupo());
-            ps.setInt(4, grupo.getNum_estudiantes());
+            ps.setInt(4, grupo.getNumEstudiantes());
             ps.executeQuery();
-        }catch(Exception e ){
-            System.err.println(e);
-        }finally{
-            close(ps,rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return grupo;
     }
-    
+
 }

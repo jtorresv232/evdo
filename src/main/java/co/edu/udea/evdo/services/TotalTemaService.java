@@ -32,7 +32,6 @@ public class TotalTemaService implements Serializable{
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String calcularTotal(){
-        System.out.println("SERVICIO");
         TotalTemaBL.getInstance().calcularTotalTema();
         return "aprobado";
     }

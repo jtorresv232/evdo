@@ -14,37 +14,38 @@ import java.util.Collection;
  *
  * @author Jonathan
  */
-public class EvaluacionBL implements Serializable{
+public class EvaluacionBL implements Serializable {
+
     private static EvaluacionBL singletonInstance = new EvaluacionBL();
 
     public EvaluacionBL() {
+        // empty constructor
     }
-        
-        public static EvaluacionBL getInstance() {
+
+    public static EvaluacionBL getInstance() {
         synchronized (EvaluacionBL.class) {
-            if (singletonInstance == null) { 
+            if (singletonInstance == null) {
                 singletonInstance = new EvaluacionBL();
             }
         }
         return singletonInstance;
     }
-        
-        public Collection<Evaluacion> getEvaluaciones(){
-            return obtenerEvaluacionDAO().getEvaluaciones();
-        
-        }
-        
-        public Evaluacion addEvaluacion(Evaluacion evaluacion){
-            return obtenerEvaluacionDAO().addEvalucion(evaluacion);
-        }
-        
-        public boolean updateEvaluacion(Evaluacion evaluacion){
-            return obtenerEvaluacionDAO().updateEvaluacion(evaluacion);
-        }
-        
-        private EvaluacionDAO obtenerEvaluacionDAO() {
-        EvaluacionDAO DAO = new EvaluacionDAO();
-        return DAO;
+
+    public Collection<Evaluacion> getEvaluaciones() {
+        return obtenerEvaluacionDAO().getEvaluaciones();
+
+    }
+
+    public Evaluacion addEvaluacion(Evaluacion evaluacion) {
+        return obtenerEvaluacionDAO().addEvalucion(evaluacion);
+    }
+
+    public boolean updateEvaluacion(Evaluacion evaluacion) {
+        return obtenerEvaluacionDAO().updateEvaluacion(evaluacion);
+    }
+
+    private EvaluacionDAO obtenerEvaluacionDAO() {
+        return new EvaluacionDAO();
     }
 
 }

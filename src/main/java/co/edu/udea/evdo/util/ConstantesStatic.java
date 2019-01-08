@@ -63,20 +63,20 @@ public class ConstantesStatic {
     //
     // MARES
     //
-    public final static String WS_MARES_CONSULTAR_PERSONA = "consultapersonamares";
-    public final static String WS_MARES_CONSULTAR_FACULTADES = "consultafacultadesmares";
-    public final static String WS_MARES_CONSULTAR_PROGRAMAS = "consultaprogramasmares";
-    public final static String WS_MARES_MATERIAS_PROGRAMA_VERSION = "consultarmateriasprogramaversion";
-    public final static String WS_MARES_CONSULTAR_PROGRAMAS_DE_ROL = "consultarprogramasderol";
-    public final static String WS_MARES_CONSULTAR_MATERIAS_ESTUDIANTES = "consultamateriasestudiantemares";
+    public static final String WS_MARES_CONSULTAR_PERSONA = "consultapersonamares";
+    public static final String WS_MARES_CONSULTAR_FACULTADES = "consultafacultadesmares";
+    public static final String WS_MARES_CONSULTAR_PROGRAMAS = "consultaprogramasmares";
+    public static final String WS_MARES_MATERIAS_PROGRAMA_VERSION = "consultarmateriasprogramaversion";
+    public static final String WS_MARES_CONSULTAR_PROGRAMAS_DE_ROL = "consultarprogramasderol";
+    public static final String WS_MARES_CONSULTAR_MATERIAS_ESTUDIANTES = "consultamateriasestudiantemares";
 
     //
     // SIPE
     //
-    public final static String WS_SIPE_CONSULTA_EMPLEADOS = "consultaempleadossipe";
+    public static final String WS_SIPE_CONSULTA_EMPLEADOS = "consultaempleadossipe";
     
     
     // Datos para el envio de correos
-     public static String WS_ENVIAR_CORREO = "enviarcorreows";
+     public static final String WS_ENVIAR_CORREO = "enviarcorreows";
 
 }

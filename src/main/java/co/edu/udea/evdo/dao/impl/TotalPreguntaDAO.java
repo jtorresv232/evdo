@@ -12,30 +12,33 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.LinkedList;
-import oracle.jdbc.OracleTypes;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Jonathan
  */
-public class TotalPreguntaDAO extends ConnectionPool{
-    public Collection<TotalPregunta> getTotalPreguntas(){
+public class TotalPreguntaDAO extends ConnectionPool {
+
+    static final Logger logger = Logger.getLogger(TotalPreguntaDAO.class);
+
+    public Collection<TotalPregunta> getTotalPreguntas() {
         CallableStatement ps = null;
         ResultSet rs = null;
         Collection<TotalPregunta> listaTotales = new LinkedList<>();
         TotalPregunta total;
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("totalpregunta.obtener"));
             rs = ps.executeQuery();
-            if(rs!=null){
-                while(rs.next()){
+            if (rs != null) {
+                while (rs.next()) {
                     total = new TotalPregunta();
                     total.setCodigo(rs.getInt("CODIGO"));
                     total.setNumero(rs.getInt("NUMERO"));
                     total.setEvaluacion(rs.getString("EVALUACION"));
                     total.setMedia(rs.getDouble("MEDIA"));
                     total.setDesviacion(rs.getDouble("DESVIACION"));
-                    total.setCoeficiente_desv(rs.getDouble("COEFICIENTE_DESV"));
+                    total.setCoeficienteDesv(rs.getDouble("COEFICIENTE_DESV"));
                     total.setSemestre(rs.getInt("SEMESTRE"));
                     total.setMateria(rs.getInt("MATERIA"));
                     total.setGrupo(rs.getInt("GRUPO"));
@@ -43,34 +46,33 @@ public class TotalPreguntaDAO extends ConnectionPool{
                     listaTotales.add(total);
                 }
             }
-        }catch(Exception e){
-            System.out.println(e);
-        }finally{
-            close(ps,rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return listaTotales;
     }
-    
-    public TotalPregunta addTotalPregunta(TotalPregunta tp){
+
+    public TotalPregunta addTotalPregunta(TotalPregunta tp) {
         CallableStatement ps = null;
-        ResultSet rs = null;
         TotalPregunta total = new TotalPregunta();
-        try{
+        try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("totalpregunta.agregar"));
             ps.setInt(1, tp.getNumero());
             ps.setString(2, tp.getEvaluacion());
             ps.setDouble(3, tp.getMedia());
             ps.setDouble(4, tp.getDesviacion());
-            ps.setDouble(5, tp.getCoeficiente_desv());
+            ps.setDouble(5, tp.getCoeficienteDesv());
             ps.setLong(6, tp.getSemestre());
             ps.setLong(7, tp.getMateria());
             ps.setInt(8, tp.getGrupo());
             ps.setString(9, tp.getCedula());
             ps.executeQuery();
-        }catch(Exception e){
-            System.out.println(e);
-        }finally{
-            close(ps,rs);
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
         }
         return total;
     }

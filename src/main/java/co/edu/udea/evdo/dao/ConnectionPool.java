@@ -11,23 +11,25 @@ import java.util.ResourceBundle;
 import javax.sql.DataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Jonathan
  */
 public class ConnectionPool {
-    
-    private static DataSource dataSource = null;
+
+    private DataSource dataSource = null;
     private static ResourceBundle properties;
     private Connection con;
-    
-    public Connection getConn(){
-        try{
+    static final Logger loggerCon = Logger.getLogger(ConnectionPool.class);
+
+    public Connection getConn() {
+        try {
             boolean useDataSource = true;
-            
+
             if (!useDataSource) {
-                con = getConn(true);
+                con = getConne();
             } else {
                 if (dataSource == null) {
                     InitialContext initContext = new InitialContext();
@@ -36,17 +38,17 @@ public class ConnectionPool {
                 con = dataSource.getConnection();
                 con.setAutoCommit(true);
             }
-            
-        }catch (SQLException | NamingException e){
-            
+
+        } catch (SQLException | NamingException e) {
+            loggerCon.error(e);
         } catch (Exception es) {
-            
+            loggerCon.error(es);
         }
         return con;
     }
-    
-    public Connection getConn(boolean state) throws SQLException, Exception{
-        try{
+
+    public Connection getConne() {
+        try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             String host = "sinu.udea.red";
             String port = "1521";
@@ -55,11 +57,11 @@ public class ConnectionPool {
             Properties props = new Properties();
             props.put("password", "evaluaDocen123");
             props.put("user", "evaluaDocen");
-        }catch(Exception e){
-            throw new Exception(e);
-        }finally {
-            return con;
+            props.put("url", url);
+        } catch (Exception e) {
+            loggerCon.error(e);
         }
+        return con;
     }
 
     public static ResourceBundle getProperties() {
@@ -69,8 +71,8 @@ public class ConnectionPool {
     public static void setProperties(ResourceBundle properties) {
         ConnectionPool.properties = properties;
     }
-    
-    public void close(PreparedStatement ps, ResultSet rs){
+
+    public void close(PreparedStatement ps) {
         try {
             if (!empty(con)) {
                 con.close();
@@ -80,10 +82,10 @@ public class ConnectionPool {
             }
 
         } catch (Exception e) {
-            System.err.println(e);
+            loggerCon.error(e);
         }
     }
-    
+
     public boolean empty(Object objeto) {
         if (objeto == null) {
             return true;
@@ -94,4 +96,3 @@ public class ConnectionPool {
         return false;
     }
 }
-

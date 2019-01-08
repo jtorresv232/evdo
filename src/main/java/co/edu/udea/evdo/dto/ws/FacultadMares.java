@@ -11,7 +11,7 @@ package co.edu.udea.evdo.dto.ws;
  */
 public class FacultadMares {
     long codigo;
-    String Nombre;
+    String nombre;
 
     public long getCodigo() {
         return codigo;
@@ -22,11 +22,11 @@ public class FacultadMares {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     

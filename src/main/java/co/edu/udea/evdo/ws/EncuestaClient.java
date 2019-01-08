@@ -9,11 +9,6 @@ import co.edu.udea.evdo.dto.Encuesta;
 import co.edu.udea.evdo.dto.Pregunta;
 import co.edu.udea.evdo.dto.Resultados;
 import co.edu.udea.evdo.dto.Tema;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -36,14 +31,12 @@ public class EncuestaClient {
                     request(MediaType.APPLICATION_JSON).get(Response.class);
         
         List<Resultados> resultados = serviceResponse.readEntity(new GenericType<List<Resultados>>(){});
-        Resultados[] result = resultados.toArray(new Resultados[resultados.size()]);
-        return result;
+        return resultados.toArray(new Resultados[resultados.size()]);
     }
     
     public double getAverage(Resultados[] resultados){
         double sum = 0;
         double avg;
-        int len = 0;
         for(Resultados resu:resultados){
             sum += resu.getValor();
         }
@@ -66,21 +59,18 @@ public class EncuestaClient {
     public List<Tema> obtenerTemas(){
         Response serviceResponse = client.target(REST_URL + "temas").
                     request(MediaType.APPLICATION_JSON).get(Response.class);
-        List<Tema> temas = serviceResponse.readEntity(new GenericType<List<Tema>>(){});
-        return temas;
+        return serviceResponse.readEntity(new GenericType<List<Tema>>(){});
     }
     
     public List<Encuesta> obtenerEncuestas(){
         Response serviceResponse = client.target(REST_URL + "encuestas").
                     request(MediaType.APPLICATION_JSON).get(Response.class);
-        List<Encuesta> encuestas = serviceResponse.readEntity(new GenericType<List<Encuesta>>(){});
-        return encuestas;
+        return serviceResponse.readEntity(new GenericType<List<Encuesta>>(){});
     }
     
     public List<Pregunta> obtenerPregutnas(){
         Response serviceResponse = client.target(REST_URL + "preguntas").
                     request(MediaType.APPLICATION_JSON).get(Response.class);
-        List<Pregunta> preguntas = serviceResponse.readEntity(new GenericType<List<Pregunta>>(){});
-        return preguntas;
+        return serviceResponse.readEntity(new GenericType<List<Pregunta>>(){});
     }
 }

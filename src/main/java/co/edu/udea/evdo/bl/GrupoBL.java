@@ -14,32 +14,33 @@ import java.util.Collection;
  *
  * @author Jonathan
  */
-public class GrupoBL implements Serializable{
+public class GrupoBL implements Serializable {
+
     private static GrupoBL singletonInstance = new GrupoBL();
 
     public GrupoBL() {
+        // empty constructor
     }
-        
-        public static GrupoBL getInstance() {
+
+    public static GrupoBL getInstance() {
         synchronized (GrupoBL.class) {
-            if (singletonInstance == null) { 
+            if (singletonInstance == null) {
                 singletonInstance = new GrupoBL();
             }
         }
         return singletonInstance;
     }
-        
-        public Collection<Grupo> getGrupos(){
-            return obtenerGrupoDAO().getGrupos();
-        }
-        
-        public Grupo addGrupo(Grupo grupo){
-            return obtenerGrupoDAO().addGrupo(grupo);
-        }
-        
-        private GrupoDAO obtenerGrupoDAO() {
-        GrupoDAO DAO = new GrupoDAO();
-        return DAO;
+
+    public Collection<Grupo> getGrupos() {
+        return obtenerGrupoDAO().getGrupos();
+    }
+
+    public Grupo addGrupo(Grupo grupo) {
+        return obtenerGrupoDAO().addGrupo(grupo);
+    }
+
+    private GrupoDAO obtenerGrupoDAO() {
+        return new GrupoDAO();
     }
 
 }

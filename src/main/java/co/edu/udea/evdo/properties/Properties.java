@@ -7,35 +7,39 @@ package co.edu.udea.evdo.properties;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
+import javax.inject.Inject;
 
 /**
  *
  * @author Jonathan
  */
 public class Properties implements Serializable {
+
     private static Properties singletonProperties = new Properties();
-    private ResourceBundle evaluacionProperties = ResourceBundle.getBundle("evaluacion");
-    private ResourceBundle applicationProperties = ResourceBundle.getBundle("application");
+    private transient @Inject
+    ResourceBundle evaluacionProperties = ResourceBundle.getBundle("evaluacion");
+    private transient @Inject
+    ResourceBundle applicationProperties = ResourceBundle.getBundle("application");
 
     public Properties() {
+        // empty constructor
     }
-    
-    public static Properties getInstance(){
-        synchronized(Properties.class){
-        if (singletonProperties == null){
-            singletonProperties = new Properties();
-        }}
-    return singletonProperties;
+
+    public static Properties getInstance() {
+        synchronized (Properties.class) {
+            if (singletonProperties == null) {
+                singletonProperties = new Properties();
+            }
+        }
+        return singletonProperties;
     }
 
     public ResourceBundle getEvaluacionProperties() {
         return evaluacionProperties;
     }
-    
-    public ResourceBundle getAppProperties(){
+
+    public ResourceBundle getAppProperties() {
         return applicationProperties;
     }
-    
-    
-    
+
 }

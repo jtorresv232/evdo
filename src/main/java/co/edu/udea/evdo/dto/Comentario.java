@@ -15,8 +15,8 @@ import java.sql.Date;
 public class Comentario implements Serializable{
     private int codigo;
     private String autor;
-    private String email_autor;
-    private Date fecha_comentario;
+    private String emailAutor;
+    private Date fechaComentario;
     private String comentario;
     private int semestre;
     private int materia;
@@ -39,20 +39,20 @@ public class Comentario implements Serializable{
         this.autor = autor;
     }
 
-    public String getEmail_autor() {
-        return email_autor;
+    public String getEmailAutor() {
+        return emailAutor;
     }
 
-    public void setEmail_autor(String email_autor) {
-        this.email_autor = email_autor;
+    public void setEmailAutor(String emailAutor) {
+        this.emailAutor = emailAutor;
     }
 
-    public Date getFecha_comentario() {
-        return fecha_comentario;
+    public Date getFechaComentario() {
+        return fechaComentario;
     }
 
-    public void setFecha_comentario(Date fecha_comentario) {
-        this.fecha_comentario = fecha_comentario;
+    public void setFechaComentario(Date fechaComentario) {
+        this.fechaComentario = fechaComentario;
     }
 
     public String getComentario() {

@@ -16,48 +16,49 @@ import java.util.Collection;
  *
  * @author Jonathan
  */
-public class FacultadBL implements Serializable{
+public class FacultadBL implements Serializable {
+
     private static FacultadBL singletonInstance = new FacultadBL();
 
     public FacultadBL() {
+        // empty constructor
     }
-        
-        public static FacultadBL getInstance() {
+
+    public static FacultadBL getInstance() {
         synchronized (FacultadBL.class) {
-            if (singletonInstance == null) { 
+            if (singletonInstance == null) {
                 singletonInstance = new FacultadBL();
             }
         }
         return singletonInstance;
     }
-        
-        public Facultad addFacultad(Facultad facultad){
-            return obtenerFacultadDAO().addFacultad(facultad);
+
+    public Facultad addFacultad(Facultad facultad) {
+        return obtenerFacultadDAO().addFacultad(facultad);
+    }
+
+    public Collection<Facultad> getFacultades() {
+        return obtenerFacultadDAO().getFacultades();
+    }
+
+    public String updateFacultad(Facultad facultad) {
+        return obtenerFacultadDAO().updateFacultad(facultad);
+    }
+
+    public void poblarFacultades() {
+        MaresService ms = new MaresService();
+        Collection<FacultadMares> listaFacultades = ms.consultaFacultades();
+        Facultad facultad;
+        for (FacultadMares facult : listaFacultades) {
+            facultad = new Facultad();
+            facultad.setCodigo(facult.getCodigo());
+            facultad.setNombre(facult.getNombre());
+            addFacultad(facultad);
         }
-        
-        public Collection<Facultad> getFacultades(){
-            return obtenerFacultadDAO().getFacultades();
-        }
-        
-        public String updateFacultad(Facultad facultad){
-            return obtenerFacultadDAO().updateFacultad(facultad);
-        }
-        
-        public void poblarFacultades(){
-            MaresService ms = new MaresService();
-            Collection<FacultadMares> listaFacultades = ms.consultaFacultades();
-            Facultad facultad;
-            for(FacultadMares facult : listaFacultades){
-                facultad = new Facultad();
-                facultad.setCodigo(facult.getCodigo());
-                facultad.setNombre(facult.getNombre());
-                addFacultad(facultad);
-            }
-        }
-        
-        private FacultadDAO obtenerFacultadDAO() {
-        FacultadDAO DAO = new FacultadDAO();
-        return DAO;
+    }
+
+    private FacultadDAO obtenerFacultadDAO() {
+        return new FacultadDAO();
     }
 
 }
