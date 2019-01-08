@@ -261,11 +261,16 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>co.edu.udea.apoyo-tecnico</groupId>
-			<artifactId>udea-ws_security</artifactId>
-			<version>0.1.1</version>
-			<scope>provided</scope>
-		</dependency>
+  <groupId>co.edu.udea.apoyo-tecnico</groupId>
+  <artifactId>udea-ws_security</artifactId>
+  <version>0.1.1</version>
+</dependency>
+
+<dependency>
+  <groupId>co.edu.udea.apoyo-tecnico</groupId>
+  <artifactId>udea-ws_client</artifactId>
+  <version>0.1.1</version>
+</dependency>
 
 
 		<dependency>

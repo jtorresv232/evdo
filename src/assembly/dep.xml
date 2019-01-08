@@ -1,0 +1,82 @@
+<assembly>
+	<id>installer</id>
+	<formats>
+		<!-- formato de salida del empaquetado -->
+		<format>zip</format>
+	</formats>
+	<!-- no queremos que el empaquetado tenga como raíz un directorio con el 
+		nombre del módulo batch -->
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<!-- las dependencias del módulo (las librerías) se incluirán en un directorio 
+		/lib -->
+	<dependencySets>
+		<dependencySet>
+			<outputDirectory>/lib</outputDirectory>
+			<scope>runtime</scope>
+		</dependencySet>
+	</dependencySets>
+	<!-- además el contenido del zip incluirá los siguientes directorios -->
+	<fileSets>
+		<!-- irá al directorio lib el contenido del directorio target del módulo 
+			batch -->
+		<fileSet>
+			<directory>target</directory>
+			<outputDirectory>lib</outputDirectory>
+			<!-- a exclusión del empaquetado del javadoc y los fuentes -->
+			<excludes>
+				<exclude>app-batch-*-source.jar</exclude>
+				<exclude>app-batch-*-javadoc.jar</exclude>
+			</excludes>
+			<!-- se incluirá la propia librería del módulo batch -->
+			<includes>
+				<include>app-batch-*.jar</include>
+			</includes>
+		</fileSet>
+		<!-- se creará un directorio doc en el que se incluirá el site del módulo 
+			batch -->
+		<fileSet>
+			<directory>target/site</directory>
+			<outputDirectory>doc</outputDirectory>
+			<includes>
+				<include>**/*</include>
+			</includes>
+		</fileSet>
+		<!-- los ficheros de configuración de la aplicación deberán estar disponibles 
+			también en el entorno del módulo batch, aunque quizás no se requiera la configuración 
+			de todas sus propiedades -->
+		<fileSet>
+			<directory>src/main/config</directory>
+			<outputDirectory>/config</outputDirectory>
+			<includes>
+				<include>**/*</include>
+			</includes>
+		</fileSet>
+		<!-- para la ejecución de los procesos batch haremos uso de unos ejecutables 
+			que invoquen a los métodos main de las clases que implementen los procesos -->
+		<fileSet>
+			<directory>src/main/bin</directory>
+			<outputDirectory>/bin</outputDirectory>
+			<lineEnding>dos</lineEnding>
+			<includes>
+				<include>**/*.cmd</include>
+			</includes>
+		</fileSet>
+		<!-- al distribuir multiplataforma debemos tener en cuenta que el entorno 
+			puede ser windows o unix. Los sctips para ambos serán empaquetados bajo el 
+			directorio bin. -->
+		<fileSet>
+			<directory>src/main/bin</directory>
+			<outputDirectory>/bin</outputDirectory>
+			<lineEnding>unix</lineEnding>
+			<fileMode>0755</fileMode>
+			<includes>
+				<include>**/*.sh</include>
+			</includes>
+		</fileSet>
+		<!-- crearemos un directorio de salida para los logs de los procesos -->
+		<fileSet>
+			<directory>src/main/logs</directory>
+			<outputDirectory>/logs</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly>
