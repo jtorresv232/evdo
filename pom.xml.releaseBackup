@@ -64,7 +64,7 @@
 		<url>${repo.url}</url>
 		<connection>${repo.conexion}</connection>
 		<developerConnection>${repo.conexion}</developerConnection>
-		<tag>quality/v0.1.19</tag>
+		<tag>quality/v0.1.16</tag>
 	</scm>
 
 	<distributionManagement>
