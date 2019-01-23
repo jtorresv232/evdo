@@ -56,7 +56,7 @@ public class AsignacionService implements Serializable {
         return AsignacionBL.getInstance().updatePorcentaje(asignacion);
     }
 
-    @Path("poblar")
+    @Path("/poblar")
     public String poblarAsignaciones() {
         AsignacionBL.getInstance().poblarAsignaciones();
         return "aprobado";

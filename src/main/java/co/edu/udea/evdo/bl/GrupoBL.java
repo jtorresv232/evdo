@@ -7,6 +7,7 @@ package co.edu.udea.evdo.bl;
 
 import co.edu.udea.evdo.dao.impl.GrupoDAO;
 import co.edu.udea.evdo.dto.Grupo;
+import co.edu.udea.evdo.dto.GrupoXMateria;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -37,6 +38,10 @@ public class GrupoBL implements Serializable {
 
     public Grupo addGrupo(Grupo grupo) {
         return obtenerGrupoDAO().addGrupo(grupo);
+    }
+    
+    public Collection<GrupoXMateria> getGruposXMateria(long semestre, long materia){
+        return obtenerGrupoDAO().getGruposXMateria(semestre, materia);
     }
 
     private GrupoDAO obtenerGrupoDAO() {

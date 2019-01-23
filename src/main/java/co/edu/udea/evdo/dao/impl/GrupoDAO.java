@@ -7,6 +7,7 @@ package co.edu.udea.evdo.dao.impl;
 
 import co.edu.udea.evdo.dao.ConnectionPool;
 import co.edu.udea.evdo.dto.Grupo;
+import co.edu.udea.evdo.dto.GrupoXMateria;
 import co.edu.udea.evdo.properties.Properties;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -64,6 +65,34 @@ public class GrupoDAO extends ConnectionPool {
             close(ps);
         }
         return grupo;
+    }
+    
+    public Collection<GrupoXMateria> getGruposXMateria(long semestre, long materia) {
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        Collection<GrupoXMateria> listaGrupos = new LinkedList<>();
+        GrupoXMateria grupo;
+        try {
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("grupo.obtenerXmateria"));
+            ps.setLong(1, semestre);
+            ps.setLong(2, materia);
+            rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    grupo = new GrupoXMateria();
+
+                    grupo.setSemestre(rs.getLong("SEMESTRE"));
+                    grupo.setMateria(rs.getLong("MATERIA"));
+                    grupo.setGrupo(rs.getInt("GRUPO"));
+                    listaGrupos.add(grupo);
+                }
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
+        }
+        return listaGrupos;
     }
 
 }

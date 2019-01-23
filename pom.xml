@@ -9,7 +9,7 @@
 	<url>${organizacion.url}</url>
 	<description>${proyecto.descripcion}</description>
 	
-	<!-- Definición de la Organización -->
+	<!-- Definici�n de la Organizaci�n -->
 	<organization>
 		<name>${organizacion.nombre} </name>
 		<url>${organizacion.url}</url>
@@ -26,33 +26,32 @@
 
     <properties>
 
-		<!-- Parametrización de Organización -->
+		<!-- Parametrizaci�n de Organizaci�n -->
 		<organizacion.id>udea</organizacion.id>
 		<organizacion.nombre>
 			Universidad de Antioquia :: UdeA
 		</organizacion.nombre>
 		<organizacion.url>http://www.udea.edu.co</organizacion.url>
 
-		<!-- Parametrización del Proyecto -->
+		<!-- Parametrizaci�n del Proyecto -->
 		<proyecto.descripcion>
-			Sistema de evaluación docente-curso
+			Sistema de evaluaci�n docente-curso
 		</proyecto.descripcion>
 		<proyecto.contexto>
-			Sistema de evaluación docente-curso
+			Sistema de evaluaci�n docente-curso
 		</proyecto.contexto>
 		<proyecto.compilacion>
 			${project.artifactId}-${project.version}
 		</proyecto.compilacion>
 
-		<!-- Parametrización de Desarrollo -->
+		<!-- Parametrizaci�n de Desarrollo -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 
 		<jersey.version>2.26-b08</jersey.version>
-		<jersey.scope>compile</jersey.scope>
+                <jersey.scope>compile</jersey.scope>
 
-
-		<!-- Parametrización de SCM -->
+		<!-- Parametrizaci�n de SCM -->
 		<repo.url>http://172.19.0.212/git/drai2/evaluadocen.git</repo.url>
 		<repo.conexion>
 			scm:git:http://drai2:p3l1c4n0--@172.19.0.212/git/drai2/evaluadocen.git
@@ -82,7 +81,7 @@
 	</distributionManagement>
 
 	<build>
-		<!-- Nombramiento para la compilación del proyecto -->
+		<!-- Nombramiento para la compilaci�n del proyecto -->
 		<finalName>${proyecto.compilacion}</finalName>
 
 		<!-- Directorios de desarrollo -->
@@ -102,7 +101,7 @@
 		</testResources>
 
 		<plugins>
-			<!-- Plugin para la la instalación del proyecto -->
+			<!-- Plugin para la la instalaci�n del proyecto -->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.5.3</version>
@@ -143,7 +142,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<!-- Plugin para definir la ejecución de Javadoc -->
+			<!-- Plugin para definir la ejecuci�n de Javadoc -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -164,7 +163,7 @@
 			</plugin>
 
 
-			<!-- Plugin para la compilación del proyecto -->
+			<!-- Plugin para la compilaci�n del proyecto -->
 			<plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
@@ -231,12 +230,18 @@
 				<artifactId>jersey-bom</artifactId>
 				<version>${jersey.version}</version>
 				<type>pom</type>
-				<scope>provided</scope>
+                                <scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
+            
+            <dependency>
+  <groupId>com.sun.jersey</groupId>
+  <artifactId>jersey-client</artifactId>
+  <version>1.19.1</version>
+</dependency>
 
 		<!-- Libreria Propietaria de la UdeA -->
 		
@@ -397,8 +402,6 @@
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
 			<version>2.4</version>
-			<classifier>jdk15</classifier>
-			<scope>provided</scope>
 		</dependency>
 		
 		<!--  
@@ -418,77 +421,65 @@
 			<version>1.19.4</version>
 		</dependency>
 		
-            -->
-            <dependency>
-                <groupId>com.sun.jersey</groupId>
-                <artifactId>jersey-core</artifactId>
-                <version>1.2</version>
-                <scope>provided</scope>
-            </dependency>
+        -->
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/net.sf.ezmorph/ezmorph -->
+        <dependency>
+            <groupId>net.sf.ezmorph</groupId>
+            <artifactId>ezmorph</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.7.0</version>
+        </dependency>
 		
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+            <version>2.2.1</version>
+        </dependency> 
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.6</version>
+        </dependency>
 
-            <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>jsr311-api</artifactId>
-                <version>1.1.1</version>
-                <scope>provided</scope>
-            </dependency>
-
-
-            <!-- https://mvnrepository.com/artifact/net.sf.ezmorph/ezmorph -->
-            <dependency>
-                <groupId>net.sf.ezmorph</groupId>
-                <artifactId>ezmorph</artifactId>
-                <version>1.0.6</version>
-                <scope>provided</scope>
-            </dependency>
-
-
-            <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
-            <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>2.4</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>3.2.1</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
-            <dependency>
-                <groupId>commons-beanutils</groupId>
-                <artifactId>commons-beanutils</artifactId>
-                <version>1.7.0</version>
-                <scope>provided</scope>
-            </dependency>
-		
-            <dependency>
-                <groupId>org.quartz-scheduler</groupId>
-                <artifactId>quartz</artifactId>
-                <version>2.2.1</version>
-            </dependency>
-            <dependency>
-                <groupId>org.quartz-scheduler</groupId>
-                <artifactId>quartz-jobs</artifactId>
-                <version>2.2.1</version>
-            </dependency> 
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.16</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>1.6.6</version>
-            </dependency>
-
-	</dependencies>
-
+    </dependencies>
 </project>

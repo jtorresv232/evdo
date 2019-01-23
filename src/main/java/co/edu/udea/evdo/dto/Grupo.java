@@ -16,6 +16,28 @@ public class Grupo implements Serializable{
     private long materia;
     private int grupo;
     private int numEstudiantes;
+    private String nombreDocente;
+    private String cedulaDocente;
+
+    public String getCedulaDocente() {
+        return cedulaDocente;
+    }
+
+    public void setCedulaDocente(String cedulaDocente) {
+        this.cedulaDocente = cedulaDocente;
+    }
+    
+    
+
+    public String getNombreDocente() {
+        return nombreDocente;
+    }
+
+    public void setNombreDocente(String nombreDocente) {
+        this.nombreDocente = nombreDocente;
+    }
+    
+    
 
     public long getSemestre() {
         return semestre;
