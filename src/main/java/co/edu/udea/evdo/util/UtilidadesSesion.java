@@ -83,17 +83,6 @@ public class UtilidadesSesion
                 String datosDummy = (String) sesion.getAttribute("DUMMY_SESSION");
                 this.logger.debug("Presentando el contenido del atributo dummy");
                 this.logger.debug(datosDummy);
-                this.logger.debug("heeeyyyyy");
-                Enumeration e = (Enumeration) (sesion.getAttributeNames());
-                while ( e.hasMoreElements())
-        {
-            Object tring;
-            if((tring = e.nextElement())!=null)
-            {
-                this.logger.debug(sesion.getAttribute((String) tring));
-            }
-
-        }
                 
                 if (sesion.getAttribute("userDataUdeA") != null) {
 

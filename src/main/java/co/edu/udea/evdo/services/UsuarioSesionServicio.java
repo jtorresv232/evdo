@@ -29,7 +29,6 @@ public class UsuarioSesionServicio implements Serializable {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public UsuarioSesion obtenerDatosFiltro(@Context HttpServletRequest request) {
-        System.out.println((String) request.getSession().getAttribute("userDataUdeA"));
         return FiltroBL.obtenerDatosUsuarioSesion(request);
     }       
 }

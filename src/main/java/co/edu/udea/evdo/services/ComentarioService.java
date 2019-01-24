@@ -39,11 +39,12 @@ public class ComentarioService implements Serializable{
         return ComentarioBL.getInstance().addComentario(comentario);
     }
     
-    @Path("notificar")
+    @Path("/notificar")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     public String notificar(Correo inCorreo) throws OrgSistemasSecurityException{
+        System.out.println("SERVICIO");
         return ComentarioBL.getInstance().notificar(inCorreo);
     }
 }

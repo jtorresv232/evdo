@@ -255,7 +255,6 @@
 			<groupId>oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.3</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -281,15 +280,12 @@
 
 
 		<!-- Dependencias del proyecto original -->
-
-
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
-		</dependency>
+                <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
 
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
