@@ -193,6 +193,7 @@ public class AsignacionDAO extends ConnectionPool {
                     asignacion.setNombreMateria(rs.getString(NOMBRE_MATERIA));
                     asignacion.setPrograma(rs.getLong(PROGRAMA));
                     asignacion.setTotal(rs.getInt("TOTAL"));
+                    asignacion.setComentarios(rs.getInt("COMENTARIOS"));
                     listaAsignaciones.add(asignacion);
                 }
             }

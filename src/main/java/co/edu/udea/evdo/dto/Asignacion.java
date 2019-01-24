@@ -31,6 +31,17 @@ public class Asignacion {
     private String nombreDocente;
     private long programa;
     private int total;
+    private int comentarios;
+
+    public int getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(int comentarios) {
+        this.comentarios = comentarios;
+    }
+    
+    
 
     public int getTotal() {
         return total;
