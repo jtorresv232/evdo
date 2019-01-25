@@ -32,6 +32,46 @@ public class Asignacion {
     private long programa;
     private int total;
     private int comentarios;
+    private String encuestaprof;
+    private Date fechaEncprofInicio;
+    private Date fechaEncprofFinal;
+    private String respondida_prof;
+
+    public String getRespondida_prof() {
+        return respondida_prof;
+    }
+
+    public void setRespondida_prof(String respondida_prof) {
+        this.respondida_prof = respondida_prof;
+    }
+    
+    
+    
+    public String getEncuestaprof() {
+        return encuestaprof;
+    }
+
+    public void setEncuestaprof(String encuestaprof) {
+        this.encuestaprof = encuestaprof;
+    }
+
+    public Date getFechaEncprofInicio() {
+        return fechaEncprofInicio;
+    }
+
+    public void setFechaEncprofInicio(Date fechaEncprofInicio) {
+        this.fechaEncprofInicio = fechaEncprofInicio;
+    }
+
+    public Date getFechaEncprofFinal() {
+        return fechaEncprofFinal;
+    }
+
+    public void setFechaEncprofFinal(Date fechaEncprofFinal) {
+        this.fechaEncprofFinal = fechaEncprofFinal;
+    }
+    
+    
 
     public int getComentarios() {
         return comentarios;

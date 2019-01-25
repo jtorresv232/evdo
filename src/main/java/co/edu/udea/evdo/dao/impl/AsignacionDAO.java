@@ -194,6 +194,10 @@ public class AsignacionDAO extends ConnectionPool {
                     asignacion.setPrograma(rs.getLong(PROGRAMA));
                     asignacion.setTotal(rs.getInt("TOTAL"));
                     asignacion.setComentarios(rs.getInt("COMENTARIOS"));
+                    asignacion.setEncuestaprof(rs.getString("ENCUESTAPROF"));
+                    asignacion.setFechaEncprofInicio(rs.getDate("FECHA_ENCPROF_INICIO"));
+                    asignacion.setFechaEncprofFinal(rs.getDate("FECHA_ENCPROF_FINAL"));
+                    asignacion.setRespondida_prof(rs.getString("RESPONDIDA_PROF"));
                     listaAsignaciones.add(asignacion);
                 }
             }
@@ -273,10 +277,49 @@ public class AsignacionDAO extends ConnectionPool {
         } catch (Exception e) {
             logger.error(e);
         } finally {
-            Notifications notifications = Notifications.getInstance();
-            notifications.notificar();
             close(ps);
         }
         return asignacion;
     }
+    
+    public Asignacion updateAsignacionProf(Asignacion asig) {
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        Asignacion asignacion = new Asignacion();
+        try {
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.actualizarProf"));
+            ps.setLong(1, asig.getSemestre());
+            ps.setLong(2, asig.getMateria());
+            ps.setInt(3, asig.getGrupo());
+            ps.setString(4, asig.getCedula());
+            ps.setString(5, asig.getEncuestaprof());
+            ps.setDate(6, asig.getFechaEncprofInicio());
+            ps.setDate(7, asig.getFechaEncprofFinal());
+            ps.registerOutParameter(8, OracleTypes.CURSOR);
+            ps.executeQuery();
+            rs = (ResultSet) ps.getObject(8);
+            if (rs != null) {
+                rs.next();
+                asignacion.setSemestre(rs.getInt(SEMESTRE));
+                asignacion.setMateria(rs.getInt(MATERIA));
+                asignacion.setGrupo(rs.getInt(GRUPO));
+                asignacion.setCedula(rs.getString(CEDULA));
+                asignacion.setProfCompartido(rs.getString(PROF_COMPARTIDO));
+                asignacion.setProfCatedra(rs.getString(PROF_CATEDRA));
+                asignacion.setNumCatedra(rs.getInt(NUM_CATEDRA));
+                asignacion.setPorcentaje(rs.getDouble(PORCENTAJE));
+                asignacion.setTipoPeriodo(rs.getString("TIPO_PERIODO"));
+                asignacion.setEncuestaprof(rs.getString("ENCUESTAPROF"));
+                asignacion.setFechaEncInicio(rs.getDate("FECHA_ENCPROF_INICIO"));
+                asignacion.setFechaEncFinal(rs.getDate("FECHA_ENCPROF_FINAL"));
+
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
+        }
+        return asignacion;
+    }
+    
 }

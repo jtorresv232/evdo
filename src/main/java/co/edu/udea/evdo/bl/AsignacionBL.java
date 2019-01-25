@@ -98,6 +98,10 @@ public class AsignacionBL implements Serializable {
     public Asignacion updateAsignacion(Asignacion asignacion) throws SchedulerException, ParseException {
         return obtenerAsignacionDAO().updateAsignacion(asignacion);
     }
+    
+    public Asignacion updateAsignacionProf(Asignacion asignacion) {
+        return obtenerAsignacionDAO().updateAsignacionProf(asignacion);
+    }
 
     public Asignacion updatePorcentaje(Asignacion asignacion) {
         return obtenerAsignacionDAO().updatePorcentaje(asignacion);

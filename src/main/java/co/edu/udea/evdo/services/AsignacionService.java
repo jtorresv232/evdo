@@ -47,6 +47,14 @@ public class AsignacionService implements Serializable {
     public Asignacion updateAsignacion(Asignacion asignacion) throws SchedulerException, ParseException {
         return AsignacionBL.getInstance().updateAsignacion(asignacion);
     }
+    
+    @PUT
+    @Path("/updateProf/{idAsignacion}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Asignacion updateAsignacionProf(Asignacion asignacion) {
+        return AsignacionBL.getInstance().updateAsignacionProf(asignacion);
+    }
 
     @PUT
     @Path("/porcentaje")
