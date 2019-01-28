@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
  */
 public class EncuestaClient {
     private static final String REST_URL
-            = "http://172.19.0.203:29000/encuesta/webapi/";
+            = "http://wasquality.udea.edu.co:29000/encuesta/webapi/";
     
     private Client client = ClientBuilder.newClient();
     

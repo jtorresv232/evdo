@@ -1,5 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <groupId>co.edu.udea.ciclo-academico</groupId>
 	<artifactId>evaluadocen</artifactId>
 	<version>0.1.20-SNAPSHOT</version>
@@ -7,9 +9,10 @@
 	<packaging>war</packaging>
 	<inceptionYear>2018</inceptionYear>
 	<url>${organizacion.url}</url>
+        
 	<description>${proyecto.descripcion}</description>
 	
-	<!-- Definici�n de la Organizaci�n -->
+	<!-- Definición de la Organización -->
 	<organization>
 		<name>${organizacion.nombre} </name>
 		<url>${organizacion.url}</url>
@@ -25,433 +28,295 @@
     </repositories>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <!-- Parametrización de Organizaci�n -->
+        <organizacion.id>udea</organizacion.id>
+        <organizacion.nombre>
+            Universidad de Antioquia :: UdeA
+        </organizacion.nombre>
+        <organizacion.url>http://www.udea.edu.co</organizacion.url>
 
-		<!-- Parametrizaci�n de Organizaci�n -->
-		<organizacion.id>udea</organizacion.id>
-		<organizacion.nombre>
-			Universidad de Antioquia :: UdeA
-		</organizacion.nombre>
-		<organizacion.url>http://www.udea.edu.co</organizacion.url>
+        <!-- Parametrizaci�n del Proyecto -->
+        <proyecto.descripcion>
+            Sistema de posgrados: Evaluación de cursos
+        </proyecto.descripcion>
+        <proyecto.contexto>
+            Sistema de posgrados: Evaluación de cursos
+        </proyecto.contexto>
+        <proyecto.compilacion>
+            ${project.artifactId}-${project.version}
+        </proyecto.compilacion>
 
-		<!-- Parametrizaci�n del Proyecto -->
-		<proyecto.descripcion>
-			Sistema de evaluaci�n docente-curso
-		</proyecto.descripcion>
-		<proyecto.contexto>
-			Sistema de evaluaci�n docente-curso
-		</proyecto.contexto>
-		<proyecto.compilacion>
-			${project.artifactId}-${project.version}
-		</proyecto.compilacion>
+        <!-- Parametrizaci�n de Desarrollo -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
 
-		<!-- Parametrizaci�n de Desarrollo -->
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
+        <jersey.version>2.26-b08</jersey.version>
+        <jersey.scope>compile</jersey.scope>
 
-		<jersey.version>2.26-b08</jersey.version>
-                <jersey.scope>compile</jersey.scope>
+        <!-- Parametrizaci�n de SCM -->
+        <repo.url>http://172.19.0.212/git/drai2/evaluadocen.git</repo.url>
+        <repo.conexion>
+            scm:git:http://drai2:p3l1c4n0--@172.19.0.212/git/drai2/evaluadocen.git
+        </repo.conexion>
+        <repo.rama>quality</repo.rama>
+    </properties>
+    
+    <scm>
+        <url>${repo.url}</url>
+        <connection>${repo.conexion}</connection>
+        <developerConnection>${repo.conexion}</developerConnection>
+        <tag>quality/v0.1.20</tag>
+    </scm>
 
-		<!-- Parametrizaci�n de SCM -->
-		<repo.url>http://172.19.0.212/git/drai2/evaluadocen.git</repo.url>
-		<repo.conexion>
-			scm:git:http://drai2:p3l1c4n0--@172.19.0.212/git/drai2/evaluadocen.git
-		</repo.conexion>
-		<repo.rama>quality</repo.rama>
+    <distributionManagement>
+        <repository>
+            <id>co.edu.udea.nexus</id>
+            <name>udea-releases</name>
+            <url>http://ws-svn.udea.red/nexus/content/repositories/quality</url>
+        </repository>
+        <snapshotRepository>
+            <id>co.edu.udea.nexus</id>
+            <name>udea-snapshots</name>
+            <url>http://ws-svn.udea.red/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
-	</properties>
-	
-	<scm>
-		<url>${repo.url}</url>
-		<connection>${repo.conexion}</connection>
-		<developerConnection>${repo.conexion}</developerConnection>
-		<tag>quality/v0.1.16</tag>
-	</scm>
-
-	<distributionManagement>
-		<repository>
-			<id>co.edu.udea.nexus</id>
-			<name>udea-releases</name>
-			<url>http://ws-svn.udea.red/nexus/content/repositories/quality</url>
-		</repository>
-		<snapshotRepository>
-			<id>co.edu.udea.nexus</id>
-			<name>udea-snapshots</name>
-			<url>http://ws-svn.udea.red/nexus/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<build>
-		<!-- Nombramiento para la compilaci�n del proyecto -->
-		<finalName>${proyecto.compilacion}</finalName>
-
-		<!-- Directorios de desarrollo -->
-		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-			</resource>
-		</resources>
-
-		<!-- Directorios de pruebas -->
-		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-		<testResources>
-			<testResource>
-				<directory>${project.basedir}/src/test/resources</directory>
-			</testResource>
-		</testResources>
-
-		<plugins>
-			<!-- Plugin para la la instalaci�n del proyecto -->
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.5.3</version>
-				<configuration>
-					<descriptor>src/assembly/dep.xml</descriptor>
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- Plugin para definir el versionamiento del proyecto -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5.2</version>
-				<configuration>
-					<preparationGoals>clean install</preparationGoals>
-					<goals>deploy</goals>
-					<username>${git.username}</username>
-					<password>${git.password}</password>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<tagNameFormat>
-						${repo.rama}/v@{project.version}
-					</tagNameFormat>
-					<branchName>${repo.rama}/${project.version}</branchName>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.apache.maven.shared</groupId>
-						<artifactId>maven-invoker</artifactId>
-						<version>2.2</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<!-- Plugin para definir la ejecuci�n de Javadoc -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.4</version>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<additionalparam>
-								-Xdoclint:none
-							</additionalparam>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-
-			<!-- Plugin para la compilaci�n del proyecto -->
-			<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.0</version>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-            </configuration>
-        </plugin>
-			<!-- Plugin para definir el Manifest del proyecto -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
-					<archive>
-						<index>true</index>
-						<manifestSections>
-							<manifestSection>
-								<name>${project.name}</name>
-								<manifestEntries>
-									<version>${project.version}</version>
-									<context>${proyecto.contexto}</context>
-									<organization>
-										${organizacion.nombre}
-									</organization>
-									<url>
-										${organizacion.url}
-									</url>
-								</manifestEntries>
-							</manifestSection>
-						</manifestSections>
-					</archive>
-				</configuration>
-			</plugin>
-
-			<!-- Plugin para definir el formato HTML del Javadoc -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.3</version>
-				<configuration>
-					<locales>es</locales>
-					<reportPlugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-javadoc-plugin</artifactId>
-							<configuration>
-								<additionalparam>
-									-Xdoclint:none
-								</additionalparam>
-							</configuration>
-						</plugin>
-					</reportPlugins>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	
-        <dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.glassfish.jersey</groupId>
-				<artifactId>jersey-bom</artifactId>
-				<version>${jersey.version}</version>
-				<type>pom</type>
-                                <scope>provided</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-	<dependencies>
-            
+    <dependencyManagement>
+        <dependencies>
             <dependency>
-  <groupId>com.sun.jersey</groupId>
-  <artifactId>jersey-client</artifactId>
-  <version>1.19.1</version>
-</dependency>
+                <groupId>org.glassfish.jersey</groupId>
+                <artifactId>jersey-bom</artifactId>
+                <version>${jersey.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-		<!-- Libreria Propietaria de la UdeA -->
-		
-		<dependency>
-		  <groupId>org.apache.maven.plugins</groupId>
-		  <artifactId>maven-compiler-plugin</artifactId>
-		  <version>3.6.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.3</version>
-                        <scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sun.el</groupId>
-			<artifactId>el-ri</artifactId>
-			<version>1.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-<dependency>
-  <groupId>co.edu.udea.apoyo-tecnico</groupId>
-  <artifactId>udea-ws_client</artifactId>
-  <version>0.1.1</version>
-</dependency>
-
-
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.14</version>
-			<scope>provided</scope>
-		</dependency>
-
-
-		<!-- Dependencias del proyecto original -->
-                <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+    <dependencies>
+        
+        <dependency> 			
+            <groupId>co.edu.udea.apoyo-tecnico</groupId> 			
+            <artifactId>udea-ws_security</artifactId> 			
+            <version>0.1.1</version>
             <scope>provided</scope>
         </dependency>
-
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-  <groupId>org.glassfish.jersey.containers</groupId>
-  <artifactId>jersey-container-servlet-core</artifactId>
-  <version>2.17</version>
-	</dependency>
+         		
+        <dependency> 			
+            <groupId>co.edu.udea.apoyo-tecnico</groupId> 			
+            <artifactId>udea-filtro</artifactId> 			
+            <version>1.1.6</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency> 			
+            <groupId>co.edu.udea.apoyo-tecnico</groupId> 			
+            <artifactId>udea-ws_client</artifactId> 			
+            <version>0.1.1</version>
+            <scope>provided</scope>
+        </dependency>
         
         <dependency>
-  <groupId>org.glassfish.jersey.inject</groupId>
-  <artifactId>jersey-hk2</artifactId>
-  <version>2.26-b08</version>
-  <classifier>sources</classifier>
-</dependency>
-
-<dependency>
-  <groupId>org.glassfish.jersey.media</groupId>
-  <artifactId>jersey-media-multipart</artifactId>
-  <version>2.25.1</version>
-</dependency>
-
-<dependency>
+            <groupId>co.edu.udea.apoyo-tecnico</groupId>
+            <artifactId>udea-administrador_sesion</artifactId>
+            <version>0.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency> 			
+            <groupId>oracle</groupId> 			
+            <artifactId>ojdbc6</artifactId> 			
+            <version>11.2.0.3</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency> 			
+            <groupId>com.sun.el</groupId> 			
+            <artifactId>el-ri</artifactId> 			
+            <version>1.0</version> 			
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- Originales -->
+        
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.1</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet-core</artifactId>
+            <!-- use the following artifactId if you don't need servlet 2.x compatibility -->
+            <!-- artifactId>jersey-container-servlet</artifactId -->
+        </dependency>
+        
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>16.0.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.codahale.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty</artifactId>
+            <version>3.9.0.Final</version>
+        </dependency>
+               
+        <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
-            <version>2.26-b08</version>
         </dependency>
         
         <dependency>
-  <groupId>org.glassfish.jersey.core</groupId>
-  <artifactId>jersey-client</artifactId>
-  <version>2.25.1</version>
-</dependency>
-
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.25</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.8.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.8.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>16.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.codahale.metrics</groupId>
-			<artifactId>metrics-core</artifactId>
-			<version>3.0.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty</artifactId>
-			<version>3.9.0.Final</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.transaction</groupId>
-			<artifactId>jta</artifactId>
-			<version>1.1</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
-		
-<!--		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-		
- -->		
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>net.sf.json-lib</groupId>
-			<artifactId>json-lib</artifactId>
-			<version>2.4</version>
-		</dependency>
-		
-		<!--  
-		<dependency>
-			<groupId>net.sf.json-lib</groupId>
-			<artifactId>json-lib</artifactId>
-			<version>2.3</version>
-			<classifier>jdk15</classifier>
-		</dependency>	
-		
-		-->	
-
-<!-- 
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-core</artifactId>
-			<version>1.19.4</version>
-		</dependency>
-		
-        -->
-
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>jsr311-api</artifactId>
-            <version>1.1.1</version>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.1</version>
             <scope>provided</scope>
         </dependency>
         
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.4</version>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        
+        <dependency> 			
+            <groupId>junit</groupId> 			
+            <artifactId>junit</artifactId> 			
+            <version>4.12</version> 			
+            <scope>provided</scope> 		
         </dependency>
-
-
+        
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!--
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>1.19.4</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-core</artifactId>
+            <version>1.19.4</version>
+        </dependency>
+        -->
+        
+        <dependency> 			
+            <groupId>com.sun.jersey</groupId> 			
+            <artifactId>jersey-client</artifactId> 			
+            <version>1.2</version>
+            <scope>provided</scope>			
+        </dependency>
+        
+        <dependency>
+            <groupId>com.sun.jersey</groupId> 			
+            <artifactId>jersey-core</artifactId> 			
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
+        	
+        <dependency> 			
+            <groupId>javax.ws.rs</groupId> 			
+            <artifactId>jsr311-api</artifactId> 			
+            <version>1.1.1</version> 			
+            <scope>provided</scope> 		
+        </dependency>
+        
         <!-- https://mvnrepository.com/artifact/net.sf.ezmorph/ezmorph -->
         <dependency>
             <groupId>net.sf.ezmorph</groupId>
             <artifactId>ezmorph</artifactId>
             <version>1.0.6</version>
+            <scope>provided</scope>
         </dependency>
-
-
+        
         <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
-
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.4</version>
+            <scope>provided</scope>
+        </dependency>
+        
         <!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
+            <scope>provided</scope>
         </dependency>
-
+        
         <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.7.0</version>
+        <dependency> 			
+            <groupId>commons-beanutils</groupId> 			
+            <artifactId>commons-beanutils</artifactId> 			
+            <version>1.7.0</version> 			
+            <scope>provided</scope> 		
         </dependency>
-		
+        
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
@@ -473,23 +338,131 @@
             <version>1.6.6</version>
         </dependency>
         
-        <dependency> 			
-            <groupId>co.edu.udea.apoyo-tecnico</groupId> 			
-            <artifactId>udea-ws_security</artifactId> 			
-            <version>0.1.1</version> 			
-        </dependency> 
-        
-        <dependency>
-            <groupId>co.edu.udea.apoyo-tecnico</groupId>
-            <artifactId>udea-administrador_sesion</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        		
-        <dependency> 			
-            <groupId>co.edu.udea.apoyo-tecnico</groupId> 			
-            <artifactId>udea-filtro</artifactId> 			
-            <version>1.1.6</version> 			
-        </dependency>
-
     </dependencies>
+
+    <build>
+        <!-- Nombramiento para la compilación del proyecto -->
+        <finalName>${proyecto.compilacion}</finalName>
+
+        <!-- Directorios de desarrollo -->
+        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <!-- Directorios de pruebas -->
+        <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+        <testResources>
+            <testResource>
+                <directory>${project.basedir}/src/test/resources</directory>
+            </testResource>
+        </testResources>
+        <pluginManagement>
+            <plugins>
+                <!-- Plugin para la la instalación del proyecto --> 			
+                <plugin> 				
+                    <artifactId>maven-assembly-plugin</artifactId> 				
+                    <version>2.5.3</version> 				
+                    <configuration> 					
+                        <descriptor>src/assembly/dep.xml</descriptor> 				
+                    </configuration> 				
+                    <executions> 					
+                        <execution> 						
+                            <id>make-assembly</id> 						
+                            <phase>package</phase> 						
+                            <goals> 							
+                                <goal>single</goal> 						
+                            </goals> 					
+                        </execution> 				
+                    </executions> 			
+                </plugin> 			<!-- Plugin para definir el versionamiento del proyecto --> 			
+                <plugin> 				
+                    <groupId>org.apache.maven.plugins</groupId> 				
+                    <artifactId>maven-release-plugin</artifactId> 				
+                    <version>2.5.2</version> 				
+                    <configuration> 					
+                        <preparationGoals>clean install</preparationGoals> 					
+                        <goals>deploy</goals> 					
+                        <username>${git.username}</username> 					
+                        <password>${git.password}</password> 					
+                        <autoVersionSubmodules>true</autoVersionSubmodules> 					
+                        <tagNameFormat>${repo.rama}/v@{project.version}</tagNameFormat> 					
+                        <branchName>${repo.rama}/${project.version}</branchName> 				
+                    </configuration> 				
+                    <dependencies> 					
+                        <dependency> 						
+                            <groupId>org.apache.maven.shared</groupId> 						
+                            <artifactId>maven-invoker</artifactId> 						
+                            <version>2.2</version> 					
+                        </dependency> 				
+                    </dependencies> 			
+                </plugin> 			<!-- Plugin para definir la ejecución de Javadoc --> 			
+                <plugin> 				
+                    <groupId>org.apache.maven.plugins</groupId> 				
+                    <artifactId>maven-javadoc-plugin</artifactId> 				
+                    <version>2.10.4</version> 				
+                    <executions> 					
+                        <execution> 						
+                            <id>attach-javadocs</id> 						
+                            <goals> 							
+                                <goal>jar</goal> 						
+                            </goals> 						
+                            <configuration> 							
+                                <additionalparam>-Xdoclint:none</additionalparam> 						
+                            </configuration> 					
+                        </execution> 				
+                    </executions> 			
+                </plugin> 			<!-- Plugin para la compilación del proyecto --> 			
+                <plugin>             
+                    <groupId>org.apache.maven.plugins</groupId>             
+                    <artifactId>maven-compiler-plugin</artifactId>             
+                    <version>3.0</version>             
+                    <configuration>                 
+                        <source>1.8</source>                 
+                        <target>1.8</target>             
+                    </configuration>         
+                </plugin> 			<!-- Plugin para definir el Manifest del proyecto --> 			
+                <plugin> 				
+                    <groupId>org.apache.maven.plugins</groupId> 				
+                    <artifactId>maven-war-plugin</artifactId> 				
+                    <version>3.0.0</version> 				
+                    <configuration> 					
+                        <archive> 						
+                            <index>true</index> 						
+                            <manifestSections> 							
+                                <manifestSection> 								
+                                    <name>${project.name}</name> 								
+                                    <manifestEntries> 									
+                                        <version>${project.version}</version> 									
+                                        <context>${proyecto.contexto}</context> 									
+                                        <organization>${organizacion.nombre}</organization> 									
+                                        <url>${organizacion.url}</url> 								
+                                    </manifestEntries> 							
+                                </manifestSection> 						
+                            </manifestSections> 					
+                        </archive> 				
+                    </configuration> 			
+                </plugin> 			<!-- Plugin para definir el formato HTML del Javadoc --> 			
+                <plugin> 				
+                    <groupId>org.apache.maven.plugins</groupId> 				
+                    <artifactId>maven-site-plugin</artifactId> 				
+                    <version>3.3</version> 				
+                    <configuration> 					
+                        <locales>es</locales> 					
+                        <reportPlugins> 						
+                            <plugin> 							
+                                <groupId>org.apache.maven.plugins</groupId> 							
+                                <artifactId>maven-javadoc-plugin</artifactId> 							
+                                <configuration> 								
+                                    <additionalparam>-Xdoclint:none</additionalparam> 							
+                                </configuration> 						
+                            </plugin> 					
+                        </reportPlugins> 				
+                    </configuration> 			
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
