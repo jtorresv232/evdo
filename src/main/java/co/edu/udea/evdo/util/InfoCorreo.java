@@ -29,6 +29,10 @@ public class InfoCorreo {
     }
 
     public boolean enviar(Correo correo, String servicio) throws OrgSistemasSecurityException {
+        this.logger.debug("enviar");
+        logger.debug(correo.getDestinatario());
+        logger.debug(correo.getAsunto());
+        logger.debug(correo.getCuerpo());
         try {
             OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
             wsClient.addParam("destinatario", correo.getDestinatario());
@@ -38,7 +42,6 @@ public class InfoCorreo {
             wsClient.addParam("servicio", "EVALDOCOBSRESULTADOS");
 
             List<ResultadoCorreo> lista = wsClient.obtenerBean(ConstantesStatic.WS_ENVIAR_CORREO, servicio, ResultadoCorreo.class);
-            logger.debug(lista.size());
         } catch (Exception e) {
             logger.debug("Error al enviar el correo:  " + e);
             return false;

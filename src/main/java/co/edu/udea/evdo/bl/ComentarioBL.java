@@ -6,12 +6,15 @@
 package co.edu.udea.evdo.bl;
 
 import co.edu.udea.evdo.dao.impl.ComentarioDAO;
+import co.edu.udea.evdo.dao.impl.FacultadDAO;
 import co.edu.udea.evdo.dto.Comentario;
 import co.edu.udea.evdo.dto.Correo;
 import co.edu.udea.evdo.util.InfoCorreo;
 import co.edu.udea.exception.OrgSistemasSecurityException;
 import java.io.Serializable;
+import java.time.Clock;
 import java.util.Collection;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -20,6 +23,7 @@ import java.util.Collection;
 public class ComentarioBL implements Serializable {
 
     private static ComentarioBL singletonInstance = new ComentarioBL();
+    static final Logger logger = Logger.getLogger(ComentarioBL.class);
 
     public ComentarioBL() {
         // empty constructor
@@ -44,11 +48,14 @@ public class ComentarioBL implements Serializable {
     }
 
     public String notificar(Correo inCorreo) throws OrgSistemasSecurityException {
+        this.logger.debug("envio");
         try {
             InfoCorreo infoCorreo = new InfoCorreo();
             Correo correo = infoCorreo.enviarNotificacion(inCorreo);
             infoCorreo.enviar(correo, "EVALDOCOBSRESULTADOS");
+            System.out.println("envio de correo");
         } catch (Exception e) {
+            this.logger.debug(e);
             return "no enviado";
         }
         return "enviado";

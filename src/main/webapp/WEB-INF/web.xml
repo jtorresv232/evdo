@@ -54,7 +54,7 @@
     </filter>
     <filter-mapping>
         <filter-name>SSOFilter</filter-name>
-        <url-pattern>/services/*</url-pattern>
+        <url-pattern>/webapi/*</url-pattern>
     </filter-mapping>
    
 </web-app>
