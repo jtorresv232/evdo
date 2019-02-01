@@ -36,8 +36,8 @@
         <filter-name>SSOFilter</filter-name>
         <filter-class>co.edu.udea.oid.security.filter.SSOFilter</filter-class>
         <init-param>
-                <param-name>aplicacion</param-name>
-                <param-value>POSGRADOS</param-value>
+            <param-name>aplicacion</param-name>
+            <param-value>POSGRADOS</param-value>
         </init-param>
         <init-param>
             <param-name>exclude-resources</param-name>
@@ -49,12 +49,11 @@
         </init-param>
         <init-param>
             <param-name>tipoconexion</param-name>
-            <param-value>desarrollo</param-value>
+            <param-value>pruebas</param-value>
         </init-param>
     </filter>
     <filter-mapping>
         <filter-name>SSOFilter</filter-name>
-        <url-pattern>/webapi/*</url-pattern>
+        <url-pattern>/services/*</url-pattern>
     </filter-mapping>
-   
 </web-app>

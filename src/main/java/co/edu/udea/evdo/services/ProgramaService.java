@@ -9,8 +9,10 @@ import co.edu.udea.evdo.bl.ProgramaBL;
 import co.edu.udea.evdo.dto.Programa;
 import java.io.Serializable;
 import java.util.Collection;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -36,6 +38,14 @@ public class ProgramaService implements Serializable{
         return ProgramaBL.getInstance().getProgramas();
     }
     
+    @GET
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Programa getProgramaPorId(@PathParam("id") long programa){
+        return ProgramaBL.getInstance().getProgramaPorId(programa);
+    }
+
     @Path("numeros")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

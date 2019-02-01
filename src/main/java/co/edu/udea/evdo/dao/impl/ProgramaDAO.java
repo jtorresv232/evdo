@@ -46,6 +46,34 @@ public class ProgramaDAO extends ConnectionPool {
         }
         return prog;
     }
+    
+    public Programa getProgramaPorId(long id) {
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        Programa programa = new Programa();
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("programas.obtenerPorId"));
+            ps.setLong(1, id);
+            rs = ps.executeQuery();
+            if(rs != null){
+                    rs.next();
+                    programa.setCreditosGrado(rs.getLong("CREDITOS_GRADOS"));
+                    programa.setEstado(rs.getString("ESTADO"));
+                    programa.setFacultad(rs.getLong("FACULTAD"));
+                    programa.setNombreFacultad(rs.getString("NOMBRE_PROGRAMA"));
+                    programa.setNombrePrograma(rs.getString("NOMBRE_PROGRAMA"));
+                    programa.setTipoPrograma(rs.getString("TIPO_PROGRAMA"));
+                    programa.setVersionActual(rs.getLong("VERSION_ACTUAL"));
+                    programa.setVersiones(rs.getString("VERSIONES"));
+            }
+        }catch(Exception e){
+            this.logger.error(e);
+        }finally{
+            close(ps);
+            this.logger.debug("Se consultó el programa con el código: " + id);
+        }
+        return programa;
+    }
 
     public Collection<Programa> getProgramas() {
         CallableStatement ps = null;

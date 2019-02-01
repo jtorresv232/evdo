@@ -44,6 +44,10 @@ public class ProgramaBL implements Serializable {
     public Programa getNumeros(long programa) {
         return obtenerProgramaDAO().getNumeros(programa);
     }
+    
+    public Programa getProgramaPorId(long programa) {
+        return obtenerProgramaDAO().getProgramaPorId(programa);
+    }
 
     public void poblarProgramaes() {
         MaresService ms = new MaresService();

@@ -336,7 +336,12 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.6.6</version>
         </dependency>
-        
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.servlet.jsp.jstl</artifactId>
+            <version>4.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>
