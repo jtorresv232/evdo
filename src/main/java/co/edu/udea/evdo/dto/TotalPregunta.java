@@ -22,6 +22,16 @@ public class TotalPregunta implements Serializable{
     private long materia;
     private int grupo;
     private String cedula;
+    
+    private String pregunta;
+
+    public String getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(String pregunta) {
+        this.pregunta = pregunta;
+    }
 
     public int getCodigo() {
         return codigo;

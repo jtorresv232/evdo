@@ -13,6 +13,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -34,6 +35,22 @@ public class TotalTemaService implements Serializable{
     public String calcularTotal(){
         TotalTemaBL.getInstance().calcularTotalTema();
         return "aprobado";
+    }
+    
+    @Path("por-programa/{programa}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Collection<TotalTema> getTotalTemaPorPrograma(@PathParam("programa") long programa) {
+        return TotalTemaBL.getInstance().getTotalTemaPorPrograma(programa);
+    }
+    
+    @Path("por-docente/{cedula}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Collection<TotalTema> getTotalTemaPorDocente(@PathParam("cedula") String cedula) {
+        return TotalTemaBL.getInstance().getTotalTemaPorDocente(cedula);
     }
     
     @POST

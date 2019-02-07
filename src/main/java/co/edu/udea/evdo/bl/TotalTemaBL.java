@@ -51,6 +51,14 @@ public class TotalTemaBL implements Serializable {
     public TotalTema addTotalTema(TotalTema totalTema) {
         return obtenerTotalTemaDAO().addTotalTema(totalTema);
     }
+    
+    public Collection<TotalTema> getTotalTemaPorPrograma(long programa) {
+        return obtenerTotalTemaDAO().getTotalesPorPrograma(programa);
+    }
+    
+    public Collection<TotalTema> getTotalTemaPorDocente(String cedula) {
+        return obtenerTotalTemaDAO().getTotalesPorDocente(cedula);
+    }
 
     public void calcularTotalTema() {
         EncuestaClient cliente = new EncuestaClient();

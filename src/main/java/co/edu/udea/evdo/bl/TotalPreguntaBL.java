@@ -48,7 +48,14 @@ public class TotalPreguntaBL implements Serializable {
 
     public Collection<TotalPregunta> getTotalPreguntas() {
         return obtenerTotalPreguntaDAO().getTotalPreguntas();
-
+    }
+    
+    public Collection<TotalPregunta> getTotalPreguntasPorPrograma(long programa) {
+        return obtenerTotalPreguntaDAO().getTotalesPorPrograma(programa);
+    }
+    
+    public Collection<TotalPregunta> getTotalPreguntasPorDocente (String cedula) {
+        return obtenerTotalPreguntaDAO().getTotalesPorDocente(cedula);
     }
 
     public TotalPregunta addTotalPregunta(TotalPregunta totalPregunta) {
