@@ -28,8 +28,6 @@ import org.quartz.SchedulerException;
  * @author Jonathan
  */
 @Path("/asignaciones")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 public class AsignacionService implements Serializable {
 
     @POST
@@ -49,13 +47,14 @@ public class AsignacionService implements Serializable {
     @Path("total")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public int getAsigTotal(Asignacion asig) {
         return AsignacionBL.getInstance().getAsigTotal(asig);
     }
 
     @PUT
     @Path("/{idAsignacion}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateAsignacion(Asignacion asignacion) throws SchedulerException, ParseException {
         GenericEntity<Asignacion> entity;
         entity = new GenericEntity<Asignacion> (AsignacionBL.getInstance().updateAsignacion(asignacion)){};
@@ -69,6 +68,8 @@ public class AsignacionService implements Serializable {
     
     @PUT
     @Path("/updateProf/{idAsignacion}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateAsignacionProf(Asignacion asignacion) {
         GenericEntity<Asignacion> entity;
         entity = new GenericEntity<Asignacion> (AsignacionBL.getInstance().updateAsignacionProf(asignacion)){};
@@ -82,6 +83,8 @@ public class AsignacionService implements Serializable {
 
     @PUT
     @Path("/porcentaje")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updatePorcentaje(Asignacion asignacion) {
         GenericEntity<Asignacion> entity;
         entity = new GenericEntity<Asignacion> (AsignacionBL.getInstance().updatePorcentaje(asignacion)){};
@@ -94,6 +97,8 @@ public class AsignacionService implements Serializable {
     }
 
     @Path("/poblar")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response poblarAsignaciones() {
         AsignacionBL.getInstance().poblarAsignaciones();
         GenericEntity<SuccessMessage> entity;
