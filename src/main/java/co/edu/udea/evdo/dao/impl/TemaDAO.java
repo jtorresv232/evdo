@@ -41,7 +41,7 @@ public class TemaDAO extends ConnectionPool {
         } catch (Exception e) {
             logger.error(e);
         } finally {
-            this.logger.debug("Se consultaron todos los temas");
+            logger.debug("Se consultaron todos los temas");
             close(ps);
         }
         return listaTemas;

@@ -7,15 +7,15 @@ package co.edu.udea.evdo.services;
 
 import co.edu.udea.evdo.bl.MateriaBL;
 import co.edu.udea.evdo.dto.Materia;
+import co.edu.udea.evdo.exceptions.DataNotFoundException;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.Collection;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -25,8 +25,14 @@ import javax.ws.rs.core.MediaType;
 public class MateriaService implements Serializable{
     
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Collection<Materia> obtenerMaterias(@QueryParam("semestre") long semestre, @QueryParam("programa") long programa){
-        return MateriaBL.getInstance().getMaterias(semestre, programa);
+    public Response obtenerMaterias(@QueryParam("semestre") long semestre, @QueryParam("programa") long programa) throws SQLException{
+        GenericEntity<Collection<Materia>> entity;
+        entity = new GenericEntity<Collection<Materia>> (MateriaBL.getInstance().getMaterias(semestre, programa)){};
+        if(entity.getEntity().isEmpty()) {
+            throw new DataNotFoundException("No se han encontrado materias en el programa con código " + programa + " en el semestre " + semestre);
+        }
+        return Response.ok()
+                .entity(entity)
+                .build();
     }
 }

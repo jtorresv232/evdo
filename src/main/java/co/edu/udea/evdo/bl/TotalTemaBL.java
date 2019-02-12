@@ -63,8 +63,8 @@ public class TotalTemaBL implements Serializable {
     public void calcularTotalTema() {
         EncuestaClient cliente = new EncuestaClient();
         Resultados[] resultados = cliente.getResultados();
-        Collection<Asignacion> asignaciones = new AsignacionService().getAsignaciones(1, 4, new Asignacion());
-        Collection<Tema> preguntas = new TemaService().getTemas();
+        Collection<Asignacion> asignaciones = (Collection<Asignacion>)new AsignacionService().getAsignaciones(1, 4, new Asignacion()).getEntity();
+        Collection<Tema> preguntas = (Collection<Tema>)new TemaService().getTemas();
         TotalTema total;
         Asignacion asignacion;
         Iterator<Asignacion> iteratorAsig = asignaciones.iterator();

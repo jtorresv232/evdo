@@ -10,6 +10,7 @@ import co.edu.udea.evdo.dto.Grupo;
 import co.edu.udea.evdo.dto.GrupoXMateria;
 import co.edu.udea.evdo.dto.Materia;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.Collection;
 
 /**
@@ -33,15 +34,13 @@ public class MateriaBL implements Serializable {
         return singletonInstance;
     }
 
-    public Collection<Materia> getMaterias(long semestre, long programa) {
+    public Collection<Materia> getMaterias(long semestre, long programa) throws SQLException {
         Collection<Materia> materias = obtenerMateriaDAO().getMaterias(semestre, programa);
         GrupoBL grupobl = new GrupoBL();
-        System.out.println("heyyyyyyyyy");
         for(Materia materia: materias){
             Collection<GrupoXMateria> gruposCollection = grupobl.getInstance().getGruposXMateria(semestre, materia.getMateria());
             GrupoXMateria[] grupos = gruposCollection.toArray(new GrupoXMateria[gruposCollection.size()]);
             materia.setGrupos(grupos);
-            System.out.println(materia.getNombreMateria());
         }
         return materias;
     }

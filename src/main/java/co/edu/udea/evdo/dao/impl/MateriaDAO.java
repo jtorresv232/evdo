@@ -10,6 +10,7 @@ import co.edu.udea.evdo.dto.Materia;
 import co.edu.udea.evdo.properties.Properties;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 import org.apache.log4j.Logger;
@@ -22,7 +23,7 @@ public class MateriaDAO extends ConnectionPool{
     
     static final Logger logger = Logger.getLogger(MateriaDAO.class);
     
-    public Collection<Materia> getMaterias(long semestre, long programa){
+    public Collection<Materia> getMaterias(long semestre, long programa) throws SQLException{
         CallableStatement ps = null;
         ResultSet rs = null;
         Collection<Materia> listaMaterias = new LinkedList<>();
@@ -40,10 +41,13 @@ public class MateriaDAO extends ConnectionPool{
                     listaMaterias.add(materia);
                 }
             }
-        }catch(Exception e){
-            this.logger.error(e);
+        }catch(SQLException e){
+            logger.error(e);
+            throw new SQLException();
+        } catch(Exception ex) {
+            logger.error(ex);
         }finally{
-            this.logger.debug("Se consultaron todas las materias del programa: " + programa);
+            logger.debug("Se consultaron todas las materias del programa: " + programa);
             close(ps);
         }
         return listaMaterias;

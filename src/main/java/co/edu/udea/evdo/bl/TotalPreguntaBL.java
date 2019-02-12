@@ -65,8 +65,8 @@ public class TotalPreguntaBL implements Serializable {
     public void calcularTotalPregunta() {
         EncuestaClient cliente = new EncuestaClient();
         Resultados[] resultados = cliente.getResultados();
-        Collection<Asignacion> asignaciones = new AsignacionService().getAsignaciones(1, 4, new Asignacion());
-        Collection<Pregunta> preguntas = new PreguntaService().getPreguntas();
+        Collection<Asignacion> asignaciones = (Collection<Asignacion>) new AsignacionService().getAsignaciones(1, 4, new Asignacion()).getEntity();
+        Collection<Pregunta> preguntas = (Collection<Pregunta>) new PreguntaService().getPreguntas().getEntity();
         TotalPregunta total;
         Asignacion asignacion;
         Iterator<Asignacion> iteratorAsig = asignaciones.iterator();
@@ -114,7 +114,7 @@ public class TotalPreguntaBL implements Serializable {
 
     public void obtenerTotales() {
         Resultados[] resultados = new EncuestaClient().getResultados();
-        Collection<Pregunta> preguntas = new PreguntaService().getPreguntas();
+        Collection<Pregunta> preguntas = (Collection<Pregunta>) new PreguntaService().getPreguntas();
         logger.debug(resultados.length);
         logger.debug(preguntas.size());
     }
