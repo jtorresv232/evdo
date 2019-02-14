@@ -38,7 +38,7 @@ public class InfoCorreo {
             wsClient.addParam("destinatario", correo.getDestinatario());
             wsClient.addParam("encabezado", correo.getAsunto());
             wsClient.addParam("cuerpoHtml", correo.getCuerpo());
-            wsClient.addParam("token", "5facbdd992ecd3e667df2b544e22a80a8274fd59");
+            wsClient.addParam("token", "25f9e794323b453885f5181f1b624d0b");
             wsClient.addParam("servicio", "EVALDOCOBSRESULTADOS");
 
             List<ResultadoCorreo> lista = wsClient.obtenerBean(ConstantesStatic.WS_ENVIAR_CORREO, servicio, ResultadoCorreo.class);

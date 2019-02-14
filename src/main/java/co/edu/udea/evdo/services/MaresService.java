@@ -27,7 +27,7 @@ import javax.ws.rs.core.MediaType;
 @Path("mares")
 public class MaresService {
 
-    private static final String TOKEN = "5facbdd992ecd3e667df2b544e22a80a8274fd59";
+    private static final String TOKEN = "25f9e794323b453885f5181f1b624d0b";
 
     @GET //Cambiar a tipo post
     @Path("programas")
