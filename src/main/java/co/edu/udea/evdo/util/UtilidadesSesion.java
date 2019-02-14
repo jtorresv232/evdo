@@ -39,7 +39,7 @@ public class UtilidadesSesion
             usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_USERNAME, "david.devargas");
             usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_CCID, "1035435193");
             usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_DISPLAYNAME, "DAVID DE VARGAS");
-            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_EMAIL, "desarrolloingenieria13@udea.edu.co");
+            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_EMAIL, "jtorresv232@gmail.com");
             usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_PNOMBRE, "DAVID");
             usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_SNOMBRE, "");
             usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_PAPELLIDO, "DE VARGAS");

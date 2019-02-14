@@ -12,6 +12,8 @@ package co.edu.udea.evdo.exceptions;
 public class SuccessMessage {
     private String message;
     
+    public SuccessMessage() {}
+    
     public SuccessMessage(String msg) {
         this.message = msg;
     }

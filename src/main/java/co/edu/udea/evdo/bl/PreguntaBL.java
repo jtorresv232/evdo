@@ -55,7 +55,6 @@ public class PreguntaBL implements Serializable {
             pregunta = iterator.next();
             addPregunta(pregunta);
         }
-
     }
 
     private PreguntaDAO obtenerPreguntaDAO() {

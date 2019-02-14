@@ -57,11 +57,13 @@ public class ComentarioService implements Serializable{
     
     @Path("/notificar")
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response notificar(Correo inCorreo) throws OrgSistemasSecurityException{
-        GenericEntity<SuccessMessage> entity;
-        entity = new GenericEntity<SuccessMessage> (new SuccessMessage("Se enviado el correo a la siguiente dirección " + inCorreo.getDestinatario())){};
-        return Response.ok()
-                .entity(entity)
+        ComentarioBL.getInstance().notificar(inCorreo);
+        SuccessMessage success = new SuccessMessage("Se enviado el correo a la siguiente dirección " + inCorreo.getDestinatario());
+        GenericEntity<SuccessMessage> entity = new GenericEntity<SuccessMessage> (success){};
+        return Response.ok(entity)
                 .build();
     }
 }
