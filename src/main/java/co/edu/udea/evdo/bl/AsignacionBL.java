@@ -11,6 +11,7 @@ import co.edu.udea.evdo.dto.Grupo;
 import co.edu.udea.evdo.dto.ws.DocenteMateriaGrupo;
 import co.edu.udea.evdo.dto.ws.FacultadMares;
 import co.edu.udea.evdo.dto.ws.MateriaMares;
+import co.edu.udea.evdo.exceptions.EvdoSQLException;
 import co.edu.udea.evdo.services.MaresService;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -50,6 +51,14 @@ public class AsignacionBL implements Serializable {
 
     public Asignacion addAsignacion(Asignacion asignacion) {
         return obtenerAsignacionDAO().addAsignacion(asignacion);
+    }
+    
+    public void updAllAsigs(Asignacion asignacion, long facultad) throws EvdoSQLException {
+        obtenerAsignacionDAO().updAllAsigs(asignacion, facultad);
+    }
+    
+    public void updAllAsigsProf(Asignacion asignacion, long facultad) throws EvdoSQLException {
+        obtenerAsignacionDAO().updAllAsigsProf(asignacion, facultad);
     }
 
     public void poblarAsignaciones() {
