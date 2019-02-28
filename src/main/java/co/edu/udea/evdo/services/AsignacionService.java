@@ -8,6 +8,7 @@ package co.edu.udea.evdo.services;
 import co.edu.udea.evdo.bl.AsignacionBL;
 import co.edu.udea.evdo.dto.Asignacion;
 import co.edu.udea.evdo.exceptions.DataNotFoundException;
+import co.edu.udea.evdo.exceptions.EvdoSQLException;
 import co.edu.udea.evdo.exceptions.SuccessMessage;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -39,6 +40,32 @@ public class AsignacionService implements Serializable {
         if(entity.getEntity().isEmpty()) {
             throw new DataNotFoundException("No hay asignaciones por mostrar");
         }
+        return Response.ok()
+                .entity(entity)
+                .build();
+    }
+    
+    @Path("/updAllAsigs")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updAllAsigs(@QueryParam("facultad") long facultad, Asignacion asignacion) throws EvdoSQLException {
+        AsignacionBL.getInstance().updAllAsigs(asignacion, facultad);
+        GenericEntity<SuccessMessage> entity;
+        entity = new GenericEntity<SuccessMessage> (new SuccessMessage("Se han actualizado varias asignaciones")){};
+        return Response.ok()
+                .entity(entity)
+                .build();
+    }
+    
+    @Path("/updAllAsigsProf")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response Prof(@QueryParam("facultad") long facultad, Asignacion asignacion) throws EvdoSQLException {
+        AsignacionBL.getInstance().updAllAsigsProf(asignacion, facultad);
+        GenericEntity<SuccessMessage> entity;
+        entity = new GenericEntity<SuccessMessage> (new SuccessMessage("Se han actualizado varias asignaciones")){};
         return Response.ok()
                 .entity(entity)
                 .build();

@@ -122,4 +122,17 @@ public class UsuarioDAO extends ConnectionPool{
         }
         return usuario;
     }
+    
+    public void deleteUsuario(String cedula) {
+        CallableStatement ps = null;
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("usuario.borrar"));
+            ps.setString(1, cedula);
+            ps.executeQuery();
+        }catch(Exception e){
+            logger.debug(e);
+        }finally {
+            close(ps);
+        }
+    }
 }

@@ -56,8 +56,11 @@ public class TotalTemaService implements Serializable{
     @GET
     public Response getTotalTemaPorPrograma(@PathParam("programa") long programa) {
         GenericEntity<Collection<TotalTema>> entity;
-        entity = new GenericEntity<Collection<TotalTema>> (TotalTemaBL.getInstance().getTotalTemas()){};
+        System.out.println(programa);
+        entity = new GenericEntity<Collection<TotalTema>> (TotalTemaBL.getInstance().getTotalTemaPorPrograma(programa)){};
+        System.out.println(entity.getEntity().size());
         if(entity.getEntity().isEmpty()) {
+            System.out.println("no hay nada");
             throw new DataNotFoundException("No hay ningún curso evaluado en el programa " + programa);
         }
         return Response.ok()

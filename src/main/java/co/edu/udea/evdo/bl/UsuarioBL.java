@@ -46,6 +46,10 @@ public class UsuarioBL implements Serializable {
     public Usuario findUser(String cedula) throws EvdoSQLException {
         return obtenerUsuarioDAO().findUser(cedula);
     }
+    
+    public void deleteUusuario (String cedula) {
+        obtenerUsuarioDAO().deleteUsuario(cedula);
+    }
  
     private UsuarioDAO obtenerUsuarioDAO() {
         return new UsuarioDAO();

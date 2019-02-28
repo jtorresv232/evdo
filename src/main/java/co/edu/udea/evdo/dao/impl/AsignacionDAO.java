@@ -7,6 +7,7 @@ package co.edu.udea.evdo.dao.impl;
 
 import co.edu.udea.evdo.dao.ConnectionPool;
 import co.edu.udea.evdo.dto.Asignacion;
+import co.edu.udea.evdo.exceptions.EvdoSQLException;
 import co.edu.udea.evdo.properties.Properties;
 import co.edu.udea.evdo.util.Notifications;
 import java.sql.CallableStatement;
@@ -106,6 +107,72 @@ public class AsignacionDAO extends ConnectionPool {
             close(ps);
         }
         return listaAsignaciones;
+    }
+    
+    public void updAllAsigs(Asignacion objeto, long facultad) throws EvdoSQLException {
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.all.actualizar"));
+            if (objeto.getPrograma() > 0) {
+                ps.setLong(4, objeto.getPrograma());
+            } else {
+                ps.setString(4, null);
+            }
+            if (objeto.getMateria() > 0) {
+                ps.setLong(5, objeto.getMateria());
+            } else {
+                ps.setString(5, null);
+            }
+            if (objeto.getCedula() != "") {
+                ps.setString(6, objeto.getCedula());
+            } else {
+                ps.setString(6, null);
+            }
+            ps.setString(1, objeto.getEncuesta());
+            ps.setDate(2, objeto.getFechaEncInicio());
+            ps.setDate(3, objeto.getFechaEncFinal());
+            ps.setLong(7, facultad);
+            ps.executeQuery();
+        }catch (Exception e){
+            logger.debug(e);
+            throw new EvdoSQLException();
+        }finally{
+            close(ps);
+        }
+    }
+    
+    public void updAllAsigsProf(Asignacion objeto, long facultad) throws EvdoSQLException {
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        try{
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.allprof.actualizar"));
+            if (objeto.getPrograma() > 0) {
+                ps.setLong(4, objeto.getPrograma());
+            } else {
+                ps.setString(4, null);
+            }
+            if (objeto.getMateria() > 0) {
+                ps.setLong(5, objeto.getMateria());
+            } else {
+                ps.setString(5, null);
+            }
+            if (objeto.getCedula() != "") {
+                ps.setString(6, objeto.getCedula());
+            } else {
+                ps.setString(6, null);
+            }
+            ps.setString(1, objeto.getEncuestaprof());
+            ps.setDate(2, objeto.getFechaEncprofInicio());
+            ps.setDate(3, objeto.getFechaEncprofFinal());
+            ps.setLong(7, facultad);
+            ps.executeQuery();
+        }catch (Exception e){
+            logger.debug(e);
+            throw new EvdoSQLException();
+        }finally{
+            close(ps);
+        }
     }
 
     public int getTotalAsigs(Asignacion objeto) {

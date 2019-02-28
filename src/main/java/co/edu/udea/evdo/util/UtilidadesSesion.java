@@ -36,14 +36,14 @@ public class UtilidadesSesion
 
             Map<String, Object> usuarioFiltro = new HashMap<>();
 
-            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_USERNAME, "david.devargas");
-            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_CCID, "1035435193");
-            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_DISPLAYNAME, "DAVID DE VARGAS");
+            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_USERNAME, "jonathan.torresv");
+            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_CCID, "1026150499");
+            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_DISPLAYNAME, "JONATHAN TORRES VELEZ");
             usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_EMAIL, "jtorresv232@gmail.com");
-            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_PNOMBRE, "DAVID");
+            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_PNOMBRE, "JONATHAN");
             usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_SNOMBRE, "");
-            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_PAPELLIDO, "DE VARGAS");
-            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_SAPELLIDO, "CUETER");
+            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_PAPELLIDO, "TORRES");
+            usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_SAPELLIDO, "VELEZ");
             usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_GRUPO, "UdeAEmpleados");
             usuarioFiltro.put(ConstantesStatic.SESION_FILTRO_TIPO_IDENTIFICACION, "CC");
 

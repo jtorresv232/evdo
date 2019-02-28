@@ -9,8 +9,10 @@ import co.edu.udea.evdo.bl.UsuarioBL;
 import co.edu.udea.evdo.dto.Usuario;
 import co.edu.udea.evdo.exceptions.DataNotFoundException;
 import co.edu.udea.evdo.exceptions.EvdoSQLException;
+import co.edu.udea.evdo.exceptions.SuccessMessage;
 import java.util.Collection;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -36,6 +38,19 @@ public class UsuarioService {
         if(entity.getEntity().isEmpty()) {
             throw new DataNotFoundException("No hay ningún usuario");
         }
+        return Response.ok()
+                .entity(entity)
+                .build();
+    }
+    
+    @DELETE
+    @Path("/{cedula}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response Prof(@PathParam("cedula") String cedula) {
+        UsuarioBL.getInstance().deleteUusuario(cedula);
+        GenericEntity<SuccessMessage> entity;
+        entity = new GenericEntity<SuccessMessage> (new SuccessMessage("Se ha eliminado el usuario con cedula " + cedula)){};
         return Response.ok()
                 .entity(entity)
                 .build();
