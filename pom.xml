@@ -4,7 +4,7 @@
 
     <groupId>co.edu.udea.ciclo-academico</groupId>
 	<artifactId>evaluadocen</artifactId>
-	<version>0.1.23-SNAPSHOT</version>
+	<version>0.1.23</version>
 	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
 	<inceptionYear>2018</inceptionYear>
@@ -67,7 +67,7 @@
         <url>${repo.url}</url>
         <connection>${repo.conexion}</connection>
         <developerConnection>${repo.conexion}</developerConnection>
-        <tag>quality/v0.1.20</tag>
+        <tag>quality/v0.1.23</tag>
     </scm>
 
     <distributionManagement>
