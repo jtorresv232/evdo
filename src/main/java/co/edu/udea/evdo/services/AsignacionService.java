@@ -34,9 +34,9 @@ public class AsignacionService implements Serializable {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAsignaciones(@QueryParam("page") int page, @QueryParam("size") int size, Asignacion asig) {
+    public Response getAsignaciones(@QueryParam("page") int page, @QueryParam("size") int size, @QueryParam("facultad") long facultad, Asignacion asig) {
         GenericEntity<Collection<Asignacion>> entity;
-        entity = new GenericEntity<Collection<Asignacion>> (AsignacionBL.getInstance().getAsignaciones(page, size, asig)){};
+        entity = new GenericEntity<Collection<Asignacion>> (AsignacionBL.getInstance().getAsignaciones(page, size, facultad, asig)){};
         if(entity.getEntity().isEmpty()) {
             throw new DataNotFoundException("No hay asignaciones por mostrar");
         }
@@ -74,8 +74,8 @@ public class AsignacionService implements Serializable {
     @Path("total")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public int getAsigTotal(Asignacion asig) {
-        return AsignacionBL.getInstance().getAsigTotal(asig);
+    public int getAsigTotal(@QueryParam("facultad") long facultad, Asignacion asig) {
+        return AsignacionBL.getInstance().getAsigTotal(facultad, asig);
     }
 
     @PUT

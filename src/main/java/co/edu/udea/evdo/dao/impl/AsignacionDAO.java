@@ -175,12 +175,17 @@ public class AsignacionDAO extends ConnectionPool {
         }
     }
 
-    public int getTotalAsigs(Asignacion objeto) {
+    public int getTotalAsigs(long facultad, Asignacion objeto) {
         CallableStatement ps = null;
         ResultSet rs = null;
         int total = 0;
         try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.total"));
+            if (facultad > 0) {
+                ps.setLong(5, facultad);
+            } else {
+                ps.setString(5, null);
+            }
             if (objeto.getPrograma() > 0) {
                 ps.setLong(1, objeto.getPrograma());
             } else {
@@ -211,7 +216,7 @@ public class AsignacionDAO extends ConnectionPool {
         return total;
     }
 
-    public Collection<Asignacion> getAsignaciones(int page, int size, Asignacion objeto) {
+    public Collection<Asignacion> getAsignaciones(int page, int size, long facultad, Asignacion objeto) {
         CallableStatement ps = null;
         ResultSet rs = null;
         Collection<Asignacion> listaAsignaciones = new LinkedList<>();
@@ -222,6 +227,11 @@ public class AsignacionDAO extends ConnectionPool {
                 ps.setLong(3, objeto.getPrograma());
             } else {
                 ps.setString(3, null);
+            }
+            if (facultad > 0) {
+                ps.setLong(7, facultad);
+            } else {
+                ps.setString(7, null);
             }
             if (objeto.getMateria() > 0) {
                 ps.setLong(4, objeto.getMateria());

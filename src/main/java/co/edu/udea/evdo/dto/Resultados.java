@@ -20,6 +20,9 @@ public class Resultados implements Serializable{
     private int valor;
     private int opcion;
 
+    public Resultados() {
+    }
+
     public String getMetadato() {
         return metadato;
     }

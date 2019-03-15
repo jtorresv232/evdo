@@ -40,13 +40,13 @@ public class AsignacionBL implements Serializable {
         return singletonInstance;
     }
 
-    public Collection<Asignacion> getAsignaciones(int page, int size, Asignacion asig) {
-        return obtenerAsignacionDAO().getAsignaciones(page, size, asig);
+    public Collection<Asignacion> getAsignaciones(int page, int size, long facultad, Asignacion asig) {
+        return obtenerAsignacionDAO().getAsignaciones(page, size, facultad, asig);
 
     }
 
-    public int getAsigTotal(Asignacion asig) {
-        return obtenerAsignacionDAO().getTotalAsigs(asig);
+    public int getAsigTotal(long facultad, Asignacion asig) {
+        return obtenerAsignacionDAO().getTotalAsigs( facultad, asig);
     }
 
     public Asignacion addAsignacion(Asignacion asignacion) {

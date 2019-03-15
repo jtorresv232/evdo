@@ -6,6 +6,7 @@
 package co.edu.udea.evdo.services;
 
 import co.edu.udea.evdo.dto.Grupo;
+import co.edu.udea.evdo.dto.ws.CalendarioPrograma;
 import co.edu.udea.evdo.dto.ws.DocenteMateriaGrupo;
 import co.edu.udea.evdo.dto.ws.FacultadMares;
 import co.edu.udea.evdo.dto.ws.MateriaMares;
@@ -19,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -26,8 +28,11 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("mares")
 public class MaresService {
+    
+    static final Logger logger = Logger.getLogger(MaresService.class);
 
-    private static final String TOKEN = "25f9e794323b453885f5181f1b624d0b";
+    //private static final String TOKEN = "25f9e794323b453885f5181f1b624d0b";
+    private static final String TOKEN = "5facbdd992ecd3e667df2b544e22a80a8274fd59";
 
     @GET //Cambiar a tipo post
     @Path("programas")
@@ -137,10 +142,27 @@ public class MaresService {
             //wsClient.addParam("grupo", "1");
             listaPrograsmaDeRol = wsClient.obtenerBean("consultaestudiantesmatriculadosmares", TOKEN, Grupo.class);
         } catch (OrgSistemasSecurityException ex) {
-            return listaPrograsmaDeRol;
+            System.err.println(ex);
         }
 
         return listaPrograsmaDeRol;
+    }
+    
+    @GET
+    @Path("/calendario")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<CalendarioPrograma> getCalendario(@QueryParam("semestre") long semestre,@QueryParam("programa") long programa) {
+        Collection<CalendarioPrograma> listaCalendarios = new LinkedList<>();
+        try{
+            OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
+            wsClient.addParam("semestre", String.valueOf(semestre));
+            wsClient.addParam("programa", String.valueOf(programa));
+            listaCalendarios = wsClient.obtenerBean("consultarcalendarioprograma", TOKEN, CalendarioPrograma.class);
+        } catch (OrgSistemasSecurityException ex) {
+            System.err.println(ex);
+            logger.error(ex);
+        }
+        return listaCalendarios;
     }
 
 }

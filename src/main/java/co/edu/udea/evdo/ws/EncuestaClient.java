@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,9 +9,12 @@ import co.edu.udea.evdo.dto.Encuesta;
 import co.edu.udea.evdo.dto.Pregunta;
 import co.edu.udea.evdo.dto.Resultados;
 import co.edu.udea.evdo.dto.Tema;
+import co.edu.udea.evdo.dto.TotalTema;
+import java.util.Collection;
 import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,16 +25,21 @@ import javax.ws.rs.core.Response;
  */
 public class EncuestaClient {
     private static final String REST_URL
-            = "http://wasquality.udea.edu.co:29000/encuesta/webapi/";
+            = "http://172.19.0.204:9085/encuesta/webapi/";
     
     private Client client = ClientBuilder.newClient();
     
     public Resultados[] getResultados(){
-        Response serviceResponse = client.target(REST_URL + "resultados").
+        try{
+            Response serviceResponse = client.target(REST_URL + "resultados").
                     request(MediaType.APPLICATION_JSON).get(Response.class);
-        
-        List<Resultados> resultados = serviceResponse.readEntity(new GenericType<List<Resultados>>(){});
+        List<Resultados> resultados = (List<Resultados>)serviceResponse.readEntity(new GenericType<List<Resultados>>(){});
+            System.out.println("punto 2");
         return resultados.toArray(new Resultados[resultados.size()]);
+        }catch(Exception e){
+            System.err.println("hola" + e);
+        }
+        return null;
     }
     
     public double getAverage(Resultados[] resultados){

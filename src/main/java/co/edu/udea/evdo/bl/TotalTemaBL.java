@@ -5,6 +5,7 @@
  */
 package co.edu.udea.evdo.bl;
 
+import co.edu.udea.evdo.dao.impl.AsignacionDAO;
 import co.edu.udea.evdo.dto.Resultados;
 import co.edu.udea.evdo.dao.impl.TotalTemaDAO;
 import co.edu.udea.evdo.dto.Asignacion;
@@ -19,12 +20,15 @@ import java.util.Iterator;
 import java.util.ListIterator;
 import org.apache.commons.collections.IteratorUtils;
 import java.util.Arrays;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author Jonathan
  */
 public class TotalTemaBL implements Serializable {
+    
+    static final Logger logger = Logger.getLogger(TotalTemaBL.class);
 
     private static TotalTemaBL singletonInstance = new TotalTemaBL();
     private String metadato;
@@ -61,10 +65,11 @@ public class TotalTemaBL implements Serializable {
     }
 
     public void calcularTotalTema() {
-        EncuestaClient cliente = new EncuestaClient();
+        try{
+            EncuestaClient cliente = new EncuestaClient();
         Resultados[] resultados = cliente.getResultados();
-        Collection<Asignacion> asignaciones = (Collection<Asignacion>)new AsignacionService().getAsignaciones(1, 4, new Asignacion()).getEntity();
-        Collection<Tema> preguntas = (Collection<Tema>)new TemaService().getTemas();
+        Collection<Asignacion> asignaciones = (Collection<Asignacion>)new AsignacionService().getAsignaciones(1, 5700, 0, new Asignacion()).getEntity();
+        Collection<Tema> preguntas = (Collection<Tema>)new TemaService().getTemas().getEntity();
         TotalTema total;
         Asignacion asignacion;
         Iterator<Asignacion> iteratorAsig = asignaciones.iterator();
@@ -107,6 +112,9 @@ public class TotalTemaBL implements Serializable {
             while (iteratorTema.hasPrevious()) {
                 iteratorTema.previous();
             }
+        }
+        }catch(Exception e){
+            logger.debug(e);
         }
     }
 

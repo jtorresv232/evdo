@@ -7,6 +7,7 @@ package co.edu.udea.evdo.bl;
 
 import co.edu.udea.evdo.dao.impl.ProgramaDAO;
 import co.edu.udea.evdo.dto.Programa;
+import co.edu.udea.evdo.dto.ws.CalendarioPrograma;
 import co.edu.udea.evdo.dto.ws.ProgramaMares;
 import co.edu.udea.evdo.services.MaresService;
 import java.io.Serializable;
@@ -69,6 +70,11 @@ public class ProgramaBL implements Serializable {
                 addPrograma(programa);
             }
         }
+    }
+    
+    public Collection<CalendarioPrograma> getCalendario(long semestre, long programa) {
+        MaresService ms = new MaresService();
+        return ms.getCalendario(semestre, programa);
     }
 
     private ProgramaDAO obtenerProgramaDAO() {
