@@ -8,6 +8,9 @@ package co.edu.udea.evdo.dao.impl;
 import co.edu.udea.evdo.dao.ConnectionPool;
 import co.edu.udea.evdo.dto.TotalPregunta;
 import co.edu.udea.evdo.properties.Properties;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.Collection;
@@ -128,25 +131,44 @@ public class TotalPreguntaDAO extends ConnectionPool {
     }
 
     public TotalPregunta addTotalPregunta(TotalPregunta tp) {
+        System.out.println("agregando pregunta");
         CallableStatement ps = null;
-        TotalPregunta total = new TotalPregunta();
         try {
+            System.out.println(tp.getNumero());
+            System.out.println(tp.getSemestre());
+            System.out.println(tp.getMateria());
+            System.out.println(tp.getGrupo());
+            System.out.println(tp.getCedula());
+            System.out.println(tp.getMedia());
+            System.out.println(tp.getDesviacion());
+            System.out.println(tp.getCoeficienteDesv());
+            
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("totalpregunta.agregar"));
             ps.setInt(1, tp.getNumero());
             ps.setString(2, tp.getEvaluacion());
-            ps.setDouble(3, tp.getMedia());
-            ps.setDouble(4, tp.getDesviacion());
-            ps.setDouble(5, tp.getCoeficienteDesv());
+            BigDecimal media = new BigDecimal(tp.getMedia());
+            BigDecimal Desviacion = new BigDecimal(tp.getDesviacion());
+            BigDecimal Coef = new BigDecimal(tp.getCoeficienteDesv());
+            ps.setFloat(3, media.floatValue());
+            ps.setFloat(4, Desviacion.floatValue());
+            ps.setFloat(5, Coef.floatValue());
             ps.setLong(6, tp.getSemestre());
             ps.setLong(7, tp.getMateria());
             ps.setInt(8, tp.getGrupo());
             ps.setString(9, tp.getCedula());
-            ps.executeQuery();
+            System.out.println(ps.executeUpdate());
+            getConn().commit();
         } catch (Exception e) {
             logger.error(e);
+            StringWriter writer = new StringWriter();
+PrintWriter printWriter = new PrintWriter( writer );
+e.printStackTrace( printWriter );
+printWriter.flush();
+String stackTrace = writer.toString();
+            System.out.println(stackTrace);
         } finally {
             close(ps);
         }
-        return total;
+        return tp;
     }
 }

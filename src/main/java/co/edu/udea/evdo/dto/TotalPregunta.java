@@ -25,6 +25,15 @@ public class TotalPregunta implements Serializable{
     
     private String pregunta;
 
+    public TotalPregunta(int numero) {
+        this.numero = numero;
+    }
+
+    public TotalPregunta() {
+    }
+    
+    
+
     public String getPregunta() {
         return pregunta;
     }

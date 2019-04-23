@@ -78,7 +78,8 @@ public class TotalTemaBL implements Serializable {
         double promedio = 0;
         double desviacion = 0;
         double coeficienteDesv = 0;
-
+            System.out.println("asignaciones: " + asignaciones.size());
+            System.out.println("temas: " + preguntas.size());
         while (iteratorAsig.hasNext()) {
             asignacion = iteratorAsig.next();
             this.metadato = String.valueOf(asignacion.getSemestre()) + "-"
@@ -93,8 +94,11 @@ public class TotalTemaBL implements Serializable {
                 Resultados[] res = Arrays.stream(result).filter(x
                         -> x.getTema() == this.tema)
                         .toArray(Resultados[]::new);
+                
                 promedio = cliente.getAverage(res);
-                desviacion = cliente.getStdDev(res, promedio);
+                System.out.println("promedio: " + promedio);
+                if(!Double.isNaN(promedio) ) {
+                  desviacion = cliente.getStdDev(res, promedio);
                 coeficienteDesv = desviacion / Math.abs(promedio);
                 total = new TotalTema();
                 total.setCedula(asignacion.getCedula());
@@ -107,6 +111,7 @@ public class TotalTemaBL implements Serializable {
                 total.setCodigoTema(this.tema);
                 total.setSemestre(asignacion.getSemestre());
                 addTotalTema(total);
+                }
             }
             //reset iterator preguntas
             while (iteratorTema.hasPrevious()) {

@@ -8,8 +8,11 @@ package co.edu.udea.evdo.dao.impl;
 import co.edu.udea.evdo.dao.ConnectionPool;
 import co.edu.udea.evdo.dto.TotalTema;
 import co.edu.udea.evdo.properties.Properties;
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.LinkedList;
 import oracle.jdbc.OracleTypes;
@@ -130,25 +133,29 @@ public class TotalTemaDAO extends ConnectionPool {
     }
 
     public TotalTema addTotalTema(TotalTema tp) {
+        System.out.println("agregando tema");
         CallableStatement ps = null;
-        TotalTema total = new TotalTema();
         try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("totaltema.agregar"));
             ps.setInt(1, tp.getCodigoTema());
             ps.setString(2, tp.getEvaluacion());
-            ps.setDouble(3, tp.getMedia());
-            ps.setDouble(4, tp.getDesviacion());
-            ps.setDouble(5, tp.getCoeficienteDesv());
+            BigDecimal media = new BigDecimal(tp.getMedia());
+            BigDecimal Desviacion = new BigDecimal(tp.getDesviacion());
+            BigDecimal Coef = new BigDecimal(tp.getCoeficienteDesv());
+            ps.setFloat(3, media.floatValue());
+            ps.setFloat(4, Desviacion.floatValue());
+            ps.setFloat(5, Coef.floatValue());
             ps.setLong(6, tp.getSemestre());
             ps.setLong(7, tp.getMateria());
             ps.setInt(8, tp.getGrupo());
             ps.setString(9, tp.getCedula());
-            ps.executeQuery();
+            System.out.println(ps.executeUpdate());
+            getConn().commit();
         } catch (Exception e) {
             logger.error(e);
         } finally {
             close(ps);
         }
-        return total;
+        return tp;
     }
 }

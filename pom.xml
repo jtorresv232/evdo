@@ -56,9 +56,9 @@
         <jersey.scope>compile</jersey.scope>
 
         <!-- Parametrizaci�n de SCM -->
-        <repo.url>http://172.19.0.212/git/drai2/evaluadocen.git</repo.url>
+        <repo.url>http://172.19.0.212/git/GestionDelCicloDeVidaAcademico/udea-evaluadocen.git</repo.url>
         <repo.conexion>
-            scm:git:http://drai2:p3l1c4n0--@172.19.0.212/git/drai2/evaluadocen.git
+            scm:git:http://drai2:p3l1c4n0--@172.19.0.212/git/GestionDelCicloDeVidaAcademico/udea-evaluadocen.git
         </repo.conexion>
         <repo.rama>quality</repo.rama>
     </properties>
@@ -214,10 +214,10 @@
             <version>3.9.0.Final</version>
         </dependency>
                
-<!--        <dependency>
+        <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-moxy</artifactId>
-        </dependency>-->
+        </dependency>
         
         <dependency>
             <groupId>javax.transaction</groupId>
@@ -295,12 +295,11 @@
         </dependency>
         
         <!-- https://mvnrepository.com/artifact/commons-collections/commons-collections -->
-<!--        <dependency>
+        <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
-            <scope>provided</scope>
-        </dependency>-->
+        </dependency>
         
         <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
         <dependency> 			
@@ -315,7 +314,19 @@
             <artifactId>gson</artifactId>
             <version>2.8.2</version>
         </dependency>
+         
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
         
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.6</version>
+        </dependency>
+         
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
@@ -325,38 +336,13 @@
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz-jobs</artifactId>
             <version>2.2.1</version>
-        </dependency> 
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.6.6</version>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.26-b08</version>
+            <type>jar</type>
         </dependency>
-        
-<!--        nuevos-->
-        
-        
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
-        </dependency>
-        
-        <dependency> 			
-            <groupId>commons-beanutils</groupId> 			
-            <artifactId>commons-beanutils</artifactId> 			
-            <version>1.7.0</version> 			
-        </dependency>
-        
-        <dependency>
-    <groupId>org.glassfish.jersey.media</groupId>
-    <artifactId>jersey-media-moxy</artifactId>
-    <version>2.26-b08</version>
-</dependency>
     </dependencies>
 
     <build>

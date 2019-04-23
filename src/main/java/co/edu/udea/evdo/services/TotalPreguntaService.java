@@ -6,6 +6,7 @@
 package co.edu.udea.evdo.services;
 
 import co.edu.udea.evdo.bl.TotalPreguntaBL;
+import co.edu.udea.evdo.dto.Resultados;
 import co.edu.udea.evdo.dto.TotalPregunta;
 import co.edu.udea.evdo.exceptions.DataNotFoundException;
 import co.edu.udea.evdo.exceptions.SuccessMessage;
@@ -38,6 +39,7 @@ public class TotalPreguntaService implements Serializable{
     @Path("calcular")
     @GET
     public Response calcularTotal(){
+        System.out.println("Servicio");
         TotalPreguntaBL.getInstance().calcularTotalPregunta();
         GenericEntity<SuccessMessage> entity;
         entity = new GenericEntity<SuccessMessage> (new SuccessMessage("Se han calculado todos los totales por pregunta")){};

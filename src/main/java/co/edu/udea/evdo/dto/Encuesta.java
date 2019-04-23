@@ -18,6 +18,10 @@ public class Encuesta implements Serializable{
     private Date fechaInicio;
     private Date fechaTerminacion;
     private String evaluacion;
+    
+    public Encuesta() {
+        // empty constructor
+    }
 
     public String getIdentificacion() {
         return identificacion;

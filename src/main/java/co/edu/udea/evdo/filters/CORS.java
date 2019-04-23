@@ -7,7 +7,7 @@ package co.edu.udea.evdo.filters;
 
 /**
  *
- * @author Jonathan
+ * @author JonathanTorresVelez
  */
 import java.io.IOException;
 import javax.ws.rs.container.ContainerRequestContext;

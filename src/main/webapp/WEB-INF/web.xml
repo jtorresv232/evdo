@@ -3,7 +3,7 @@
     <servlet-mapping>
         <servlet-name>myServlet</servlet-name>
         <url-pattern>/services/*</url-pattern>
-        <url-pattern>/#/*</url-pattern>
+        <url-pattern>/jonathan/*</url-pattern>
     </servlet-mapping>
     
     
@@ -32,7 +32,7 @@
         <res-auth>Container</res-auth>
     </resource-ref>
     
-<!--    <filter>
+    <filter>
         <filter-name>SSOFilter</filter-name>
         <filter-class>co.edu.udea.oid.security.filter.SSOFilter</filter-class>
         <init-param>
@@ -49,11 +49,11 @@
         </init-param>
         <init-param>
             <param-name>tipoconexion</param-name>
-            <param-value>desarrollo</param-value>
+            <param-value>pruebas</param-value>
         </init-param>
     </filter>
     <filter-mapping>
         <filter-name>SSOFilter</filter-name>
         <url-pattern>/services/*</url-pattern>
-    </filter-mapping>-->
+    </filter-mapping>
 </web-app>
