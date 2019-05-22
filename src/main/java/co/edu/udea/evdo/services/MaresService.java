@@ -8,6 +8,7 @@ package co.edu.udea.evdo.services;
 import co.edu.udea.evdo.dto.Grupo;
 import co.edu.udea.evdo.dto.ws.CalendarioPrograma;
 import co.edu.udea.evdo.dto.ws.DocenteMateriaGrupo;
+import co.edu.udea.evdo.dto.ws.EstudianteMatriculado;
 import co.edu.udea.evdo.dto.ws.FacultadMares;
 import co.edu.udea.evdo.dto.ws.MateriaMares;
 import co.edu.udea.evdo.dto.ws.ProgramaMares;
@@ -17,6 +18,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -132,20 +134,20 @@ public class MaresService {
     }
 
     @GET
-    @Path("estudiantes")
+    @Path("estudiantes/{materia}/{grupo}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<Grupo> getEstudiantes() {
-        Collection<Grupo> listaPrograsmaDeRol = new LinkedList<>();
+    public Collection<EstudianteMatriculado> getEstudiantes(@PathParam("materia") String materia, @PathParam("grupo") String grupo) {
+        Collection<EstudianteMatriculado> listaEstudiantes = new LinkedList<>();
         try {
             OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
-            wsClient.addParam("materia", "2508107");
-            //wsClient.addParam("grupo", "1");
-            listaPrograsmaDeRol = wsClient.obtenerBean("consultaestudiantesmatriculadosmares", TOKEN, Grupo.class);
+            wsClient.addParam("materia", materia);
+            wsClient.addParam("grupo", grupo);
+            listaEstudiantes = wsClient.obtenerBean("consultaestudiantesmatriculadosmares", TOKEN, EstudianteMatriculado.class);
         } catch (OrgSistemasSecurityException ex) {
             System.err.println(ex);
         }
 
-        return listaPrograsmaDeRol;
+        return listaEstudiantes;
     }
     
     @GET
