@@ -16,6 +16,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -49,6 +50,13 @@ public class UrlNotasService implements Serializable{
                 .build();
     }
     
+    public static String getDatosJsp(@PathParam("semestre") long semestre,
+            @PathParam("materia") long materia,
+            @PathParam("grupo") int grupo) {
+        String texto = UrlNotasBL.getInstance().getDatosJsp(semestre, materia, grupo);
+        return texto;
+    }
+    
     @GET
     @Path("{semestre}/{materia}/{grupo}")
     public Response getDatos(@PathParam("semestre") long semestre,
@@ -63,5 +71,10 @@ public class UrlNotasService implements Serializable{
         return Response.ok()
                 .entity(entity)
                 .build();
+    }
+    
+    public static String getTodos(@PathParam("string") String string) {
+        String entity = UrlNotasBL.getInstance().getAllData(string);
+        return entity;
     }
 }

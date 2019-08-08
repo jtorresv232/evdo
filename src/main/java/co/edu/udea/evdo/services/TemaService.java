@@ -32,15 +32,21 @@ import org.quartz.SchedulerException;
 public class TemaService {
     
     @GET
-    public Response getTemas(){
+    public static Response getTemas(){
         GenericEntity<Collection<Tema>> entity;
         entity = new GenericEntity<Collection<Tema>> (TemaBL.getInstance().getTemas()){};
         if(entity.getEntity().isEmpty()) {
             throw new DataNotFoundException("No hay ningún tema");
         }
+        System.out.println("co.edu.udea.evdo.services.TemaService.getTemas()");
+        System.out.println(Response.ok().entity(entity).build());
         return Response.ok()
                 .entity(entity)
                 .build();
+    }
+    
+    public static String saludar() {
+        return "hola";
     }
     
     

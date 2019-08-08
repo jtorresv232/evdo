@@ -17,6 +17,38 @@ public class UrlNotas implements Serializable{
     private Date fechaInicio;
     private Date fechaTerminacion;
     private String cedula;
+    private String metadato;
+    private int punto;
+    private long materia;    
+    
+
+    public long getMateria() {
+        return materia;
+    }
+
+    public void setMateria(long materia) {
+        this.materia = materia;
+    }
+    
+    
+
+    public String getMetadato() {
+        return metadato;
+    }
+
+    public void setMetadato(String metadato) {
+        this.metadato = metadato;
+    }
+
+    public int getPunto() {
+        return punto;
+    }
+
+    public void setPunto(int punto) {
+        this.punto = punto;
+    }
+    
+    
 
     public UrlNotas() {
     }

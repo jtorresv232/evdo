@@ -13,8 +13,13 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.util.Collection;
 import java.util.LinkedList;
+import oracle.jdbc.OracleConnection;
 import oracle.jdbc.OracleTypes;
+import oracle.sql.ArrayDescriptor;
 import org.apache.log4j.Logger;
+import oracle.sql.ARRAY;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  *
@@ -40,8 +45,10 @@ public class UrlNotasDAO extends ConnectionPool{
                 url.setEncuesta(rs.getString("ENCUESTA"));
                 url.setFechaInicio(rs.getDate("FECHA_ENC_INICIO"));
                 url.setFechaTerminacion(rs.getDate("FECHA_ENC_FINAL"));
+                url.setPunto(rs.getInt("PUNTO"));
+                url.setMetadato(rs.getString("METADATO"));
             }else {
-                throw new DataNotFoundException("La asignación consultada no existe");
+                throw new DataNotFoundException("La asignación getConn()sultada no existe");
             }
         }catch(Exception e){
             logger.error(e);
@@ -71,6 +78,56 @@ public class UrlNotasDAO extends ConnectionPool{
                 dato.setFechaInicio(rs.getDate("FECHA_ENC_INICIO"));
                 dato.setFechaTerminacion(rs.getDate("FECHA_ENC_FINAL"));
                 dato.setCedula(rs.getString("CEDULA"));
+                dato.setPunto(rs.getInt("PUNTO"));
+                dato.setMetadato(rs.getString("METADATO"));
+                listaDatos.add(dato);
+                }
+            }
+        }catch(Exception e){
+            logger.error(e);
+        }finally{
+            close(ps);
+        }
+        return listaDatos;
+    }
+    
+    public Collection<UrlNotas> getTodos(long[] semestres, long[] materias, int[] grupos){
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        
+        Collection<UrlNotas> listaDatos = new LinkedList<>();
+        UrlNotas dato;
+        try {
+//            Class.forName("oracle.jdbc.OracleDriver");			
+//			Connection getConn() = DriverManager.getConnection("jdbc:oracle:thin:@172.19.0.8:1521:udeadev","evaluaDocen","evaluaDocen123");
+            if(getConn().isWrapperFor(OracleConnection.class)){
+            }
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("url.get.todos"));
+            ArrayDescriptor arrDescNum =
+            ArrayDescriptor.createDescriptor("EVALUADOCEN.EVDO_OBJ_NUM", getConn());
+            //ArrayDescriptor arrDescText =
+            //ArrayDescriptor.createDescriptor("EVALUADOCEN.EVDO_OBJ_ARRAY", getConn());
+            ARRAY semestresArray = new ARRAY(arrDescNum, getConn(), semestres);
+            ARRAY materiasArray = new ARRAY(arrDescNum, getConn(), materias);
+            ARRAY gruposarArray = new ARRAY(arrDescNum, getConn(), grupos);
+            //ARRAY cedulasArray = new ARRAY(arrDescText, getConn(), cedulas);
+            ps.setArray(1, semestresArray);
+            ps.setArray(2, materiasArray);
+            ps.setArray(3, gruposarArray);
+            //ps.setArray(4, cedulasArray);
+            ps.registerOutParameter(4, OracleTypes.CURSOR);
+            ps.executeQuery();
+            rs = (ResultSet) ps.getObject(4);
+            if(rs != null) {
+                while(rs.next()){
+                dato = new UrlNotas();
+                dato.setEncuesta(rs.getString("ENCUESTA"));
+                dato.setFechaInicio(rs.getDate("FECHA_ENC_INICIO"));
+                dato.setFechaTerminacion(rs.getDate("FECHA_ENC_FINAL"));
+                dato.setCedula(rs.getString("CEDULA"));
+                dato.setPunto(rs.getInt("PUNTO"));
+                dato.setMetadato(rs.getString("METADATO"));
+                dato.setMateria(rs.getLong("MATERIA"));
                 listaDatos.add(dato);
                 }
             }

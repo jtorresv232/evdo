@@ -35,7 +35,8 @@ public class ConnectionPool {
                     InitialContext initContext = new InitialContext();
                     dataSource = (DataSource) initContext.lookup("java:comp/env/consultaevaluaDocen");
                 }
-                con = dataSource.getConnection();
+                Class.forName("oracle.jdbc.OracleDriver");
+                con = DriverManager.getConnection("jdbc:oracle:thin:@172.19.0.8:1521:udeadev","evaluaDocen","evaluaDocen123");
                 con.setAutoCommit(true);
             }
 

@@ -34,7 +34,7 @@ public class TemaBL implements Serializable {
         return singletonInstance;
     }
 
-    public Collection<Tema> getTemas() {
+    public static Collection<Tema> getTemas() {
         return obtenerTemaDAO().getTemas();
 
     }
@@ -58,7 +58,7 @@ public class TemaBL implements Serializable {
 
     }
 
-    private TemaDAO obtenerTemaDAO() {
+    private static TemaDAO obtenerTemaDAO() {
         return new TemaDAO();
     }
 
