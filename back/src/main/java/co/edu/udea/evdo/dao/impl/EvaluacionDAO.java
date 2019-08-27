@@ -58,7 +58,7 @@ public class EvaluacionDAO extends ConnectionPool {
             ps.setString(1, evaluacion.getCodigo());
             ps.setInt(2, evaluacion.getSemestre());
             ps.setDouble(3, evaluacion.getPorcentaje());
-            ps.setDouble(4, evaluacion.getPorcentajeprofesor());
+            ps.setBoolean(4, evaluacion.isCargado());
             ps.registerOutParameter(5, OracleTypes.CURSOR);
             ps.executeQuery();
             rs = (ResultSet) ps.getObject(5);
@@ -67,7 +67,7 @@ public class EvaluacionDAO extends ConnectionPool {
                 eval.setCodigo(rs.getString("CODIGO"));
                 eval.setSemestre(rs.getInt("SEMESTRE"));
                 eval.setPorcentaje(rs.getDouble("PORCENTAJE"));
-                eval.setPorcentajeprofesor(rs.getDouble("PORCENTAJEPROFESOR"));
+                eval.setCargado(rs.getBoolean("CARGADO"));
                 
             }
         } catch (Exception e) {
@@ -83,10 +83,9 @@ public class EvaluacionDAO extends ConnectionPool {
         boolean actualizado = false;
         try {
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("evaluacion.actualizar"));
-            ps.setString(1, evaluacion.getCodigo());
-            ps.setInt(2, evaluacion.getSemestre());
-            ps.setDouble(3, evaluacion.getPorcentaje());
-            ps.setDouble(4, evaluacion.getPorcentajeprofesor());
+            ps.setDouble(1, evaluacion.getPorcentaje());
+            ps.setBoolean(2, evaluacion.isCargado());
+            ps.setString(3, evaluacion.getCodigo());
             actualizado = ps.executeUpdate() > 0;
         } catch (Exception e) {
             logger.error(e);

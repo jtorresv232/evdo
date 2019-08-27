@@ -86,7 +86,7 @@ public class MaresService {
             OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
             wsClient.addParam("facultad", facultad);
             //wsClient.addParam("programa", "504");
-            wsClient.addParam("tiposPrograma", "DOCTORAD,ESPECIAL,MAESTRIA");
+            wsClient.addParam("tiposPrograma", "DOCTORAD,ESPECIAL,MAESTRIA,PREGRADO");
             listaPrograsmaDeRol = wsClient.obtenerBean("consultarmateriasprogramaversion", TOKEN, MateriaMares.class);
             listaPrograsmaDeRol.removeIf(x -> x.getIndicadorVersionActual().equalsIgnoreCase("N"));
         } catch (OrgSistemasSecurityException ex) {
@@ -136,8 +136,9 @@ public class MaresService {
     @GET
     @Path("estudiantes/{materia}/{grupo}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Collection<EstudianteMatriculado> getEstudiantes(@PathParam("materia") String materia, @PathParam("grupo") String grupo) {
+    public int getEstudiantes(@PathParam("materia") String materia, @PathParam("grupo") String grupo) {
         Collection<EstudianteMatriculado> listaEstudiantes = new LinkedList<>();
+        System.out.println(listaEstudiantes.size());
         try {
             OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
             wsClient.addParam("materia", materia);
@@ -147,7 +148,7 @@ public class MaresService {
             System.err.println(ex);
         }
 
-        return listaEstudiantes;
+        return listaEstudiantes.size();
     }
     
     @GET

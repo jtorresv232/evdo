@@ -16,6 +16,17 @@ public class Evaluacion implements Serializable{
     private int semestre;
     private double porcentaje;
     private double porcentajeprofesor;
+    private boolean cargado;
+
+    public boolean isCargado() {
+        return cargado;
+    }
+
+    public void setCargado(boolean cargado) {
+        this.cargado = cargado;
+    }
+    
+    
 
     public String getCodigo() {
         return codigo;

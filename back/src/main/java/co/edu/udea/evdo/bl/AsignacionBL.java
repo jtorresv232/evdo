@@ -61,7 +61,7 @@ public class AsignacionBL implements Serializable {
         obtenerAsignacionDAO().updAllAsigsProf(asignacion, facultad);
     }
 
-    public void poblarAsignaciones() {
+    public void poblarAsignaciones(int semestre) {
         MaresService ms = new MaresService();
         Collection<FacultadMares> facultades = ms.consultaFacultades();
         Collection<MateriaMares> materias;
@@ -72,13 +72,18 @@ public class AsignacionBL implements Serializable {
         for (FacultadMares facultad : facultades) {
             materias = ms.consultaMaterias(Long.toString(facultad.getCodigo()));
             for (MateriaMares materia : materias) {
-                for (int i = 1; i <= 10; i++) {
-                    docentes = ms.consultaDocentes(Long.toString(materia.getMateria()), Integer.toString(i));
+                int iGrupo = 1;
+                int maxEstudiantes = ms.getEstudiantes(Long.toString(materia.getMateria()), Integer.toString(0));
+                int sumaEstudiantes = 0;
+                boolean tieneGrupos = maxEstudiantes > sumaEstudiantes;
+                while(sumaEstudiantes < maxEstudiantes){
+                //for (int i = 1; i <= 10; i++) {
+                    docentes = ms.consultaDocentes(Long.toString(materia.getMateria()), Integer.toString(iGrupo));
                     for (DocenteMateriaGrupo docente : docentes) {
                         asignacion = new Asignacion();
-                        asignacion.setSemestre(20162);
+                        asignacion.setSemestre(semestre);
                         asignacion.setMateria(materia.getMateria());
-                        asignacion.setGrupo(i);
+                        asignacion.setGrupo(iGrupo);
                         asignacion.setCedula(docente.getIdentificacionDocente());
                         asignacion.setProfCompartido(docente.getIndicadorProfesoresComparten());
                         asignacion.setProfCatedra(docente.getIndicadorCatedra());
@@ -92,12 +97,15 @@ public class AsignacionBL implements Serializable {
                         grupo.setSemestre(asignacion.getSemestre());
                         grupo.setMateria(asignacion.getMateria());
                         grupo.setGrupo(asignacion.getGrupo());
-                        Random rand = new Random();
-                        int num = rand.nextInt(20) + 15;
-                        grupo.setNumEstudiantes(num);
+//                        Random rand = new Random();
+//                        int num = rand.nextInt(20) + 15;
+                        int numEstudiantes = ms.getEstudiantes(Long.toString(asignacion.getMateria()), Integer.toString(asignacion.getGrupo()));
+                        grupo.setNumEstudiantes(numEstudiantes);
                         gbl.addGrupo(grupo);
-
+                        sumaEstudiantes = sumaEstudiantes + numEstudiantes;
                     }
+                    iGrupo = iGrupo + 1;
+                //}
                 }
             }
         }
