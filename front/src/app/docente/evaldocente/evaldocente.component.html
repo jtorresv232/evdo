@@ -1,0 +1,95 @@
+<div class="principal">
+<!--Progress-->
+<div class="bar-container">
+	<span class="myspan">Docente > Evaluaciones </span>
+</div>
+<!--FIN progress-->
+<!--Table-->
+
+<div style="height:2%">
+	<span></span>
+</div>
+
+<div class="title">
+	<h4 class="title-text">Mis Evaluaciones</h4>
+</div>
+
+<!-- CONTENT -->
+<div *ngIf="aDone" style="margin-bottom: 10px">
+    <mat-accordion>
+      <div *ngFor="let asignacion of asignaciones">
+        <mat-expansion-panel (opened)="panelOpenState = true; notShow(); getTotales(asignacion)" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header style="overflow:visible">
+            <mat-panel-title class="mytext">
+              {{getTexto(asignacion)}}
+            </mat-panel-title>
+            
+          </mat-expansion-panel-header>
+          <!--CONTENT -->
+          <div *ngIf="!(totalpreguntasAsig.length > 0)" style="text-align: center; color: darkgray">
+            <span>Este curso aún no ha sido evaluada por ninguna persona.</span>
+          </div>
+          <div #mydiv *ngIf="totalpreguntasAsig.length > 0">
+            <mat-tab-group>
+              <mat-tab label="Por preguntas">
+                <!--contenido preguntas-->
+                <table matSort>
+                  <tr>
+                    <th mat-sort-header="numero">Pregunta</th>
+                    <th mat-sort-header="media">Media</th>
+                    <th mat-sort-header="desviacion">Desviación</th>
+                    <th mat-sort-header="coeficienteDesv">Coeficiente desviacion</th>
+                  </tr>
+
+                  <tr *ngFor="let totalp of totalpreguntasAsig">
+                    <td>{{getnombre(totalp.numero)}}</td>
+                    <td>{{totalp.media}}</td>
+                    <td>{{totalp.desviacion}}</td>
+                    <td>{{totalp.coeficienteDesv}}</td>
+                  </tr>
+                </table>
+              </mat-tab>
+              <div>
+                <mat-tab label="Por temas">
+                  <div [class]="grafico? 'outer showGraph': 'outer noShowGraph'">
+                    <div style="min-width: 100%; display: grid">
+                      <table matSort>
+                        <tr>
+                          <th mat-sort-header="codigoTema">Tema</th>
+                          <th mat-sort-header="media">Media</th>
+                          <th mat-sort-header="desviacion">Desviación</th>
+                          <th mat-sort-header="coeficienteDesv">Coeficiente desviacion</th>
+                        </tr>
+                        <tr *ngFor="let totalt of totaltemasAsig">
+                          <td>{{totalt.tema}}</td>
+                          <td>{{totalt.media}}</td>
+                          <td>{{totalt.desviacion}}</td>
+                          <td>{{totalt.coeficienteDesv}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div style="min-width: 100%; transition: all ease 1s;" class="chart_container">
+                      <canvas class="radar" id="radar"></canvas>
+                    </div>
+                    <button mat-icon-button class="mat-elevation-z8" graph-button (click)="toggleGraph()" matTooltip="{{grafico? 'Mostrar tabla':'Mostrar Grafico'}}"
+                      matTooltipPosition="left">
+                      <mat-icon>{{grafico? 'table_chart':'pie_chart'}}</mat-icon>
+                    </button>
+                  </div>
+                </mat-tab>
+              </div>
+            </mat-tab-group>
+          </div>
+
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </div>
+<!-- FIN CONTENT -->
+
+
+<div style="height:2%">
+	<span></span>
+</div>
+
+</div>

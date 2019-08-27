@@ -1,0 +1,38 @@
+<div class="main" *ngIf="visible">
+  <span *ngIf="preguntas.controls.length > 0" class="myspan">Preguntas Derivadas</span>
+  <form [formGroup]="derivadasForm" #formDirective="ngForm">
+      <ng-container formArrayName="preguntas">
+        <div dnd-sortable-container [sortableData]="preguntas">
+            <div questions *ngFor="let pregun of preguntas.controls; let i = index" [formGroupName]="i"
+            dnd-sortable [sortableIndex]="i">
+                <!-- <mat-form-field>
+                  <mat-select placeholder="Pregunta" formControlName="pregunta" required (selectionChange)="select(i+1)">
+                      <mat-option *ngFor="let preg of todasPreguntas" [value]="preg.numero" [disabled]="getDisable(preg)">
+                          {{preg.pregunta}}
+                      </mat-option>
+                  </mat-select>
+                  <mat-hint><span>Seleccione una pregunta</span></mat-hint>
+                  <mat-error>Este campo es requerido</mat-error>
+                </mat-form-field> -->
+                <mat-form-field>
+                  <input style="width:auto" type="text" matInput formControlName="pregunta"
+                  [matAutocomplete]="autoFacultad" placeholder="Pregunta" required>
+                  <mat-hint><span>Seleccione una pregunta</span></mat-hint>
+                  <mat-error>Este campo es requerido</mat-error>
+                </mat-form-field>
+                <!--Autocomplete-->
+                <mat-autocomplete #autoFacultad="matAutocomplete" showPanel="{{true}}" (optionSelected)="select(i+1)" [displayWith]="displayFn.bind(this)">
+                  <mat-option *ngFor="let preg of todasPreguntas | pregFilter : preguntas.get(i.toString()).value" [value]="preg.numero"
+                  [matTooltip]="preg.pregunta" [disabled]="getDisable(preg)">
+                  {{ preg.pregunta }}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-icon (click)="borrarPregunta(pregun, i)" style="vertical-align: middle">delete</mat-icon>
+              </div>
+        </div>
+      </ng-container>
+  </form>
+  <div class="plus-icon" matTooltip="Agregar Derivada" (click)="agregarPregunta()">
+    <mat-icon>add_circle_outline</mat-icon>
+  </div>
+</div>

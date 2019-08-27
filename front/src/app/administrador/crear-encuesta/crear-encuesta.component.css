@@ -1,0 +1,263 @@
+  .myform {
+    margin-top: 2%;
+  }
+  
+  .myspan{
+    color:#6c9a06;
+  }
+  
+  .myTables {
+    border-radius: 32px 32px 10px 10px;
+  -moz-border-radius: 32px 32px 10px 10px;
+  -webkit-border-radius: 32px 32px 10px 10px;
+  box-shadow: 0 6px 10px rgba(0,0,0,0.19), 0 4px 8px rgba(0,0,0,0.23);
+  }
+  
+  
+  .myBar {
+    text-align: center;
+    align-items: center;
+    background-color: #e0e0e0;
+    font-size: 25px;
+    flex-wrap: wrap;
+    width: 80%;
+    margin-bottom: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  button {
+  
+    height: 60%;
+    margin-left: 4%;
+  }
+  
+  .myWrap {
+    margin-top:1%;
+    background-color:inherit;
+    display: flex;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  mat-table{
+    background-color:#ececec;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  mat-header-row{
+    background-color: #e0e0e0;
+    font-weight: bold;
+    flex-wrap: wrap;;
+  }
+  
+  .myWrap button{
+    flex: 1;
+    background-color: #3C5E2B;
+  }
+  
+  mat-cell .cdk-column-id{
+    flex:0.5;
+  }
+  
+  div.mat-radio-label-content.mat-radio-label-before {
+    padding-right: 2px;
+    padding-left: 9px;
+  }
+  
+  mat-dialog-container#mat-dialog-0{
+    background-color: #C5D1BF;
+  }
+  
+  
+  /*STEPPER*/
+  .bar-container{
+    width: 80%;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    display:flex;
+    position: relative;
+    background-color: white;
+    flex-wrap: wrap;
+    padding:0px;
+  }
+  
+  .progressbar{
+    margin:0px;
+    display: flex;
+    float:left;
+    list-style-type: none;
+    width: 100%;
+    padding:0px;
+    overflow: hidden;
+  }
+  
+  .progress{
+    flex:1;
+    color:gray;
+    text-align: center;
+    overflow-x: visible;
+  
+    background-position: 100% 0;
+      background-size: 200% 100%;
+      transition: all 1s ease-in;
+  }
+  
+  .progress2{
+    flex:1;
+    text-align: center;
+    overflow-x: visible;
+    background-color: #6c9a06;
+    color:white;
+    cursor:pointer;
+      background-size: 200% 100%;
+      transition: all 1s ease-in;
+  
+      background-position: 0 0;
+  }
+  
+  .mymarg{
+    margin:2px;
+  }
+  /*FIN STEPPER*/
+  
+  ul{
+  }
+  
+  .myli{
+    display:flex;
+    padding-bottom: 1%;
+  }
+  
+  .spacer{
+    flex:1 1 auto;
+  }
+  
+  .evaluada{
+    color:green;
+  }
+  
+  .noevaluada{
+    color:gray;
+  }
+  
+  .mya{
+    cursor: pointer;
+    align-self:flex-end;
+    left:0;
+  }
+  
+  mat-accordion{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  
+  .float{
+    cursor: pointer;
+    transition: .3s ease-out;
+    z-index: 5000;
+      position:fixed;
+      bottom:6.5%;
+      right:4%;
+      background-color:#6c9a06;
+      color:#FFF;
+      border-radius:50px;
+      text-align:center;
+      box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+  }
+
+  mat-form-field {
+
+    margin: 15px;
+}
+
+mat-checkbox {
+    margin:15px;
+}
+
+form {
+    text-align: center;
+}
+
+[questions]{
+  counter-increment: mycounter;
+  position: relative;
+  display: inline-block;
+  margin-left: 29px;
+  white-space: nowrap;
+  width: 100%;
+}
+
+[questions]::before{
+  content: counter(mycounter);
+  height: 30%;
+  color: #3C5E2B;
+  border: 2px solid #3C5E2B;
+  position: absolute;
+  top: 35%;
+  width: 28.64px;
+  transform: translate(-110%);
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  font-weight: bold;
+}
+
+.float::after{
+  content:'';
+  display: block;
+  height: 100%;
+  width: 100%;
+  background:white;
+  position:absolute;
+  border-radius: 50%;
+  right: 0;
+  top:0;
+  opacity: 0;
+  transition: all 250ms;
+  transform: scale(0);
+}
+
+.float:active::after{
+    opacity: 0.4;
+    transition:0s;
+    transform: scale(1);
+}
+
+.float:active{
+  bottom:10%;
+}
+
+::ng-deep .mat-autocomplete-panel {
+  position: absolute !important;
+  transform: translateY(-110%);
+  width: auto;
+  max-width: 350px!important;
+}
+
+::ng-deep mat-option {
+  display:flex;
+  height: fit-content!important;
+  max-width: 450px;
+}
+
+.mat-select-panel mat-option.mat-option {
+  margin: 1rem 0;
+  overflow: visible;
+  line-height: initial;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  }
+  
+  .mat-option-text.mat-option-text {
+  white-space: normal;
+  }
+
+  ::ng-deep .mat-tooltip {
+    font-size: 1.4rem !important;
+  }
+
+  

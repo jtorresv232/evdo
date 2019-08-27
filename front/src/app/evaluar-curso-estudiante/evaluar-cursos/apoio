@@ -1,0 +1,124 @@
+<!--TABLA profesor -->
+  <div *ngIf="opcion=='profesor'"  >
+  <mat-table #table [dataSource]="arrayProfesores | myfilter2:grupoSelected | filterByName:filt">
+
+  <!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+  <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+  <mat-cell *matCellDef="let element" style="cursor:pointer" (click)="profesorSelected=element.id; opcion='formulario'"> {{element.id}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="nombre">
+  <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+  <mat-cell *matCellDef="let element" style="cursor:pointer" (click)="profesorSelected=element.id; opcion='formulario'"> {{element.nombre}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumnsProfesores"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumnsProfesores;"></mat-row>
+  </mat-table>
+  </div>
+
+ <!--TABLA GRUPOS-->
+          <div *ngIf="opcion=='grupo'"  >
+      <mat-table #table [dataSource]="arrayGrupos | myfilter:materiaSelected ">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id" >
+          <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+          <mat-cell *matCellDef="let element" style="cursor:pointer" (click)="grupoSelected=element.id; opcion='profesor'"> {{element.id}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="codigo">
+          <mat-header-cell *matHeaderCellDef> codigo </mat-header-cell>
+          <mat-cell *matCellDef="let element" style="cursor:pointer" (click)="grupoSelected=element.id; opcion='profesor'"> {{element.codigo}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="numEstudiantes">
+          <mat-header-cell *matHeaderCellDef> numEstudiantes </mat-header-cell>
+          <mat-cell *matCellDef="let element" style="cursor:pointer" (click)="grupoSelected=element.id; opcion='profesor'"> {{element.numEstudiantes}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumnsGrupos"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumnsGrupos;"></mat-row>
+      </mat-table>
+    </div>
+
+<!--TABLA MATERIAS -->
+    <div *ngIf="opcion=='materia'"  >
+<mat-table #table [dataSource]="arrayMaterias">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id" >
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let element" style="cursor:pointer" (click)="materiaSelected=element.id; opcion='grupo'"> {{element.id}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef> Cuso </mat-header-cell>
+    <mat-cell *matCellDef="let element" style="cursor:pointer" (click)="materiaSelected=element.id; opcion='grupo'"> {{element.nombre}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumnsMaterias"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumnsMaterias;"></mat-row>
+</mat-table>
+
+</div>
+
+<!-- ELEGIR FORMULARIO -->
+<div *ngIf="opcion=='formulario'"  >
+<mat-table #table [dataSource]="forms">
+<!--- Note that these columns can be defined in any order.
+		The actual rendered columns are set as a property on the row definition" -->
+
+<ng-container matColumnDef="formulario" >
+<mat-header-cell *matHeaderCellDef> Formulario </mat-header-cell>
+<mat-cell *matCellDef="let element" style="cursor:pointer" (click)="formu=element; validarForm(element);"> {{element}} </mat-cell>
+</ng-container>
+
+<mat-header-row *matHeaderRowDef="displayedColumnsForms"></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumnsForms;"></mat-row>
+</mat-table>
+</div>
+<!-- FIN ELEGIR FORMULARIO -->
+
+<!--FORM TABLE-->
+<div *ngIf="opcion=='pregunta'"  >
+	<mat-table #table [dataSource]="preguntas">
+
+	  <!-- Position Column -->
+	  <ng-container matColumnDef="pregunta" >
+	    <mat-header-cell *matHeaderCellDef> Pregunta </mat-header-cell>
+	    <mat-cell *matCellDef="let element"> {{element}} </mat-cell>
+	  </ng-container>
+
+	  <!-- Name Column -->
+	  <ng-container matColumnDef="1">
+	    <mat-header-cell *matHeaderCellDef> 1:Muy Malo 2:Malo 3:Regular 4:Bueno 5:Muy Bueno </mat-header-cell>
+	    <mat-cell *matCellDef="let element">
+				 	<mat-radio-group labelPosition="before">
+  			 		<mat-radio-button value="1">1</mat-radio-button>
+  					<mat-radio-button value="2">2</mat-radio-button>
+						<mat-radio-button value="3">3</mat-radio-button>
+						<mat-radio-button value="4">4</mat-radio-button>
+						<mat-radio-button value="5">5</mat-radio-button>
+					</mat-radio-group>
+			</mat-cell>
+	  </ng-container>
+
+	  <mat-header-row *matHeaderRowDef="displayedColumnsPreguntas"></mat-header-row>
+	  <mat-row *matRowDef="let row; columns: displayedColumnsPreguntas;"></mat-row>
+	</mat-table>
+</div>
+<!-- END FORM TABLE-->

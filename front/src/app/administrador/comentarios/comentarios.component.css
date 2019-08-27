@@ -1,0 +1,172 @@
+mat-card-footer .mat-icon .material-icons{
+    width: 18px;
+}
+
+mat-card-title{
+    margin-bottom: 3px;
+}
+
+mat-card-subtitle{
+    margin-bottom: 10px;
+}
+
+.comentario{
+    margin: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.582);
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr minmax(35px, 60px);
+    place-content: center;
+}
+
+.comentario textarea{
+    margin: 2px;
+    min-height: 60px;
+}
+
+.sendb{
+    background-color: #6c9a06;
+    display: grid;
+    place-content: center;
+}
+
+.sendb mat-icon{
+    color:white;
+}
+
+.mysend{
+    display:grid;
+    place-content: center;
+}
+
+.ref-contenedor{
+    display: grid;
+    grid-template-columns: 1fr minmax(35px,60px);
+    place-content: center;
+    margin: 5px;
+}
+
+.ref{
+    display:flex;
+}
+
+.seleccion{
+    display:grid;
+    place-content: center;
+    background-color: #6c9a06;
+    border-radius: 0px 0px 10px 0px;
+    max-height: 30px;
+}
+
+.seleccion input{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Comentarios */
+.comment{
+    display: flex;
+    margin: 10px;
+  }
+  
+  .comment-header{
+    display: flex;
+  }
+  
+  .comment-logo{
+    height: 50px;
+    width: 50px;
+    min-height: 50px;
+    min-width: 50px;
+    display: grid;
+    place-content: center;
+    background-color: #6c9a06;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 10px;
+  }
+  
+  .comment-body{
+    padding: 0px 10px 5px 10px;
+  }
+  
+  .comment-user{
+    color: blue;
+    font-size: 1.2rem;
+    display: grid;
+    place-content: center;
+    padding-right: 15px;
+  }
+  
+  .comment-date{
+    display: grid;
+    place-content: center;
+    font-size: 1rem;
+    color: gray;
+    font-weight: bold;
+  }
+  
+  .comment-content{
+    margin: 7px 0px;
+  }
+  
+  .comment-email{
+    color: gray;
+    font-size: 1.2rem;
+  }
+
+  :ng-deep mat-dialog-container {
+      max-height: 600px !important;
+  }
+
+  ::ng-deep .mat-autocomplete-panel {
+      position: absolute;
+      transform: translateY(-100%);
+      width: auto;
+      max-width: 350px;
+  }
+
+  .cdk-overlay-pane{
+    max-width:none !important;
+    width:auto !important;}
+/* Fin Comentarios */
+
+
+
+mat-chip-list {
+    max-height: 64px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+@media only screen and (max-width: 400px) {
+    /* For mobile phones: */
+    ::ng-deep .myheight {
+        height: auto;
+        max-height: 500px;
+        overflow-y: inherit;
+        width: auto;
+    }
+  }
+
+  @media only screen and (min-width: 400px) and (max-width: 600px) {
+    /* For medium screens: */
+    ::ng-deep .myheight {
+        height: auto;
+        max-height: 500px;
+        overflow-y: inherit;
+        width: auto;
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    /* For big screens: */
+    ::ng-deep .myheight {
+        height: auto;
+        max-height: 550px;
+        overflow-y: inherit;
+        width: 500px;
+    }
+  }

@@ -1,0 +1,10 @@
+.myclass {
+  height: 100%;
+	position: absolute;
+	z-index: 5000;
+  margin-left: 10%;
+  margin-bottom: 3%;
+	top: 0;
+	left: 0;
+  overflow: visible;
+}

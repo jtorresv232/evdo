@@ -1,0 +1,11 @@
+<form class="example-form">
+
+  <mat-form-field style="width:100%" class="example-full-width" >
+    <textarea [(ngModel)]="nombre" name="texto" matInput placeholder="Nombre del cuestionario"></textarea>
+  </mat-form-field>
+</form>
+
+<div style="display:flex">
+  <button mat-raised-button name="button" (click)="cancel()">cancelar</button>
+  <button mat-raised-button name="button" (click)="closeDialog()">Agregar</button>
+</div>

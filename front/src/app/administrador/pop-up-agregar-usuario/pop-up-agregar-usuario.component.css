@@ -1,0 +1,19 @@
+form {
+    text-align: center;
+}
+
+mat-form-field {
+    margin: 5px 10px;
+}
+
+[save-button] {
+    margin-top: 5px;
+    color: white;
+    background-color: #6c9a06;
+    float: right;
+}
+
+[cancel-button]{
+    margin-top: 5px;
+    float: right;
+}

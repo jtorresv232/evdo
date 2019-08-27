@@ -1,0 +1,251 @@
+.tools{
+  text-align: center;
+  align-items: center;
+  background-color: #0A351C;
+  font-size: 25px;
+  width: 100%;
+  border-radius: 10px;
+  color: gray;
+}
+
+.tools span{
+  font-size: 15px;
+  color:white;
+}
+
+.tools mat-icon{
+  color:white;
+  margin:4px 8px;
+}
+
+tr:nth-child(even){
+  background-color:rgba(61, 177, 61, 0.13);
+  }
+
+table{
+  border-collapse: collapse;
+}
+
+[derecha]{
+  float: right;
+  margin-right: 20px;
+  align-self: center;
+}
+
+mat-expansion-panel-header span .mat-content{
+  overflow: visible !important;
+}
+
+[badge]:after {
+  content:attr(badge);
+  position:absolute;
+  top:-10px;
+  right:-10px;
+  font-size:9px;
+  font-family:"Roboto","Helvetica","Arial",sans-serif;
+  font-weight:600;
+  text-align:center;
+  line-height:17px;
+  background-color: #6c9a06;
+  color:white;
+  width:18px;
+  height:18px;           
+  border-radius:50%;
+  box-shadow:1px 2px 5px #888;
+}
+
+.container-1{
+  margin:4px;
+  display: inline-block;
+  background-color: #0c4022;
+  border:0px;
+  border-radius: 10px;
+  vertical-align: middle;
+
+}
+.container-1 select{
+  border:0px;
+  background-color: inherit;
+  min-height: 25px;
+  color:white;
+  overflow: hidden;
+  vertical-align: middle;
+  border-radius: 8px;
+}
+
+::ng-deep .mat-content{
+  overflow:visible!important;
+}
+
+span{
+  overflow:visible;
+}
+
+.container-1 mat-icon{
+  vertical-align: bottom;
+  color:white;
+}
+
+input[type="search"]::placeholder{
+  color: gray;
+}
+
+
+mat-table{
+  background-color:#ececec;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+mat-header-row{
+  background-color: #e0e0e0;
+  font-weight: bold;
+  flex-wrap: wrap;;
+}
+
+mat-cell .cdk-column-id{
+  flex:0.5;
+}
+
+/*STEPPER*/
+.bar-container{
+  width: 80%;
+  margin-top: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  display:flex;
+  position: relative;
+  background-color: white;
+  flex-wrap: wrap;
+  padding:0px;
+}
+
+.myspan{
+  color:#6c9a06;
+}
+
+.progressbar{
+  margin:0px;
+  display: flex;
+  float:left;
+  list-style-type: none;
+  width: 100%;
+  padding:0px;
+  overflow: hidden;
+}
+
+.progress{
+  flex:1;
+  color:gray;
+  text-align: center;
+  overflow-x: visible;
+
+  background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all 1s ease-in;
+}
+
+.progress2{
+  flex:1;
+  text-align: center;
+  overflow-x: visible;
+  background-color: #6c9a06;
+  color:white;
+  cursor:pointer;
+    background-size: 200% 100%;
+    transition: all 1s ease-in;
+
+    background-position: 0 0;
+}
+
+.mymarg{
+  margin:2px;
+}
+/*FIN STEPPER*/
+
+/* Graficos */
+  [graph-button]{
+    position: absolute;
+    bottom: 6%;
+    right: 3%;
+    background-color: #6c9a06;
+    color: white;
+  }
+
+  .chart_container{
+    position: relative;
+  }
+
+  .showGraph{
+    justify-content: flex-end;
+  }
+
+  .noShowGraph{
+    justify-content: flex-start;
+  }
+
+  .outer{
+    display: flex;
+    overflow-x: hidden;
+  }
+/* Fin Graficos */
+
+.mat-expanded{
+  border: 1px solid #6c9a06;
+}
+
+::ng-deep .mat-expansion-panel-header[aria-expanded=true]{
+  border: none;
+}
+
+.radar{
+  max-width: 80%;
+  min-height: 300px;
+  margin: 0% 10%;
+}
+
+::ng-deep .mat-tab-body-content{
+  display: grid;
+}
+
+::ng-deep mat-tab-body{
+  padding-top: 10px;
+}
+
+::ng-deep .mat-tooltip-panel > *{
+  background-color: #6c9a06;
+}
+
+::ng-deep tr{
+  max-height: 50px;
+}
+
+.filters{
+  width: 100%;
+}
+
+mat-form-field {
+  margin: 0px 5px;
+}
+
+.cdk-overlay-pane{
+  max-width:none !important;
+  width:auto !important;}
+
+  ::ng-deep .abajo {
+    position: absolute !important;
+    transform: translateY(0%)!important;
+    width: auto !important;
+    max-width: 350px;
+  }
+
+  ::ng-deep .arriba {
+    position: absolute !important;
+    transform: translateY(-110%)!important;
+    width: auto !important;
+    max-width: 350px;
+  }
+
+  :ng-deep mat-dialog-container {
+    max-height: 600px !important;
+}

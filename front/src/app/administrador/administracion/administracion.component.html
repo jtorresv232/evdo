@@ -1,0 +1,33 @@
+<div class="principal">
+  <app-configuracion></app-configuracion>
+
+  <a *ngIf="uDone && administrador" class="float" matTooltip="Agregar Usuario" matTooltipPosition="above" mat-fab>
+      <mat-icon style="size:40px;font-size:24px; font-weight:bold"
+      (click)="openDialog()">add</mat-icon>
+  </a>
+<!--Table-->
+
+<div style="height:2%">
+  <span></span>
+</div>
+
+<div class="title">
+  <h4 class="title-text">Administración de usuarios</h4>
+</div>
+
+
+<div style="height:2%">
+  <span></span>
+</div>
+
+<mat-card>
+  <mat-card-title>Listado de usuarios</mat-card-title>
+  <mat-list role="list">
+    <mat-list-item *ngFor="let usuario of usuarios" role="listitem">{{usuario.nombre}} - {{buscarFacultad(usuario.facultad)}} - {{usuario.rol}} <span class="spacer"></span>
+      <mat-icon *ngIf="uDone && administrador" style="cursor:pointer; margin-left: 15px" matTooltip="Eliminar Pregunta" matTooltipPosition="after"
+      (click)="openDialogConf(usuario.cedula)">delete</mat-icon></mat-list-item>
+  </mat-list>
+</mat-card>
+
+
+</div>

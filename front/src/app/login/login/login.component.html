@@ -1,0 +1,43 @@
+<mat-toolbar class="title">
+  <img class="mylogo" style="padding-left:5%" src="../../../assets/images/udea.png" alt="udea logo">
+
+  <div class="spacer">
+
+  </div>
+
+  <div style="padding-right:5%">
+    <span>Evaluación de Cursos</span>
+  </div>
+
+</mat-toolbar>
+
+
+<mat-toolbar class="bar">
+  <span style="text-align:center; width:100%">Login</span>
+</mat-toolbar>
+
+
+<div class="secondBar">
+
+</div>
+
+<mat-card class="mycard">
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Username" [(ngModel)]="email" name="email">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput type="password" placeholder="password" [(ngModel)]="password" name="password">
+    </mat-form-field>
+
+    <mat-select placeholder="Rol" style="margin-top:4%;" [(ngModel)]="opcion" name="opcion">
+    <mat-option *ngFor="let rol of roles" [value]="rol.value">
+      {{ rol.viewValue }}
+    </mat-option>
+    </mat-select>
+    <div style="width:100%;text-align:center">
+      <button mat-raised-button name="button" style="margin-top:4%" (click)="reDireccionar(opcion)"> Log In</button>
+    </div>
+  </form>
+</mat-card>

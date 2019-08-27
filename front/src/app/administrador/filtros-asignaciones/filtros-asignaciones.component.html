@@ -1,0 +1,32 @@
+<div class="filters" style="display:flex; flex-wrap:wrap">
+  <mat-form-field>
+    <input style="width:auto" type="text" matInput [ngModel]="facultadnombre" (ngModelChange)="changeFacultad($event)"
+    [matAutocomplete]="autoFacultad" placeholder="Facultad">
+  </mat-form-field>
+  <!--Autocomplete-->
+  <mat-autocomplete #autoFacultad="matAutocomplete" showPanel="{{true}}">
+    <mat-option *ngFor="let facultad of filterFacultades" [value]="facultad.nombre">
+    {{ facultad.nombre }}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-form-field>
+    <input style="width:auto" type="text" matInput [ngModel]="programanombre" (ngModelChange)="change($event)"
+    [matAutocomplete]="auto" placeholder="Programa">
+  </mat-form-field>
+  <!--Autocomplete-->
+  <mat-autocomplete #auto="matAutocomplete" showPanel="{{true}}">
+    <mat-option *ngFor="let programa of filterProgramas" [value]="programa.nombrePrograma">
+    {{ programa.nombrePrograma }}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-form-field class="example-full-width">
+    <input [maxlength]="8" (keypress)="numberOnly($event)"
+    matInput placeholder="Materia codigo" [(ngModel)]="materia">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input [maxlength]="11" (keypress)="numberOnly($event)"
+    matInput placeholder="Cedula docente" [(ngModel)]="docente">
+  </mat-form-field>
+  <button mat-button (click)="filtrar()">Filtrar</button>
+  <button mat-button (click)="limpiar()">Limpiar</button>
+</div>

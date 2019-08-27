@@ -1,0 +1,73 @@
+<div class="principal">
+	<!--Progress-->
+	<div class="bar-container">
+		<span class="myspan">Administrar > Asignaciones </span>
+	</div>
+	<!--FIN progress-->
+
+	<div style="height:2%">
+		<span></span>
+	</div>
+
+	<!-- --------------TITULO------------------- -->
+
+	<div class="title">
+		<h4 class="title-text">Editar Asignaciones</h4>
+	</div>
+
+	<!-- --------FILTROS------------ -->
+
+	<app-filtros-asignaciones (infoFiltroEvento)="leerInfoFiltros($event)"></app-filtros-asignaciones>
+
+	<!-- -------------------------CONTENIDO-------------------------------- -->
+
+		<div *ngIf="total > 0">
+			<div *ngIf="qDone && aDone && pDone">
+			<ul style="padding-left: 0px">
+				<li style="display: flex; color:#0A351C; padding-bottom: 1%"><span></span><span class="spacer"></span>Editar Todos<mat-icon
+					 (click)="editarTodos(arrayAsignaciones)" style="cursor:pointer;margin-left:5px">rate_review</mat-icon>
+				</li>
+				<mat-divider style="padding-bottom:1%"></mat-divider>
+				<div *ngFor="let asignacion of arrayAsignaciones, let i=index">
+					<li class="myli" [ngClass]="getStyle(asignacion)" style="padding-top:1%">
+						<div class="liItem2">
+							<span style="white-space: wrap;">[ ({{asignacion.materia}}) {{asignacion.nombreMateria}} - {{asignacion.grupo}} -
+								{{asignacion.nombreDocente}}] 
+								<span *ngIf="asignacion.encuesta">
+									[{{asignacion.fechaEncInicio}} - {{asignacion.fechaEncFinal}} - E: {{asignacion.encuesta}}]
+								</span>
+							</span>
+							<span class="spacer"></span>
+							<mat-icon *ngIf="perteneceFacultad(asignacion)" derecha (click)="openDialog(asignacion);myasignacion=asignacion.id" style="cursor:pointer" matTooltip="Asignar Encuesta"
+							 matTooltipPosition="above">mode_edit</mat-icon>
+							<mat-icon derecha style="position:relative" matTooltip="Estudiantes : {{asignacion.estudiantes}}"
+							 matTooltipPosition="above" [attr.badge]="asignacion.estudiantes">group</mat-icon>
+							<mat-icon derecha style="position:relative" matTooltip="Encuestados" matTooltipPosition="above" [attr.badge]="asignacion.encuestados"
+							 [attr.dbadge]="asignacion.estudiantes - asignacion.encuestados">check_circle</mat-icon>
+							 <div [class]="getColor(asignacion)"><mat-icon derecha style="position:relative" matTooltip="Encuesta : {{asignacion.encuestaprof}}"
+								matTooltipPosition="above">how_to_reg</mat-icon></div>
+						</div>
+						<div class="liItem" *ngIf="asignacion.encuesta">
+							<mat-icon (click)="actualizarPorcentaje(asignacion)" style="cursor:pointer; font-size: 16px">replay</mat-icon>
+							<mat-progress-bar mode="determinate" value="{{(asignacion.porcentaje)? asignacion.porcentaje : 0}}" style="margin: 8px 120px 0px 0px"></mat-progress-bar>
+						</div>
+					</li>
+					<mat-divider></mat-divider>
+				</div>
+			</ul>
+		</div>
+	
+		<!-- --------------------PAGINADOR---------------------------- -->
+	
+		<mat-paginator style="margin-right:10%" id="paginator" [length]="total" [pageSize]="(pageEvent)?pageEvent.pageSize:5"
+		 [pageSizeOptions]="[5, 10, 20, 50, 100]" [pageIndex]="(pageEvent)?pageEvent.pageIndex:0" (page)="pageEvent = $event; siguiente()">
+		</mat-paginator>
+	</div>
+	<div *ngIf="total == 0">
+		No hay ningun curso
+	</div>
+
+	<div style="height:2%">
+		<span></span>
+	</div>
+</div>

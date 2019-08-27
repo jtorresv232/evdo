@@ -1,0 +1,6 @@
+<ng-container *ngIf="cargado; else noExiste">
+  {{datos}}
+</ng-container>
+<ng-template #noExiste>
+  {{datos}}
+</ng-template>

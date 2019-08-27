@@ -1,0 +1,99 @@
+<!-- <mat-form-field>
+  <mat-select placeholder="Seleccione un cuestionario" [(ngModel)]="cuestionario">
+    <mat-option *ngFor="let cuest of cuestionarios" [value]="cuest">
+      {{ cuest.nombre }}
+    </mat-option>
+  </mat-select>
+</mat-form-field> -->
+
+<div class="editForm">
+  <h3>Encuesta para Estudiantes</h3>
+  <form [formGroup]="editForm" #formDirective="ngForm">
+    <div style="display: flex">
+      <mat-form-field>
+        <mat-select placeholder="Seleccione un cuestionario" formControlName="encuesta">
+          <mat-option *ngFor="let cuest of cuestionarios" [value]="cuest">
+            {{ cuest.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="fecha_inicio" [errorStateMatcher]="matcher"
+        min="{{mindate | date:'yyyy-MM-dd'}}"
+        [matDatepicker]="fecha_inicio" placeholder="Fecha de inicio"
+          readonly>
+        <mat-datepicker-toggle matSuffix [for]="fecha_inicio"></mat-datepicker-toggle>
+        <mat-datepicker #fecha_inicio></mat-datepicker>
+        <mat-hint>
+          <span>Fecha de inicio de la encuesta</span>
+        </mat-hint>
+        <mat-error *ngIf="editForm.hasError('notSame')">Debe ser menor que fecha final</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="fecha_final" [errorStateMatcher]="matcher"
+        [matDatepicker]="fecha_final" placeholder="Fecha de finalización"
+        min="{{mindate | date:'yyyy-MM-dd'}}"
+          readonly>
+        <mat-datepicker-toggle matSuffix [for]="fecha_final"></mat-datepicker-toggle>
+        <mat-datepicker #fecha_final></mat-datepicker>
+        <mat-hint>
+          <span>Fecha de finalización de la encuesta</span>
+        </mat-hint>
+        <mat-error *ngIf="editForm.hasError('notSame')">Debe ser mayor que fecha inicial</mat-error>
+      </mat-form-field>
+      <div style="display: grid; place-content: center">
+          <button mat-raised-button type="submit" (click)="agregarEstudiantes(editForm)">Asignar</button>
+      </div>
+    </div>
+
+    <div fxLayout="row">
+        <h3>Encuesta para profesor</h3>
+        <form [formGroup]="editProf" #formDirective="ngForm">
+          <div style="display: flex">
+            <mat-form-field>
+              <mat-select placeholder="Seleccione un cuestionario" formControlName="encuesta" >
+                <mat-option *ngFor="let cuest of cuestionarios" [value]="cuest">
+                  {{ cuest.nombre }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="editProf.hasError('notSame')">Debe ser menor que fecha final</mat-error>
+            </mat-form-field>
+      
+            <mat-form-field>
+              <input matInput [matDatepicker]="fecha_iniciop" [errorStateMatcher]="matcher"
+              placeholder="Fecha de inicio"
+              min="{{mindate | date:'yyyy-MM-dd'}}"
+                readonly formControlName="fecha_inicio">
+              <mat-datepicker-toggle matSuffix [for]="fecha_iniciop"></mat-datepicker-toggle>
+              <mat-datepicker #fecha_iniciop></mat-datepicker>
+              <mat-hint>
+                <span>Fecha de inicio de la encuesta</span>
+              </mat-hint>
+              <mat-error *ngIf="editProf.hasError('notSame')">Debe ser mayor que fecha inicial</mat-error>
+            </mat-form-field>
+      
+            <mat-form-field>
+              <input matInput [matDatepicker]="fecha_finalp" [errorStateMatcher]="matcher"
+              placeholder="Fecha de finalización"
+              min="{{mindate | date:'yyyy-MM-dd'}}"
+                readonly formControlName="fecha_final">
+              <mat-datepicker-toggle matSuffix [for]="fecha_finalp"></mat-datepicker-toggle>
+              <mat-datepicker #fecha_finalp></mat-datepicker>
+              <mat-hint>
+                <span>Fecha de finalización de la encuesta</span>
+              </mat-hint>
+            </mat-form-field>
+
+            <div style="display: grid; place-content: center">
+                <button mat-raised-button type="submit" (click)="agregar(editProf)">Asignar</button>
+            </div>
+    </div>
+
+    <div style="display:flex">
+      <button mat-raised-button name="button" (click)="cancel()">cancelar</button>
+      <button mat-raised-button name="button" (click)="closeDialog(editForm)">Modificar</button>
+    </div>
+  </form>
+</div>

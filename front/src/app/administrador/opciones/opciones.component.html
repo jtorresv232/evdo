@@ -1,0 +1,24 @@
+<mat-card>
+<mat-card-header>
+  <mat-card-title><h1>Opciones de respuesta</h1></mat-card-title>
+  <mat-card-subtitle><h2 style="color:gray">{{data.pregunta}}</h2></mat-card-subtitle>
+</mat-card-header>
+    <mat-list role="list" *ngIf="opciones.length > 0">
+      <div *ngFor="let opcion of opciones">
+        <mat-list-item role="listitem">{{opcion.texto}}<span class="spacer"></span>{{(opcion.mixta=='NO')? 'No es mixta': 'Es mixta'}}</mat-list-item>
+        
+        <mat-list role="list" *ngIf="derivadas.length > 0" style="padding-top:0; padding-left: 20px; color:gray; margin-bottom: 10px;">
+          <mat-list-item role="listitem">
+            <span class="myspan">Preguntas Derivadas</span>
+          </mat-list-item>
+          <div *ngFor="let derivada of derivadas">
+            <mat-list-item role="listitem" *ngIf="derivada.opcion == opcion.opcion">
+              {{derivada.numero_derivada}} - {{derivada.pregunta}}
+            </mat-list-item>
+          </div>
+        </mat-list>
+        <mat-divider style="padding-bottom:1%;"></mat-divider>
+      </div>
+      </mat-list>
+      <mat-list-item *ngIf="opciones.length==0">Esta pregunta aun no tiene opciones</mat-list-item>
+</mat-card>

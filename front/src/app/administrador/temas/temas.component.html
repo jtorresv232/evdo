@@ -1,0 +1,58 @@
+<div class="principal">
+
+    <a class="float" matTooltip="Agregar Tema" matTooltipPosition="above" mat-fab (click)="openDialogAddTema()">
+        <mat-icon style="size:40px;font-size:24px; font-weight:bold">add</mat-icon>
+    </a>
+
+  <!--Progress-->
+  <div class="bar-container">
+    <span class="myspan">Administar > Temas </span>
+  </div>
+  <!--FIN progress-->
+  <!--Table-->
+
+  <div style="height:2%">
+    <span></span>
+  </div>
+
+  <div class="title">
+    <h4 class="title-text">Administrar Temas</h4>
+  </div>
+
+
+  <div style="height:2%">
+    <span></span>
+  </div>
+
+  <div>
+    <mat-accordion>
+      <div *ngFor="let tema of temas, let i = index">
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" (click)="filterTemas(tema.tema)">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{tema.descripcion}}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <!-- CONTENT -->
+          <div style="position: relative">
+            <mat-list role="list">
+              <div *ngFor="let rx of rxtFiltered">
+                <mat-list-item role="listitem">{{rx.rolusuario}}
+                  <span class="flex-spacer"></span>
+                  <mat-icon style="cursor: pointer" matTooltip="Eliminar" matTooltipPosition="above">delete_forever</mat-icon>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+              </div>
+            </mat-list>
+          </div>
+          <div style="width: 100%; display: flex; position: relative; height: 40px; padding-top: 3px">
+            <button mat-icon-button class="mat-elevation-z8" graph-button matTooltip="Agregar" matTooltipPosition="left">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </div>
+</div>
