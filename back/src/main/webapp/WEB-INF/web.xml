@@ -48,7 +48,7 @@
         </init-param>
         <init-param>
             <param-name>tipoconexion</param-name>
-            <param-value>produccion</param-value>
+            <param-value>pruebas</param-value>
         </init-param>
     </filter>
     <filter-mapping>

@@ -4,7 +4,7 @@
 
     <groupId>co.edu.udea.ciclo-academico</groupId>
 	<artifactId>evaluadocen</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.25-SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
 	<inceptionYear>2018</inceptionYear>
@@ -60,7 +60,7 @@
         <repo.conexion>
             scm:git:http://drai2:p3l1c4n0--@172.19.0.212/git/GestionDelCicloDeVidaAcademico/udea-evaluadocen.git
         </repo.conexion>
-        <repo.rama>master</repo.rama>
+        <repo.rama>quality</repo.rama>
     </properties>
     
     <scm>
@@ -74,7 +74,7 @@
         <repository>
             <id>co.edu.udea.nexus</id>
             <name>udea-releases</name>
-            <url>http://ws-svn.udea.red/nexus/content/repositories/releases</url>
+            <url>http://ws-svn.udea.red/nexus/content/repositories/quality</url>
         </repository>
         <snapshotRepository>
             <id>co.edu.udea.nexus</id>

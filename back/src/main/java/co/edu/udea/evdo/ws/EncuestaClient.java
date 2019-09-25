@@ -24,7 +24,7 @@ import javax.ws.rs.core.MediaType;
  */
 public class EncuestaClient {
     private static final String REST_URL
-            = "https://asone.udea.edu.co/encuestas-admin/webapp/";
+            = "http://172.19.0.203:29000/encuesta/webapp/";
         
     private Client client = ClientBuilder.newClient(); 
     
