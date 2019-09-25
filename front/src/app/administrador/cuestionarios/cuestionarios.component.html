@@ -1,0 +1,88 @@
+
+	<div class="principal">
+		<a class="float" matTooltip="Agregar Encuesta" matTooltipPosition="above" (click)="irCrearCuestionario();" mat-fab >
+		<mat-icon style="size:40px;font-size:24px; font-weight:bold">add</mat-icon>
+	</a>
+
+		<!--Progress-->
+		<div class="bar-container">
+	    <span class="myspan">Administar > Ver Encuestas </span>
+	  </div>
+		<!--FIN progress-->
+			<!--Table-->
+
+		<div style="height:2%">
+			<span></span>
+		</div>
+
+		<div class="title">
+      <h4 class="title-text">Administrar Encuestas</h4>
+    </div>
+
+
+		<div style="height:2%">
+			<span></span>
+		</div>
+
+
+		<!-- aqui-->
+    <div>
+    <mat-accordion>
+    <div *ngFor="let cuestionario of cuestionarios, let i=index">
+  <mat-expansion-panel   (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false" (click)="getPreguntas(cuestionario.identificacion); mycuest=cuestionario.codigo"
+                       *ngIf="i>=pageEvent.pageIndex*pageEvent.pageSize && i<((pageEvent.pageIndex*pageEvent.pageSize)+pageEvent.pageSize)">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+       {{cuestionario.fechaInicio + ' - ' + cuestionario.fechaTerminacion}} <span class="spacer"></span><span>{{cuestionario.nombreEncuesta}}</span>
+       <span class="spacer"></span><mat-icon style="cursor: pointer" matTooltip="Editar Cuestionario" 
+       *ngIf="cuestionario.modificable === 'SI'" matTooltipPosition="after"
+       (click)="irEditar(cuestionario)">edit</mat-icon>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+      
+	<div *ngIf="!(preguntas.length > 0)" style="text-align: center; color: darkgray">
+		<span>Esta encuesta no tiene ninguna pregunta.</span>
+	</div>
+      <table mat-table style="width: 100%" *ngIf="(preguntas.length > 0)">
+        <tr class="headers">
+          <th mat-header-cell>Orden</th>
+          <th mat-header-cell>Pregunta</th>
+          <th mat-header-cell>Obligatoriedad</th>
+          <th mat-header-cell>Opcion Única</th>
+          <th mat-header-cell>Tipo de dato</th>
+        </tr>
+          <ng-container *ngFor="let pregunta of preguntas">
+              <tr *ngIf="pregunta.textoSeccion">
+                  <th class="sub-headers" colspan="5"><span class="sub-headers-text">{{pregunta.textoSeccion}}</span></th>
+              </tr>
+              <tr>
+                <td style="text-align: center" mat-cell>{{pregunta.orden}}</td>
+                <td mat-cell style="text-align: justify">{{pregunta.pregunta}}</td>
+                <td mat-cell style="text-align: center">{{pregunta.obligatoriedad}}</td>
+                <td mat-cell style="text-align: center">{{(pregunta.opcionUnica =='S')? 'SI': 'NO'}}</td>
+                <td mat-cell style="text-align: center">{{pregunta.tipodato}}</td>
+              </tr>
+        </ng-container>
+        </table>
+
+
+    <!--fin contenido-->
+  </mat-expansion-panel>
+  </div>
+</mat-accordion>
+</div>
+<mat-paginator style="margin-right:18%" id="paginator" [length]="leng"
+			[pageSize]="(pageEvent)?pageEvent.pageSize:5"
+			[pageSizeOptions]="[5, 10, 20, 50, 100]"
+			(page)="pageEvent = $event">
+
+		</mat-paginator>
+		<!-- y aqui-->
+
+
+
+
+
+
+	</div>

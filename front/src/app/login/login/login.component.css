@@ -1,0 +1,56 @@
+.title{
+  position:relative;
+  height: 16%;
+  padding:0px;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  background-color: #ececec;
+}
+
+.bar{
+  align-items: center;
+  text-align: center;
+  background-color: #0A351C;
+  color:white;
+  height: 9%;
+  width: 100%;
+  padding:0px;
+}
+
+.secondBar{
+  background-color: #ececec;
+  height: 4%;
+  width: 100%;
+  padding:0px;
+}
+
+.mylogo{
+  position: relative;
+  height:100%;
+  padding:20px;
+  flex-wrap: wrap;
+  white-space: nowrap;
+}
+
+.mycard{
+  margin-left: 32%;
+  margin-right: 32%;
+  width: 36%;
+  margin-top: 6%;
+
+}
+
+.spacer{
+  flex:1 1 auto;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}

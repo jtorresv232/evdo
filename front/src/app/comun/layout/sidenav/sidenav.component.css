@@ -1,0 +1,106 @@
+.sidenav {
+  z-index: 5000;
+  opacity: 10%;
+
+	position: fixed;
+  overflow: visible;
+	padding:0px;
+  margin:0px;
+	background-color: #ececec;
+	color:black;
+	font-size: 13px;
+	font-weight: 500;
+  transition: 0.7s;
+  min-width: 67.44px;
+}
+
+.sidenav a {
+	padding:8px 8px 8px 8px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #ffffff;
+	display: block;
+}
+
+.sidenav .showButton {
+	position: fixed;
+	padding: 8px 8px 8px 20px;
+	bottom: 10px;
+	right: 3px;
+	font-size: 20px;
+	color: rgba(0,0,0,0.54);
+	height: 20px;
+	width: 20px;
+}
+
+.sidenav a:hover {
+    background-color: #1b5e20;
+}
+
+.menus {
+	display:flex;
+	flex-direction: row;
+}
+
+.selected{
+  color:white;
+  background-color: #0A351C;
+}
+ul{
+	padding: 0;
+	list-style: none;
+  margin: 0px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+}
+li {
+	padding: 7px 0px;
+  align-items: center;
+  white-space: nowrap;
+  margin:2px;
+  border-radius: 3px;
+
+}
+
+li:hover{
+	background-color: rgba(26,26,26,0.63);
+	color: black;
+  border-bottom: 2px solid #0A351C;
+  flex:5;
+  flex-grow: 1;
+  height: 10%;
+  color:white;
+}
+
+mat-icon {
+   padding: 2px 20px 2px 20px;
+   font-size: 22px;
+
+}
+
+.float{
+  visibility: hidden;
+  background-color: #e0e0e0;
+  position: absolute;
+  bottom:50%;
+  right: -20px;
+  z-index: 5000;
+  cursor:pointer;
+  align-items: center;
+  size:1%;
+  padding:0px;
+  margin:0px;
+  transition:0.3s;
+}
+
+.toggleIcon {
+  padding:0px;
+  font-size: 30px;
+
+}
+
+.sidenav:hover  .float{
+  visibility:visible!important;
+}

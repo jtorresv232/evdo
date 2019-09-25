@@ -1,0 +1,27 @@
+mat-form-field {
+
+    margin: 15px;
+}
+
+mat-checkbox {
+    margin:15px;
+}
+
+.titleAdd {
+    text-align: center;
+    position: sticky;
+    top: 0px;
+    background-color: white;
+    width: 100%;
+    z-index: 5000;
+    height: 100px;
+
+}
+
+.mat-container {
+    padding-top: 0px !important;
+}
+
+.principal {
+    z-index: 10000;
+}

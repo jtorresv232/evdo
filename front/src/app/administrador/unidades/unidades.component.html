@@ -1,0 +1,62 @@
+<div class="principal">
+  <!--Progress-->
+  <div class="bar-container">
+    <span class="myspan">Administrar > Unidades Academicas</span>
+  </div>
+  <!--FIN progress-->
+
+  <div style="height:2%">
+    <span></span>
+  </div>
+  
+  <div class="title">
+      <h4 class="title-text">Unidades Academicas</h4>
+  </div>
+  <div *ngIf="uLoaded">
+  <form [formGroup]="unidadesForm" >
+      <ng-container formArrayName="emails">
+        <div *ngFor="let unidad of unidades; let i = index" [formGroupName]="i">
+            <div style="display: flex" >
+                <div style="display: grid; align-content: center">
+                    <span>{{unidad.nombre}}</span>
+                </div>
+                <span style="flex: 1 1 auto"></span>
+                <div style="display: grid; align-content: center">
+                    <mat-form-field >
+                      <input formControlName="email" matInput placeholder="Correo unidad académica">
+                      <!-- <mat-hint><span>Correo unidad académica.</span></mat-hint> -->
+                      <mat-error>Dirección de correo invalida.</mat-error>
+                  </mat-form-field>
+                </div>
+                <div style="display: grid; align-content: center">
+                    <button mat-button commit (click)="modificar(unidadesForm.get('emails').get(i.toString()), unidad.codigo)"><mat-icon>done</mat-icon> Modificar</button>
+                </div>
+          </div>
+          <mat-divider style="width: 100%"></mat-divider>
+        </div>
+      </ng-container>
+  </form>
+  </div>
+</div>
+
+
+<!-- <div>
+    <div style="text-align: left">
+    <div style="display: flex" >
+          <div style="display: grid; align-content: center">
+              <span>{{unidad.nombre}}</span>
+          </div>
+          <span style="flex: 1 1 auto"></span>
+          <div style="display: grid; align-content: center">
+              <mat-form-field >
+                <input formControlName="email" matInput placeholder="Correo unidad académica">
+                <mat-hint><span>Correo unidad académica.</span></mat-hint>
+            </mat-form-field>
+          </div>
+          <div style="display: grid; align-content: center">
+              <button mat-button commit (click)="modificar(unidadesForm)"><mat-icon>done</mat-icon> Modificar</button>
+          </div>
+    </div>
+    <mat-divider style="width: 100%"></mat-divider>
+    </div>
+  </div> -->

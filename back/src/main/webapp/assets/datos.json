@@ -1,0 +1,58 @@
+{
+  "materias":[{
+    "id":1,
+    "nombre":"Calculo"
+  },
+  {
+    "id":2,
+    "nombre":"Gestion de proyectos"
+  },
+  {
+    "id":3,
+    "nombre":"Aplicaciones empresariales"
+  }
+
+
+
+  ],
+
+  "grupos":[
+    {"id":3,
+    "codigo":"2a",
+  "numEstudiantes":12,
+"materia":1},
+  {"id":2,
+  "codigo":"3a",
+"numEstudiantes":23,
+"materia":2},
+{"id":1,
+"codigo":"4a",
+"numEstudiantes":30,
+"materia":2}
+
+  ],
+
+  "profesores":[
+    {
+    "id":1,
+    "nombre":"Armando Mendoza",
+  "grupo":1},
+    {
+    "id":2,
+    "nombre":"Julian Sepulveda",
+  "grupo":2},
+    {
+    "id":3,
+    "nombre":"Alfredo Rendon",
+  "grupo":1},
+    {
+    "id":4,
+    "nombre":"Camilo Guerra",
+  "grupo":3},
+    {
+    "id":5,
+    "nombre":"Sebastian Rojas",
+  "grupo":1}
+
+  ]
+}

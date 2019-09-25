@@ -1,0 +1,226 @@
+<div class="principal">
+
+  <div class="bar-container">
+    <span class="myspan">Administrar > Resultados </span>
+  </div>
+
+  <div style="height:2%">
+    <span></span>
+  </div>
+
+  <div class="title">
+    <h4 class="title-text">Resultados Evaluación</h4>
+  </div>
+
+  <app-filtros-asignaciones (infoFiltroEvento)="leerInfoFiltros($event)"></app-filtros-asignaciones>
+
+  <div>
+    <button mat-button (click)="exportarPreguntas()">Exportar total por preguntas</button>
+    <button mat-button (click)="exportarTemas()">Exportar total por temas</button>
+  </div>
+
+  <div *ngIf="aDone" style="margin-bottom: 10px">
+    <mat-accordion>
+      <div *ngFor="let asignacion of arrayAsignaciones">
+        <mat-expansion-panel (opened)="panelOpenState = true; notShow(); grafico = false; getTotales(asignacion)" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header style="overflow:visible">
+            <mat-panel-title class="mytext">
+              {{getTexto(asignacion)}}
+            </mat-panel-title>
+            <mat-icon derecha style="position:relative" matTooltip="Respondido" matTooltipPosition="above" [attr.badge]="asignacion.encuestados">group</mat-icon>
+            <mat-icon derecha (click)="openDialogComentarios(asignacion)" style="position: relative; cursor: pointer"
+              matTooltip="Comentarios" matTooltipPosition="above" [attr.badge]="asignacion.comentarios ? asignacion.comentarios : 0">forum</mat-icon>
+          </mat-expansion-panel-header>
+          <!--CONTENT -->
+          <div *ngIf="!(sortedDataPreguntas.length > 0)" style="text-align: center; color: darkgray">
+            <span>Este curso aún no ha sido evaluada por ninguna persona.</span>
+          </div>
+          <div #mydiv *ngIf="sortedDataPreguntas.length > 0">
+            <mat-tab-group (selectedTabChange)="dochart2(totaltemasAsig, $event)">
+              <mat-tab label="Por preguntas">
+                <!--contenido preguntas-->
+                <table matSort (matSortChange)="sortDataPreguntas($event)">
+                  <tr>
+                    <th mat-sort-header="numero">Pregunta</th>
+                    <th mat-sort-header="media">Media</th>
+                    <th mat-sort-header="desviacion">Desviación</th>
+                    <th mat-sort-header="coeficienteDesv">Coeficiente desviacion</th>
+                  </tr>
+
+                  <tr *ngFor="let totalp of sortedDataPreguntas">
+                    <td>{{getnombre(totalp.numero)}}</td>
+                    <td>{{totalp.media}}</td>
+                    <td>{{totalp.desviacion}}</td>
+                    <td>{{totalp.coeficienteDesv}}</td>
+                  </tr>
+                </table>
+              </mat-tab>
+              <div>
+                <mat-tab label="Por temas">
+                  <div [class]="grafico? 'outer showGraph': 'outer noShowGraph'">
+                    <div style="min-width: 100%; display: grid">
+                      <table matSort (matSortChange)="sortDataTemas($event)">
+                        <tr>
+                          <th mat-sort-header="codigoTema">Tema</th>
+                          <th mat-sort-header="media">Media</th>
+                          <th mat-sort-header="desviacion">Desviación</th>
+                          <th mat-sort-header="coeficienteDesv">Coeficiente desviacion</th>
+                        </tr>
+                        <tr *ngFor="let totalt of sortedDataTemas">
+                          <td>{{totalt.tema}}</td>
+                          <td>{{totalt.media}}</td>
+                          <td>{{totalt.desviacion}}</td>
+                          <td>{{totalt.coeficienteDesv}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div style="min-width: 100%; transition: all ease 1s;" class="chart_container">
+                      <canvas class="radar" id="radar" responsive="true"></canvas>
+                    </div>
+                    <button mat-icon-button class="mat-elevation-z8" graph-button (click)="toggleGraph()" matTooltip="{{grafico? 'Mostrar tabla':'Mostrar Grafico'}}"
+                      matTooltipPosition="left">
+                      <mat-icon>{{grafico? 'table_chart':'bar_chart'}}</mat-icon>
+                    </button>
+                  </div>
+                </mat-tab>
+              </div>
+            </mat-tab-group>
+          </div>
+
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </div>
+
+  <mat-paginator style="margin-right:10%" id="paginator" [length]="total" [pageSize]="(pageEvent)?pageEvent.pageSize:5"
+    [pageSizeOptions]="[5, 10, 20, 50, 100]" [pageIndex]="(pageEvent)?pageEvent.pageIndex:0" (page)="pageEvent = $event; siguiente()">
+  </mat-paginator>
+
+  <mat-card class="mat-elevation-z3">
+    <mat-card-title>
+      Resultados por programa.
+    </mat-card-title>
+    <div style="display:flex; margin: 20px 0px">
+      <div style="display: grid; place-content: center">
+        <mat-form-field>
+          <input type="text" matInput [ngModel]="programanombre2" (ngModelChange)="change2($event)" [matAutocomplete]="complete"
+            placeholder="Programa">
+        </mat-form-field>
+      </div>
+      <!--Autocomplete-->
+      <mat-autocomplete #complete="matAutocomplete" class="arriba">
+        <mat-option *ngFor="let programa of filterProgramas2" [value]="programa.nombrePrograma">
+          {{ programa.nombrePrograma }}
+        </mat-option>
+      </mat-autocomplete>
+      <div style="display: grid; place-content: center">
+        <button mat-button (click)="doChart()">Buscar</button>
+      </div>
+      <div *ngIf="totalTemaPrograma.length > 0" class="chart_container">
+        <canvas id="myPie"></canvas>
+      </div>
+    </div>
+    <div style="min-width: 100%; display: grid" *ngIf="totalTemaPrograma.length > 0">
+      <mat-tab-group>
+        <mat-tab label="Por preguntas">
+          <!--contenido preguntas-->
+          <table matSort (matSortChange)="sortDataPreguntas($event)">
+            <tr>
+              <th mat-sort-header="numero">Pregunta</th>
+              <th mat-sort-header="media">Media</th>
+              <th mat-sort-header="desviacion">Desviación</th>
+              <th mat-sort-header="coeficienteDesv">Coeficiente desviacion</th>
+            </tr>
+
+            <tr *ngFor="let totalp of totalPreguntaPrograma">
+              <td>{{getnombre(totalp.numero)}}</td>
+              <td>{{totalp.media}}</td>
+              <td>{{totalp.desviacion}}</td>
+              <td>{{totalp.coeficienteDesv}}</td>
+            </tr>
+          </table>
+        </mat-tab>
+        <div>
+          <mat-tab label="Por temas">
+            <div style="min-width: 100%; display: grid">
+              <table matSort (matSortChange)="sortDataTemas($event)">
+                <tr>
+                  <th mat-sort-header="codigoTema">Tema</th>
+                  <th mat-sort-header="media">Media</th>
+                  <th mat-sort-header="desviacion">Desviación</th>
+                  <th mat-sort-header="coeficienteDesv">Coeficiente desviacion</th>
+                </tr>
+                <tr *ngFor="let totalt of totalTemaPrograma">
+                  <td>{{totalt.tema}}</td>
+                  <td>{{totalt.media}}</td>
+                  <td>{{totalt.desviacion}}</td>
+                  <td>{{totalt.coeficienteDesv}}</td>
+                </tr>
+              </table>
+            </div>
+          </mat-tab>
+        </div>
+      </mat-tab-group>
+    </div>
+  </mat-card>
+  <br>
+  <mat-card class="mat-elevation-z3">
+    <mat-card-title>Resultados por docente.</mat-card-title>
+    <div style="display:flex; margin: 20px 0px">
+      <div style="display: grid; place-content: center">
+        <mat-form-field>
+          <input type="number" matInput [(ngModel)]="docente2" placeholder="Cedula Docente">
+        </mat-form-field>
+      </div>
+      <div style="display: grid; place-content: center">
+        <button mat-button (click)="getTotalesPorDocente(docente2)">Buscar</button>
+      </div>
+    </div>
+    <div style="min-width: 100%; display: grid" *ngIf="totalPreguntaDocente.length > 0">
+      <mat-tab-group>
+        <mat-tab label="Por preguntas">
+          <!--contenido preguntas-->
+          <table matSort (matSortChange)="sortDataPreguntas($event)">
+            <tr>
+              <th mat-sort-header="numero">Pregunta</th>
+              <th mat-sort-header="media">Media</th>
+              <th mat-sort-header="desviacion">Desviación</th>
+              <th mat-sort-header="coeficienteDesv">Coeficiente desviacion</th>
+            </tr>
+
+            <tr *ngFor="let totalp of totalPreguntaDocente">
+              <td>{{getnombre(totalp.numero)}}</td>
+              <td>{{totalp.media}}</td>
+              <td>{{totalp.desviacion}}</td>
+              <td>{{totalp.coeficienteDesv}}</td>
+            </tr>
+          </table>
+        </mat-tab>
+        <div>
+          <mat-tab label="Por temas">
+            <div style="min-width: 100%; display: grid">
+              <table matSort (matSortChange)="sortDataTemas($event)">
+                <tr>
+                  <th mat-sort-header="codigoTema">Tema</th>
+                  <th mat-sort-header="media">Media</th>
+                  <th mat-sort-header="desviacion">Desviación</th>
+                  <th mat-sort-header="coeficienteDesv">Coeficiente desviacion</th>
+                </tr>
+                <tr *ngFor="let totalt of totalTemaDocente">
+                  <td>{{totalt.tema}}</td>
+                  <td>{{totalt.media}}</td>
+                  <td>{{totalt.desviacion}}</td>
+                  <td>{{totalt.coeficienteDesv}}</td>
+                </tr>
+              </table>
+            </div>
+          </mat-tab>
+        </div>
+      </mat-tab-group>
+    </div>
+  </mat-card>
+  <br>
+  <div style="height:2%">
+    <span></span>
+  </div>
+</div>

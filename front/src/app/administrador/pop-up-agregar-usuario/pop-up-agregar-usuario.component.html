@@ -1,0 +1,64 @@
+<div>
+  <div fxLayout="row" class="titleAdd">
+    <h1>Agregar Usuario</h1>
+    <mat-divider style="margin: 0px 7px; z-index: 5001;"></mat-divider>
+  </div>
+
+  <br>
+
+  <form [formGroup]="usuariosForm" #formDirective="ngForm">
+    <div fxLayout="row">
+      <mat-form-field>
+        <input matInput formControlName="nombre" placeholder="Nombre Completo" required>
+        <mat-hint><span>Nombre Completo</span></mat-hint>
+        <mat-error *ngIf="usuariosForm.get('nombre').invalid">Este campo es requerido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input [maxlength]="11" (keypress)="numberOnly($event)"
+        matInput formControlName="cedula" placeholder="Nro. Identificación" required>
+        <mat-hint><span>Número de identificación</span></mat-hint>
+        <mat-error *ngIf="usuariosForm.get('cedula').invalid">Este campo es requerido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="rol" placeholder="Rol" >
+          <mat-option value="ADMINISTRADOR" selected>Administrador</mat-option>
+          <mat-option value="AUXILIARPOSGRADOS">Auxiliar Posgrados</mat-option>
+        </mat-select>
+        <mat-hint><span>Rol del usuario</span></mat-hint>
+        <mat-error *ngIf="usuariosForm.get('rol').invalid">Este campo es requerido</mat-error>
+      </mat-form-field>
+    </div>
+    
+    <div fxLayout="row">
+      <mat-form-field>
+        <input matInput formControlName="correo" placeholder="Correo Electrónico" required>
+        <mat-hint><span>Correo Electrónico</span></mat-hint>
+        <mat-error *ngIf="usuariosForm.get('correo').invalid">Este campo es requerido. Debe ser un correo valido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [maxlength]="14" (keypress)="numberOnly($event)"
+        formControlName="telefono" placeholder="Nro. de contacto" required>
+        <mat-hint><span>Número de contacto</span></mat-hint>
+        <mat-error *ngIf="usuariosForm.get('telefono').invalid">Este campo es requerido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="direccion" placeholder="Dirección" required>
+        <mat-hint><span>Dirección de residencia</span></mat-hint>
+        <mat-error *ngIf="usuariosForm.get('direccion').invalid">Este campo es requerido</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-select formControlName="facultad" placeholder="Facultad" >
+          <mat-option  *ngFor="let facultad of facultades" value="{{facultad.codigo}}">{{facultad.nombre}}</mat-option>
+        </mat-select>
+        <mat-hint><span>Facultad</span></mat-hint>
+        <mat-error *ngIf="usuariosForm.get('rol').invalid">Este campo es requerido</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row">
+      <button save-button mat-button type="submit" (click)="guardarUsuario(usuariosForm)">Guardar</button>
+      <button cancel-button mat-button (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</div>

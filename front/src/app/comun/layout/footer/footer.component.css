@@ -1,0 +1,37 @@
+.myclass{
+position:relative;
+height: 16%;
+padding:0px;
+overflow: hidden;
+width: 86%;
+display: flex;
+padding-left: 7%;
+padding-right: 7%;
+background-color: #ececec;
+margin-left: 7%;
+margin-right: 7%;
+}
+
+.spacer{
+  flex:1 1 auto;
+}
+
+.mytool{
+  display:flex;
+
+  text-align: center!important;
+  align-items: center!important;
+  align-content: center!important;
+  align-self:center;
+  color:white;
+  position:relative;
+  bottom:0px;
+  background-color: #0A351C;
+  color:white;
+  height: 6%;
+  margin-left: 7%;
+  margin-right: 7%;
+  width: 86%;
+  padding:0px;
+  z-index: 5001;
+}

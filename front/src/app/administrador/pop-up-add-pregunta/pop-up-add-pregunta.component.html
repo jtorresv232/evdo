@@ -1,0 +1,85 @@
+<div class="principal">
+  <div fxLayout="row" class="titleAdd">
+    <h1>Agregar Pregunta</h1>
+    <mat-divider style="margin: 0px 7px; z-index: 5001;"></mat-divider>
+  </div>
+  <form [formGroup]="preguntasForm" #formDirective="ngForm">
+    <ng-template matStepLabel>Agregar preguntas</ng-template>
+    <div fxLayout="row">
+      <mat-form-field>
+        <input matInput formControlName="pregunta" placeholder="Pregunta" required>
+        <mat-hint><span>Texto de la pregunta</span></mat-hint>
+        <mat-error *ngIf="preguntasForm.get('pregunta').invalid">Este campo es requerido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="tipo" placeholder="Tipo" >
+          <mat-option value="CERRADA" selected>Cerrada</mat-option>
+          <mat-option value="ABIERTA">Abierta</mat-option>
+          <mat-option value="MIXTA">Mixta</mat-option>
+        </mat-select>
+        <mat-hint><span>Tipo de pregunta</span></mat-hint>
+        <mat-error *ngIf="preguntasForm.get('tipo').invalid">Este campo es requerido</mat-error>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" style="text-align: center">
+      <mat-checkbox style="margin-right: 20px;" formControlName="otro" labelPosition='after'>¿Opción Otro?</mat-checkbox>
+      <mat-checkbox formControlName="unica" labelPosition='after'>¿Opción Unica?</mat-checkbox>
+    </div>
+    <div fxLayout="row">
+      <mat-form-field>
+        <mat-select formControlName="tema" placeholder="Tema" >
+          <mat-option *ngFor="let tema of categories" value="{{tema.tema}}" selected>{{tema.descripcion}}</mat-option>
+        </mat-select>
+        <mat-hint><span>Tema de la pregunta</span></mat-hint>
+        <mat-error *ngIf="preguntasForm.get('tema').invalid">Este campo es requerido</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="tipodato" placeholder="Tipo de dato" (change)="onSelection($event.value)">
+          <mat-option value="NUMERICO" selected>Numerico</mat-option>
+          <mat-option value="TEXTO_CORTO">Texto Corto</mat-option>
+          <mat-option value="tEXTO_LARGO">Texto Larco</mat-option>
+        </mat-select>
+        <mat-hint><span>Tipo de dato de la pregunta</span></mat-hint>
+        <mat-error *ngIf="preguntasForm.get('tipodato').invalid">Este campo es requerido</mat-error>
+      </mat-form-field>
+    </div>
+    <mat-card>
+      <mat-card-title>
+        Opciones
+      </mat-card-title>
+      <div *ngIf="preguntasForm.get('automatico').value === false">
+        <mat-card-content>
+          <ng-container formArrayName="opciones">
+            <div fxLayout="columns" *ngFor="let opcion of opciones.controls; let i = index" [formGroupName]="i">
+              <mat-form-field>
+                <input [type]="getType(preguntasForm.get('tipodato').value)" matInput formControlName="texto" placeholder="Opcion" required>
+                <mat-hint><span>Texto de la opcion</span></mat-hint>
+                <mat-error *ngIf="preguntasForm.get('opciones').get(i.toString()).invalid">Este campo es requerido</mat-error>
+              </mat-form-field>
+              <mat-checkbox formControlName="mixta" labelPosition='after'>¿Mixta?</mat-checkbox>
+              <!-- [visible]="preguntasForm.get('unica').value" -->
+              <app-derivadas [todasPreguntas]="todasPreguntas" visible="true"
+              [orden]="i+1" (getDerivadas)="getDerivadas($event)"></app-derivadas>
+              <mat-divider style="margin: 0px 10%; width: 80%"></mat-divider>
+            </div>
+          </ng-container>
+        </mat-card-content>
+        <mat-card-actions style="text-align: center">
+          <button mat-raised-button type="button" style="margin: 10px" (click)="agregarOpcion()">
+            Agregar opción.
+          </button>
+        </mat-card-actions>
+      </div>
+      <!-- <mat-card-actions *ngIf="preguntasForm.get('tipodato').value == 'NUMERICO'" style="text-align: center">
+        <mat-checkbox formControlName="automatico">Agregar Automáticamente.</mat-checkbox>
+      </mat-card-actions> -->
+    </mat-card>
+  </form>
+  <br>
+  <br>
+  <div fxLayout="row" style="text-align: center">
+    <button mat-raised-button name="button" (click)="cancel()">cancelar</button>
+    <button mat-raised-button name="button" (click)="closeDialog()" [disabled]="loading">Agregar</button>
+  </div>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+</div>

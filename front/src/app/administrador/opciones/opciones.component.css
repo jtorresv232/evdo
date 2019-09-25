@@ -1,0 +1,12 @@
+.spacer{
+    flex:1 1 auto;
+  }
+
+  .myspan {
+    float: left;
+    color: gray;
+    font-style: italic;
+    font-size: 12px;
+    text-decoration: underline;
+    margin-bottom: 3px;
+}

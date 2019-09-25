@@ -1,0 +1,57 @@
+
+
+.secondBar{
+  background-color: #ececec;
+  height: 4%;
+  margin-left: 7%;
+  margin-right: 7%;
+  width: 86%;
+  padding:0px;
+}
+
+.myclass{
+position:relative;
+height: 16%;
+padding:0px;
+overflow: hidden;
+width: 86%;
+display: flex;
+padding-left: 7%;
+padding-right: 7%;
+background-color: #ececec;
+margin-left: 7%;
+margin-right: 7%;
+}
+
+.mylogo{
+  position: relative;
+  height:100%;
+  flex-wrap: wrap;
+  white-space: nowrap;
+  margin: 3px;
+}
+
+.spacer{
+  flex:1 1 auto;
+}
+
+.mytool{
+  background-color: #0A351C;
+  color:white;
+  height: 9%;
+  margin-left: 7%;
+  margin-right: 7%;
+  width: 86%;
+  padding:0px;
+}
+
+mat-toolbar .mytool mat-toolbar mat-toolbar-single-row{
+  background-color: #ececec;
+  height: 6%;
+}
+
+.graySquare{
+  height: 100%;
+  width:5.8%;
+  background-color: #ececec;
+}

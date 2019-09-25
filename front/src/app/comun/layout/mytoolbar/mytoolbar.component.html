@@ -1,0 +1,22 @@
+<mat-toolbar class="myclass">
+  <img class="mylogo" src="./assets/images/udea.png" alt="udea logo">
+  <div class="spacer">
+  </div>
+  <div>
+    <span>Evaluación de Cursos</span>
+  </div>
+</mat-toolbar>
+<mat-toolbar class="mytool">
+  <span style="padding-left:7%;">Evaluacion de Cursos</span>
+  <span class="spacer"></span>
+  <mat-menu #appMenu="matMenu">
+    <button mat-menu-item (click)="cerrarSesion()">Cerrar Sesion</button>
+    <button mat-menu-item>Help</button>
+  </mat-menu>
+
+  <button mat-icon-button [matMenuTriggerFor]="appMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="secondBar">
+</div>

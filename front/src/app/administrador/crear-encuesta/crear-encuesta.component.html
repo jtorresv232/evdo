@@ -1,0 +1,146 @@
+<div class="principal">
+    <a class="float" matTooltip="Agregar pregunta" matTooltipPosition="above" (click)="agregarPregunta();" mat-fab>
+        <mat-icon style="size:40px;font-size:24px; font-weight:bold">add</mat-icon>
+    </a>
+
+    <div class="bar-container">
+        <span class="myspan">Administar > Ver Encuestas </span>
+    </div>
+
+    <div style="height:2%">
+        <span></span>
+    </div>
+
+    <div class="title">
+        <h4 class="title-text">Administrar Cuestionarios</h4>
+    </div>
+
+    <div class="myform">
+        <form [formGroup]="encuestaForm" #formDirective="ngForm">
+            <mat-card>
+                <mat-card-title>
+                    Agregar encuesta
+                </mat-card-title>
+                <mat-form-field>
+                    <mat-select placeholder="Punto de aplicacion" formControlName="punto" required>
+                        <mat-option *ngFor="let punto of puntos" [value]="punto.idPunto">
+                            {{punto.descripcion}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint><span>Punto de aplicacion de la encuesta</span></mat-hint>
+                    <mat-error>Este campo es requerido</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput formControlName="identificacion" placeholder="Identificacion de la encuesta"
+                        required>
+                    <mat-hint><span>Identificacion de la encuesta</span></mat-hint>
+                    <mat-error>Este campo es requerido</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput formControlName="nombre" placeholder="Nombre de la encuesta" required>
+                    <mat-hint><span>Nombre de la encuesta</span></mat-hint>
+                    <mat-error>Este campo es requerido</mat-error>
+                </mat-form-field>
+                <div fxLayout="row">
+                    <mat-form-field>
+                        <input matInput formControlName="fechaInicio" [matDatepicker]="fechaInicio" placeholder="Fecha de inicio"
+                            readonly>
+                        <mat-datepicker-toggle matSuffix [for]="fechaInicio"></mat-datepicker-toggle>
+                        <mat-datepicker #fechaInicio></mat-datepicker>
+                        <mat-hint>
+                            <span>Fecha de inicio de la encuesta</span>
+                        </mat-hint>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput formControlName="fechaFin" [matDatepicker]="fechaFin" placeholder="Fecha de fin"
+                            readonly>
+                        <mat-datepicker-toggle matSuffix [for]="fechaFin"></mat-datepicker-toggle>
+                        <mat-datepicker #fechaFin></mat-datepicker>
+                        <mat-hint>
+                            <span>Fecha de inicio de la encuesta</span>
+                        </mat-hint>
+                    </mat-form-field>
+                </div>
+                <br>
+                <div fxLayout="row">
+                    <mat-checkbox style="margin-right: 20px;" formControlName="modificable" labelPosition='before'>Modificable?</mat-checkbox>
+                    <mat-checkbox style="margin-right: 20px;" formControlName="logeo" labelPosition='before'>¿Requiere
+                        logeo?</mat-checkbox>
+                    <mat-checkbox style="margin-right: 20px;" formControlName="secreta" labelPosition='before'>¿Es
+                        secreta?</mat-checkbox>
+                </div>
+                <div fxLayout="row">
+                    <!-- <mat-form-field>
+                        <input matInput formControlName="sql" placeholder="sql">
+                        <mat-hint><span>SQL personas que aplica</span></mat-hint>
+                    </mat-form-field> -->
+                    <mat-form-field>
+                        <input matInput formControlName="encabezado" placeholder="Encabezado de la encuesta" required>
+                        <mat-hint><span>Encabezado de la encuesta</span></mat-hint>
+                        <mat-error>Este campo es requerido</mat-error>
+                    </mat-form-field>
+                    <!-- <mat-form-field>
+                        <input matInput formControlName="estructura" placeholder="Estructura" required>
+                        <mat-hint><span>Estructura metadato</span></mat-hint>
+                    </mat-form-field> -->
+                </div>
+                <!-- <mat-card-actions>
+                    <button mat-button (click)="crearEncuesta(encuestaForm)">Crear encuesta</button>
+                </mat-card-actions> -->
+            </mat-card>
+            <div fxLayout="column">
+                <mat-card style="margin-top: 20px">
+                    <mat-card-title>
+                        Preguntas de la encuesta
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <p>Presione el boton verde para agregar preguntas</p>
+                        <p *ngIf="preguntas.length > 1">Arrastre las preguntas para ordenar la encuesta</p>
+                    </mat-card-subtitle>
+                    <ng-container formArrayName="preguntas">
+                        <div style="text-align: left" dnd-sortable-container [sortableData]="preguntas">
+                            <div questions fxLayout="columns" *ngFor="let pregun of preguntas.controls; let i = index"
+                                [formGroupName]="i" dnd-sortable [sortableIndex]="i">
+                                <!-- <mat-form-field>
+                                    <mat-select placeholder="Pregunta" formControlName="pregunta" required>
+                                        <mat-option *ngFor="let preg of todasPreguntas" [value]="preg.numero"
+                                        [disabled]="getDisable(preg)">
+                                            {{preg.pregunta}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-hint><span>Seleccione una pregunta</span></mat-hint>
+                                    <mat-error>Este campo es requerido</mat-error>
+                                </mat-form-field> -->
+                                <mat-form-field>
+                                    <input style="width:auto" type="text" matInput formControlName="pregunta"
+                                    [matAutocomplete]="autoPregunta" placeholder="Pregunta" required>
+                                    <mat-hint><span>Seleccione una pregunta</span></mat-hint>
+                                    <mat-error>Este campo es requerido</mat-error>
+                                  </mat-form-field>
+                                  <!--Autocomplete-->
+                                  <mat-autocomplete #autoPregunta="matAutocomplete" showPanel="{{true}}" [displayWith]="displayFn.bind(this)">
+                                    <mat-option *ngFor="let preg of todasPreguntas | pregFilter : preguntas.get(i.toString()).value" [value]="preg.numero"
+                                    [matTooltip]="preg.pregunta" [disabled]="getDisable(preg)">
+                                    {{ preg.pregunta }}
+                                    </mat-option>
+                                  </mat-autocomplete>
+                                <mat-checkbox style="margin-right: 20px;" formControlName="obligatoria" labelPosition='before'>¿obligatoria?</mat-checkbox>
+                                <mat-checkbox style="margin-right: 20px;" formControlName="esSeccion" labelPosition='before'>¿Seccionar?</mat-checkbox>
+                                <mat-form-field *ngIf="pregun.value.esSeccion">
+                                    <input matInput formControlName="seccion" placeholder="Seccion">
+                                    <mat-hint><span>Texto de la seccion</span></mat-hint>
+                                </mat-form-field>
+                                <mat-icon style="cursor: pointer; vertical-align: middle" (click)="openDialog(i)" matTooltip="Eliminar Pregunta" 
+                                matTooltipPosition="after">delete</mat-icon>
+                                <mat-divider style="width: 80%; margin-left: 10%"></mat-divider>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <mat-card-actions>
+                        <button mat-button (click)="crearEncuesta(encuestaForm, preguntas.controls)">Crear y agregar preguntas</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </form>
+    </div>
+</div>

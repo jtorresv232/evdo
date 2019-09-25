@@ -1,0 +1,7 @@
+<mat-form-field class="example-full-width">
+  <input type="text" [(ngModel)]="tema" matInput placeholder="Tema" required>
+</mat-form-field>
+<div fxLayout="row" style="text-align: center">
+  <button mat-raised-button name="button" (click)="cancel()">cancelar</button>
+  <button mat-raised-button name="button" (click)="agregarTema()">Agregar</button>
+</div>

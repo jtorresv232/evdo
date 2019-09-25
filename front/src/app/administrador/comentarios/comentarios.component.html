@@ -1,0 +1,33 @@
+<div class="myheight">
+  <div *ngIf="comentarios.length > 0">
+    <div class="comment" *ngFor="let comentario of comentarios; let i=index">
+      <div class="comment-logo">{{getLogo(comentario.autor)}}</div>
+      <div class="comment-body">
+        <div class="comment-header">
+          <div class="comment-user">{{comentario.autor}}</div>
+          <div class="comment-date">{{comentario.fechaComentario}}</div>
+        </div>
+        <div class="comment-content">
+          {{comentario.comentario}}
+        </div>
+        <div class="comment-email">
+          {{comentario.emailAutor}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="comentario-container">
+    <div class="comentario">
+      <textarea #texto matInput [(ngModel)]="comentario" placeholder="Leave a comment"></textarea>
+      <div class="mysend">
+        <button mat-mini-fab class="sendb" (click)="send()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+      <mat-checkbox [(ngModel)]="notify">Enviar notificación?</mat-checkbox>
+    </div>
+  </div>
+</div>
