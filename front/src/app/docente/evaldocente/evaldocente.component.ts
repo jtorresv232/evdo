@@ -53,7 +53,7 @@ export class EvaldocenteComponent implements OnInit {
 
   ngOnInit() {
       this._service.getFiltroUser()
-      .mergeMap(sesionUser => this._service.getAsignacionesFiltered(1, 100, 0, { programa: 0, materia: 0, cedula: sesionUser.ccid }))
+      .mergeMap(sesionUser => this._service.getAsignacionesFiltered(1, 100, 0, { programa: 0, materia: 0, cedula: sesionUser.ccid }, 0, 'ninguno'))
       .subscribe(res => {
         this.asignaciones = res;
         this.aDone = true;
