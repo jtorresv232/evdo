@@ -32,13 +32,6 @@
     matInput placeholder="Cedula docente" [(ngModel)]="docente">
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Favorite food">
-      <mat-option *ngFor="let food of foods" [value]="food.value">
-        {{ food.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
     <mat-select placeholder="Tipo de programa" [(ngModel)]="tipo">
       <mat-option value="MAESTRIA">MAESTRIA</mat-option>
       <mat-option value="DOCTORAD">DOCTORADO</mat-option>
