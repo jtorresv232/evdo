@@ -46,6 +46,8 @@ export class AsignacionesComponent implements OnInit {
   public facultad = 0;
   public programa: any;
   public materia: any;
+  public tipo: any;
+  public semestre: any;
 
   ///////////////
   public usuario: any;
@@ -63,7 +65,7 @@ export class AsignacionesComponent implements OnInit {
     console.log(this.pageEvent);
     this.data.changeMessage('admin');
     this.length = 0;
-    this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
+    /* this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
       this.pageEvent.pageSize, this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
@@ -71,12 +73,12 @@ export class AsignacionesComponent implements OnInit {
         this.aDone = true;
       }, err => {
         console.log(err);
-      });
+      }); */
 
-    this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
+    /* this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
       .subscribe(res => {
         this.total = res;
-      });
+      }); */
 
     this._service.getEncuestas().map(response => response)
       .subscribe(res => {
@@ -103,20 +105,21 @@ export class AsignacionesComponent implements OnInit {
 
   public limpiar() {
     this.pageEvent.pageIndex = 0;
-    this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
-      this.pageEvent.pageSize, this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
+    /* this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
+      this.pageEvent.pageSize, this.facultad, { programa: 0, materia: 0, cedula: '' }, this.semestre, this.tipo).map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
         console.log(this.arrayAsignaciones);
         this.aDone = true;
       }, err => {
         console.log(err);
-      });
+      }); */
 
-    this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
+    /* this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }, this.semestre? this.semestre : 0, 'ninguno').map(response => response)
       .subscribe(res => {
         this.total = res;
-      });
+      }); */
+      this.total = 0;
   }
 
   public getTexto(asig) {
@@ -163,7 +166,7 @@ export class AsignacionesComponent implements OnInit {
   siguiente() {
     this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
       this.pageEvent.pageSize, this.facultad, { programa: this.programa ? this.programa : 0,
-         materia: this.materia ? this.materia : 0, cedula: '' }).map(response => response)
+         materia: this.materia ? this.materia : 0, cedula: '' }, this.semestre, this.tipo).map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
       }, err => {
@@ -202,7 +205,9 @@ export class AsignacionesComponent implements OnInit {
           cedula: this.docente ? this.docente : '',
           encuesta: result.estudiantes.encuesta.identificacion,
           fechaEncInicio: fechaI,
-          fechaEncFinal: fechaF
+          fechaEncFinal: fechaF,
+          semestre: this.semestre? this.semestre : 0,
+          tipo_programa: this.tipo? this.tipo : 'ninguno'
         };
         console.log(datos);
         this._service.updAllAsigs(this.usuario.facultad, datos).subscribe(res => {
@@ -221,7 +226,9 @@ export class AsignacionesComponent implements OnInit {
           cedula: this.docente ? this.docente : '',
           encuestaprof: result.profesor.encuesta.identificacion,
           fechaEncprofInicio: fechaI,
-          fechaEncprofFinal: fechaF
+          fechaEncprofFinal: fechaF,
+          semestre: this.semestre? this.semestre : 0,
+          tipo_programa: this.tipo? this.tipo : 'ninguno'
         };
         console.log(datos);
         this._service.updAllAsigsProf(this.usuario.facultad, datos).subscribe(res => {
@@ -309,7 +316,7 @@ export class AsignacionesComponent implements OnInit {
     this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
       this.pageEvent.pageSize, this.facultad ? this.facultad : 0, { programa: this.programa ? this.programa : 0,
          materia: this.materia ? this.materia : 0,
-         cedula: this.docente ? this.docente : '' }).map(response => response)
+         cedula: this.docente ? this.docente : ''}, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
         console.log(this.arrayAsignaciones);
@@ -319,7 +326,7 @@ export class AsignacionesComponent implements OnInit {
       });
 
       this._service.getAsigTotal(this.facultad, { programa: this.programa ? this.programa : 0,
-         materia: this.materia ? this.materia : 0, cedula: this.docente ? this.docente : '' }).map(response => response)
+         materia: this.materia ? this.materia : 0, cedula: this.docente ? this.docente : '' }, this.semestre? this.semestre: 0 , this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.total = res;
         console.log(res);
@@ -367,6 +374,8 @@ export class AsignacionesComponent implements OnInit {
     this.programanombre = event['programanombre'];
     this.docente = event['docente'];
     this.materia = event['materia'];
+    this.semestre = event['semestre'];
+    this.tipo = event['tipo'];
     if(event['evento'] === 'limpiar') {
       this.limpiar();
     } else {

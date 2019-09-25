@@ -1,0 +1,14 @@
+<div class="main-container">
+    <a class="float" matTooltip="Agregar Evaluacion" matTooltipPosition="above" (click)="openDialog();" mat-fab>
+        <mat-icon style="size:40px;font-size:24px; font-weight:bold">add</mat-icon>
+    </a>
+  <mat-card *ngFor="let evaluacion of evaluaciones">
+    <mat-card-title>Evaluacion Semestre {{evaluacion.semestre}}</mat-card-title>
+    <mat-card-content>
+      <div class="loadingContainer">
+        <mat-spinner diameter="20" *ngIf="!evaluacion.cargado"></mat-spinner><mat-progress-bar mode="determinate" value="{{evaluacion.porcentaje}}"></mat-progress-bar>
+      </div>
+    </mat-card-content>
+    <mat-card-footer percentage>%{{evaluacion.porcentaje}}</mat-card-footer>
+  </mat-card>
+</div>

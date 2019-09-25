@@ -36,6 +36,17 @@ public class Asignacion {
     private Date fechaEncprofInicio;
     private Date fechaEncprofFinal;
     private String respondida_prof;
+    private String tipo_programa;
+
+    public String getTipo_programa() {
+        return tipo_programa;
+    }
+
+    public void setTipo_programa(String tipo_programa) {
+        this.tipo_programa = tipo_programa;
+    }
+    
+    
 
     public String getRespondida_prof() {
         return respondida_prof;

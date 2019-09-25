@@ -38,6 +38,7 @@ public class EvaluacionDAO extends ConnectionPool {
                     eval.setSemestre(rs.getInt("SEMESTRE"));
                     eval.setPorcentaje(rs.getDouble("PORCENTAJE"));
                     eval.setPorcentajeprofesor(rs.getDouble("PORCENTAJEPROFESOR"));
+                    eval.setCargado(rs.getBoolean("CARGADO"));
                     listaEvaluaciones.add(eval);
                 }
             }
@@ -47,6 +48,31 @@ public class EvaluacionDAO extends ConnectionPool {
             close(ps);
         }
         return listaEvaluaciones;
+    }
+    
+    public Evaluacion getEvaluacion(int semestre) {
+        CallableStatement ps = null;
+        ResultSet rs = null;
+        Evaluacion eval = new Evaluacion();
+        try {
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("evaluacion.get"));
+            ps.setString(1, "eval" + semestre);
+            rs = ps.executeQuery();
+            if (rs != null) {
+                while (rs.next()) {
+                    eval.setCodigo(rs.getString("CODIGO"));
+                    eval.setSemestre(rs.getInt("SEMESTRE"));
+                    eval.setPorcentaje(rs.getDouble("PORCENTAJE"));
+                    eval.setPorcentajeprofesor(rs.getDouble("PORCENTAJEPROFESOR"));
+                    eval.setCargado(rs.getBoolean("CARGADO"));
+                }
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        } finally {
+            close(ps);
+        }
+        return eval;
     }
     
     public Evaluacion addEvalucion(Evaluacion evaluacion) {

@@ -97,6 +97,8 @@ export class ResultadosComponent implements OnInit {
   totalTemaDocente: totalTem[] = [];
   public docente2: any;
   public usuario: any;
+  public tipo: any;
+  public semestre: any;
 
   constructor(private _service: HttpService, public dialog: MatDialog, private data: DataService) {
   }
@@ -391,12 +393,13 @@ export class ResultadosComponent implements OnInit {
 
       this._service.getPreguntas().map(response => response)
     .subscribe(res => {
+      console.log(res);
       this.preguntas = res;
     }, err => {
       console.log(err);
     });
 
-    this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1, this.pageEvent.pageSize, this.facultad, {})
+    /* this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1, this.pageEvent.pageSize, this.facultad, {})
       .map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
@@ -406,10 +409,11 @@ export class ResultadosComponent implements OnInit {
     this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
       .subscribe(res => {
         this.total = res;
-      });
+      }); */
     this._service.getTotalPreguntas().subscribe(resp => {
       this.totalPreguntas = resp;
       this.sortedDataPreguntas = this.totalPreguntas;
+      console.log(this.totalPreguntas);
     });
 
     this._service.getTotalTemas().subscribe(respuesta => {
@@ -557,7 +561,7 @@ export class ResultadosComponent implements OnInit {
   siguiente() {
     this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
       this.pageEvent.pageSize, this.facultad, { programa: this.programa ? this.programa : 0,
-         materia: this.materia ? this.materia : 0, cedula: '' }).map(response => response)
+         materia: this.materia ? this.materia : 0, cedula: '' }, this.semestre, this.tipo).map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
       }, err => {
@@ -569,27 +573,9 @@ export class ResultadosComponent implements OnInit {
   filtrar(): void {
     this.pageEvent.pageIndex = 0;
     this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
-      this.pageEvent.pageSize, this.facultad, { programa: this.programa ? this.programa : 0,
+      this.pageEvent.pageSize, this.facultad ? this.facultad : 0, { programa: this.programa ? this.programa : 0,
          materia: this.materia ? this.materia : 0,
-         cedula: this.docente ? this.docente : '' }).map(response => response)
-      .subscribe(res => {
-        this.arrayAsignaciones = res;
-        this.aDone = true;
-      }, err => {
-        console.log(err);
-      });
-
-      this._service.getAsigTotal(this.facultad, { programa: this.programa ? this.programa : 0,
-         materia: this.materia ? this.materia : 0, cedula: this.docente ? this.docente : '' }).map(response => response)
-      .subscribe(res => {
-        this.total = res;
-      });
-  }
-
-  public limpiar() {
-    this.pageEvent.pageIndex = 0;
-    this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
-      this.pageEvent.pageSize, this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
+         cedula: this.docente ? this.docente : ''}, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
         console.log(this.arrayAsignaciones);
@@ -598,10 +584,31 @@ export class ResultadosComponent implements OnInit {
         console.log(err);
       });
 
-    this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
+      this._service.getAsigTotal(this.facultad, { programa: this.programa ? this.programa : 0,
+         materia: this.materia ? this.materia : 0, cedula: this.docente ? this.docente : '' }, this.semestre? this.semestre: 0 , this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.total = res;
+        console.log(res);
       });
+  }
+
+  public limpiar() {
+    this.pageEvent.pageIndex = 0;
+    /* this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
+      this.pageEvent.pageSize, this.facultad, { programa: 0, materia: 0, cedula: '' }, this.semestre, this.tipo).map(response => response)
+      .subscribe(res => {
+        this.arrayAsignaciones = res;
+        console.log(this.arrayAsignaciones);
+        this.aDone = true;
+      }, err => {
+        console.log(err);
+      }); */
+
+    /* this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }, this.semestre? this.semestre : 0, 'ninguno').map(response => response)
+      .subscribe(res => {
+        this.total = res;
+      }); */
+      this.total = 0;
   }
   /* FIN FILTROS */
 
@@ -649,7 +656,12 @@ export class ResultadosComponent implements OnInit {
   // Fin Comentarios
 
   getnombre(numero) {
-    return this.preguntas.find(x => x.numero === numero).pregunta;
+    let pregunta = this.preguntas.find(x => x.numero === numero);
+    if(pregunta) {
+      return pregunta.pregunta;
+    } else {
+      return 'Pregunta';
+    }
   }
 
   // Exportar a excel
@@ -699,6 +711,8 @@ export class ResultadosComponent implements OnInit {
     this.programanombre = event['programanombre'];
     this.docente = event['docente'];
     this.materia = event['materia'];
+    this.semestre = event['semestre'];
+    this.tipo = event['tipo'];
     if(event['evento'] === 'limpiar') {
       this.limpiar();
     } else {

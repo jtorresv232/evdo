@@ -19,6 +19,9 @@ export class FiltrosAsignacionesComponent implements OnInit {
   public facultad = 0;
   public programa: any;
   public materia: any;
+  public semestre: any;
+  public tipo: any;
+
   @Output() infoFiltroEvento: EventEmitter<any> = new EventEmitter();
 
   constructor(private _service: HttpService) { }
@@ -84,6 +87,8 @@ export class FiltrosAsignacionesComponent implements OnInit {
     this.docente = null;
     this.programanombre = '';
     this.facultadnombre = '';
+    this.semestre = 0;
+    this.tipo = '';
     this.emitirInformacion('limpiar');
   }
 
@@ -94,7 +99,9 @@ export class FiltrosAsignacionesComponent implements OnInit {
       materia: this.materia,
       docente: this.docente,
       programanombre: this.programanombre,
-      facultadnombre: this.facultadnombre
+      facultadnombre: this.facultadnombre,
+      semestre: this.semestre,
+      tipo: this.tipo
     }
   }
 

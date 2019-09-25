@@ -11,6 +11,7 @@ import { TemasComponent } from './temas/temas.component';
 import { PuntosComponent } from './puntos/puntos.component';
 import { EditarCuestionarioComponent } from './editar-cuestionario/editar-cuestionario.component';
 import { AdministracionComponent } from './administracion/administracion.component';
+import { EvaluacionComponent } from './evaluacion/evaluacion.component';
 
 const routes: Routes = [
 {path: '', component: AdminComponent,
@@ -26,7 +27,8 @@ const routes: Routes = [
               {path: 'temas', component: TemasComponent},
               {path: 'puntos', component: PuntosComponent},
               {path: 'editar-encuesta/:id', component: EditarCuestionarioComponent},
-              {path: 'administracion', component: AdministracionComponent}
+              {path: 'administracion', component: AdministracionComponent},
+              {path: 'evaluaciones', component: EvaluacionComponent}
               ]}
             ];
 

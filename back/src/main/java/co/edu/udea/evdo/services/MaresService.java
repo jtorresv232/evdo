@@ -117,12 +117,12 @@ public class MaresService {
 
     @GET //Cambiar a tipo post
     @Path("docentes")
-    public Collection<DocenteMateriaGrupo> consultaDocentes(@QueryParam("materia") String materia, @QueryParam("grupo") String grupo) {
+    public Collection<DocenteMateriaGrupo> consultaDocentes(@QueryParam("materia") String materia, @QueryParam("grupo") String grupo, @QueryParam("semestre") String semestre) {
         Collection<DocenteMateriaGrupo> listaPrograsmaDeRol = new LinkedList<>();
 
         try {
             OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
-            wsClient.addParam("periodo", "20162");
+            wsClient.addParam("periodo", semestre);
             wsClient.addParam("codigoMateria", materia);
             wsClient.addParam("grupo", grupo);
             listaPrograsmaDeRol = wsClient.obtenerBean("consultardocentesmateriagrupomares", TOKEN, DocenteMateriaGrupo.class);
@@ -136,7 +136,7 @@ public class MaresService {
     @GET
     @Path("estudiantes/{materia}/{grupo}")
     @Produces(MediaType.APPLICATION_JSON)
-    public int getEstudiantes(@PathParam("materia") String materia, @PathParam("grupo") String grupo) {
+    public Collection<EstudianteMatriculado> getEstudiantes(@PathParam("materia") String materia, @PathParam("grupo") String grupo) {
         Collection<EstudianteMatriculado> listaEstudiantes = new LinkedList<>();
         System.out.println(listaEstudiantes.size());
         try {
@@ -148,7 +148,7 @@ public class MaresService {
             System.err.println(ex);
         }
 
-        return listaEstudiantes.size();
+        return listaEstudiantes;
     }
     
     @GET

@@ -26,6 +26,8 @@ import { ConfiguracionComponent } from './configuracion/configuracion.component'
 import { FiltrosAsignacionesComponent } from './filtros-asignaciones/filtros-asignaciones.component';
 import { DerivadasComponent } from './derivadas/derivadas.component';
 import { PopUpAgregarTemaComponent } from './pop-up-agregar-tema/pop-up-agregar-tema.component';
+import { EvaluacionComponent } from './evaluacion/evaluacion.component';
+import { PopUpAddEvaluacionComponent } from './pop-up-add-evaluacion/pop-up-add-evaluacion.component';
 
 
 @NgModule({
@@ -55,11 +57,13 @@ import { PopUpAgregarTemaComponent } from './pop-up-agregar-tema/pop-up-agregar-
      ConfiguracionComponent,
      FiltrosAsignacionesComponent,
      DerivadasComponent,
-     PopUpAgregarTemaComponent
+     PopUpAgregarTemaComponent,
+     EvaluacionComponent,
+     PopUpAddEvaluacionComponent
    ],
   schemas: [ NO_ERRORS_SCHEMA ],
   entryComponents: [DialogAddP, DialogEditAsig, DialogAddC, OpcionesComponent, ComentariosComponent, ConfirmacionComponent
-  ,PopUpAgregarUsuarioComponent, PopUpAgregarTemaComponent]
+  ,PopUpAgregarUsuarioComponent, PopUpAgregarTemaComponent, PopUpAddEvaluacionComponent]
 
 })
 export class AdministradorModule { }

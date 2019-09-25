@@ -82,8 +82,9 @@ export class HttpService {
     return this.http.get(this.url + 'encuestas/' + id);
   }
 
-  getAsignacionesFiltered(page, size, facultad, data): Observable<any> {
-    return this.http.post(this.url2 + 'asignaciones?page=' + page + '&size=' + size + '&facultad=' + facultad, data);
+  getAsignacionesFiltered(page, size, facultad, data, semestre, tipo): Observable<any> {
+    return this.http.post(this.url2 + 'asignaciones?page=' + page + '&size=' + size + '&facultad=' + facultad +
+    '&semestre=' + semestre + '&tipo=' + tipo, data);
   }
 
   updAllAsigs(facultad, data) {
@@ -94,8 +95,8 @@ export class HttpService {
     return this.http.post(this.url2 + 'asignaciones/updAllAsigsProf?facultad=' + facultad, data);
   }
 
-  getAsigTotal(facultad, data) {
-    return this.http.post(this.url2 + 'asignaciones/total?facultad=' + facultad, data);
+  getAsigTotal(facultad, data, semestre, tipo) {
+    return this.http.post(this.url2 + 'asignaciones/total?facultad=' + facultad + '&semestre=' + semestre + '&tipo=' + tipo, data);
   }
 
   notificarResultado(data) {
@@ -316,5 +317,25 @@ export class HttpService {
 
   getDerivadas(numero) {
     return this.http.get(this.url + 'derivadas/' + numero);
+  }
+
+  getEvaluacion(semestre) {
+    return this.http.get(this.url2 + 'evaluacion/' + semestre);
+  }
+
+  getEvaluaciones() {
+    return this.http.get(this.url2 + 'evaluacion/');
+  }
+
+  addEvaluacion(evaluacion) {
+    return this.http.post(this.url2 + 'evaluacion/', evaluacion);
+  }
+
+  updateEvaluacion(evaluacion) {
+    return this.http.put(this.url2 + 'evaluacion/' + evaluacion.codigo, evaluacion);
+  }
+
+  poblarCursos(semestre) {
+    return this.http.get(this.url2 + 'asignaciones/poblar?semestre=' + semestre);
   }
 }

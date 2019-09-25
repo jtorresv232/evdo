@@ -43,6 +43,10 @@ public class EvaluacionBL implements Serializable {
     public boolean updateEvaluacion(Evaluacion evaluacion) {
         return obtenerEvaluacionDAO().updateEvaluacion(evaluacion);
     }
+    
+    public Evaluacion getEvaluacion(int semestre) {
+        return obtenerEvaluacionDAO().getEvaluacion(semestre);
+    }
 
     private EvaluacionDAO obtenerEvaluacionDAO() {
         return new EvaluacionDAO();

@@ -1,0 +1,8 @@
+  <mat-form-field>
+      <input matInput placeholder="Semestre actual" [(ngModel)]="semestre">
+      <mat-hint>Escriba el semestre actual</mat-hint>
+  </mat-form-field>
+  <div style="display:flex">
+      <button mat-button (click)="close()">Cancelar</button>
+      <button mat-button (click)="confirmar()">Confirmar</button>
+  </div>

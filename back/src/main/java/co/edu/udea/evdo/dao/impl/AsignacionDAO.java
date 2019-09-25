@@ -133,6 +133,16 @@ public class AsignacionDAO extends ConnectionPool {
             ps.setDate(2, objeto.getFechaEncInicio());
             ps.setDate(3, objeto.getFechaEncFinal());
             ps.setLong(7, facultad);
+            if (objeto.getSemestre() > 0) {
+                ps.setLong(8, objeto.getSemestre());
+            } else {
+                ps.setString(8, null);
+            }
+            if (!objeto.getTipo_programa().equalsIgnoreCase("ninguno")) {
+                ps.setString(9, objeto.getTipo_programa());
+            } else {
+                ps.setString(9, null);
+            }
             ps.executeQuery();
         }catch (Exception e){
             logger.debug(e);
@@ -166,6 +176,16 @@ public class AsignacionDAO extends ConnectionPool {
             ps.setDate(2, objeto.getFechaEncprofInicio());
             ps.setDate(3, objeto.getFechaEncprofFinal());
             ps.setLong(7, facultad);
+            if (objeto.getSemestre() > 0) {
+                ps.setLong(8, objeto.getSemestre());
+            } else {
+                ps.setString(8, null);
+            }
+            if (!objeto.getTipo_programa().equalsIgnoreCase("ninguno")) {
+                ps.setString(9, objeto.getTipo_programa());
+            } else {
+                ps.setString(9, null);
+            }
             ps.executeQuery();
         }catch (Exception e){
             logger.debug(e);
@@ -175,7 +195,7 @@ public class AsignacionDAO extends ConnectionPool {
         }
     }
 
-    public int getTotalAsigs(long facultad, Asignacion objeto) {
+    public int getTotalAsigs(long facultad, Asignacion objeto, int semestre, String tipo) {
         CallableStatement ps = null;
         ResultSet rs = null;
         int total = 0;
@@ -201,6 +221,16 @@ public class AsignacionDAO extends ConnectionPool {
             } else {
                 ps.setString(3, null);
             }
+            if (semestre > 0) {
+                ps.setInt(6, semestre);
+            } else {
+                ps.setString(6, null);
+            }
+            if (!tipo.equalsIgnoreCase("ninguno")) {
+                ps.setString(7, tipo);
+            } else {
+                ps.setString(7, null);
+            }
             ps.registerOutParameter(4, OracleTypes.CURSOR);
             ps.executeQuery();
             rs = (ResultSet) ps.getObject(4);
@@ -216,7 +246,7 @@ public class AsignacionDAO extends ConnectionPool {
         return total;
     }
 
-    public Collection<Asignacion> getAsignaciones(int page, int size, long facultad, Asignacion objeto) {
+    public Collection<Asignacion> getAsignaciones(int page, int size, long facultad,int semestre, String tipo, Asignacion objeto) {
         CallableStatement ps = null;
         ResultSet rs = null;
         Collection<Asignacion> listaAsignaciones = new LinkedList<>();
@@ -242,6 +272,16 @@ public class AsignacionDAO extends ConnectionPool {
                 ps.setString(5, objeto.getCedula());
             } else {
                 ps.setString(5, null);
+            }
+            if (semestre > 0) {
+                ps.setInt(8, semestre);
+            } else {
+                ps.setString(8, null);
+            }
+            if (!tipo.equalsIgnoreCase("ninguno")) {
+                ps.setString(9, objeto.getTipo_programa());
+            } else {
+                ps.setString(9, null);
             }
 
             ps.setInt(1, page);

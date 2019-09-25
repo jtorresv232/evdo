@@ -68,7 +68,7 @@ public class TotalTemaBL implements Serializable {
         try{
             EncuestaClient cliente = new EncuestaClient();
         Resultados[] resultados = cliente.getResultados();
-        Collection<Asignacion> asignaciones = (Collection<Asignacion>)new AsignacionService().getAsignaciones(1, 5700, 0, new Asignacion()).getEntity();
+        Collection<Asignacion> asignaciones = (Collection<Asignacion>)new AsignacionService().getAsignaciones(1, 5700, 0, 0, "ninguno", new Asignacion()).getEntity();
         Collection<Tema> preguntas = (Collection<Tema>)new TemaService().getTemas().getEntity();
         TotalTema total;
         Asignacion asignacion;

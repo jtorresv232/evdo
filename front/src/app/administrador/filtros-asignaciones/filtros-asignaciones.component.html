@@ -1,4 +1,8 @@
 <div class="filters" style="display:flex; flex-wrap:wrap">
+  <mat-form-field class="example-full-width">
+    <input [maxlength]="5" (keypress)="numberOnly($event)"
+    matInput placeholder="Semestre" [(ngModel)]="semestre">
+  </mat-form-field>
   <mat-form-field>
     <input style="width:auto" type="text" matInput [ngModel]="facultadnombre" (ngModelChange)="changeFacultad($event)"
     [matAutocomplete]="autoFacultad" placeholder="Facultad">
@@ -26,6 +30,21 @@
   <mat-form-field class="example-full-width">
     <input [maxlength]="11" (keypress)="numberOnly($event)"
     matInput placeholder="Cedula docente" [(ngModel)]="docente">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Favorite food">
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{ food.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Tipo de programa" [(ngModel)]="tipo">
+      <mat-option value="MAESTRIA">MAESTRIA</mat-option>
+      <mat-option value="DOCTORAD">DOCTORADO</mat-option>
+      <mat-option value="ESPECIAL">ESPECIALIZACIÓN</mat-option>
+      <mat-option value="PREGRADO">PREGRADO</mat-option>
+    </mat-select>
   </mat-form-field>
   <button mat-button (click)="filtrar()">Filtrar</button>
   <button mat-button (click)="limpiar()">Limpiar</button>

@@ -79,7 +79,9 @@ export class PreguntasComponent implements OnInit {
     this.dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.misPreguntas.push(result);
-        location.reload();
+        this._service.addPreguntaEv({numero:result.numero, tema: result.tema, pregunta: result.pregunta}).subscribe(res=>{
+          console.log(res);
+        });
         this.openSnackBar('Se ha agregado la pregunta (' + result.numero + ') correctamente');
         } else {
           console.log('no hay nada que guardar');

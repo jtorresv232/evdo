@@ -16,6 +16,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -36,6 +37,19 @@ public class EvaluacionService implements Serializable{
         entity = new GenericEntity<Collection<Evaluacion>> (EvaluacionBL.getInstance().getEvaluaciones()){};
         if(entity.getEntity().isEmpty()) {
             throw new DataNotFoundException("No hay ninguna evaluación");
+        }
+        return Response.ok()
+                .entity(entity)
+                .build();
+    }
+    
+    @GET
+    @Path("/{semestre}")
+    public Response getEvaluacion(@PathParam("semestre") int semestre){
+        GenericEntity<Evaluacion> entity;
+        entity = new GenericEntity<Evaluacion> (EvaluacionBL.getInstance().getEvaluacion(semestre)){};
+        if(entity.getEntity().getCodigo() == null) {
+            throw new DataNotFoundException("No hay ninguna evaluación con codigo eval" + semestre);
         }
         return Response.ok()
                 .entity(entity)
