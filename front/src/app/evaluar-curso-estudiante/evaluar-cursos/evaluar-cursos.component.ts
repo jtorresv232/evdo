@@ -35,6 +35,8 @@ export class EvaluarCursosComponent implements OnInit {
   public facultades: any = [];
   public programas: any = [];
   public pDone = false;
+  public semestre: any;
+  public tipo: any;
 
   constructor(private _service: HttpService, public snackBar: MatSnackBar, public dialog: MatDialog,
     private _router: Router) { }
@@ -44,7 +46,7 @@ export class EvaluarCursosComponent implements OnInit {
     console.log(this.pageEvent);
     this.length = 0;
     this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
-      this.pageEvent.pageSize, this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
+      this.pageEvent.pageSize, this.facultad, { programa: 0, materia: 0, cedula: '' }, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
         console.log(this.arrayAsignaciones);
@@ -53,7 +55,7 @@ export class EvaluarCursosComponent implements OnInit {
         console.log(err);
       });
 
-    this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
+    this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.total = res;
       });
@@ -73,7 +75,7 @@ export class EvaluarCursosComponent implements OnInit {
   siguiente() {
     this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
       this.pageEvent.pageSize, this.facultad, { programa: this.programa ? this.programa : 0,
-         materia: this.materia ? this.materia : 0, cedula: '' }).map(response => response)
+         materia: this.materia ? this.materia : 0, cedula: '' }, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
       }, err => {
@@ -131,7 +133,7 @@ export class EvaluarCursosComponent implements OnInit {
     this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
       this.pageEvent.pageSize, this.facultad ? this.facultad : 0, { programa: this.programa ? this.programa : 0,
          materia: this.materia ? this.materia : 0,
-         cedula: this.docente ? this.docente : '' }).map(response => response)
+         cedula: this.docente ? this.docente : '' }, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
         console.log(this.arrayAsignaciones);
@@ -141,7 +143,7 @@ export class EvaluarCursosComponent implements OnInit {
       });
 
       this._service.getAsigTotal(this.facultad, { programa: this.programa ? this.programa : 0,
-         materia: this.materia ? this.materia : 0, cedula: this.docente ? this.docente : '' }).map(response => response)
+         materia: this.materia ? this.materia : 0, cedula: this.docente ? this.docente : '' }, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.total = res;
         console.log(res);
@@ -156,7 +158,7 @@ export class EvaluarCursosComponent implements OnInit {
     this.programanombre = '';
     this.pageEvent.pageIndex = 0;
     this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
-      this.pageEvent.pageSize, this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
+      this.pageEvent.pageSize, this.facultad, { programa: 0, materia: 0, cedula: '' }, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
         console.log(this.arrayAsignaciones);
@@ -165,7 +167,7 @@ export class EvaluarCursosComponent implements OnInit {
         console.log(err);
       });
 
-    this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }).map(response => response)
+    this._service.getAsigTotal(this.facultad, { programa: 0, materia: 0, cedula: '' }, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.total = res;
       });

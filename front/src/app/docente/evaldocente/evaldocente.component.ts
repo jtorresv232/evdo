@@ -48,12 +48,14 @@ export class EvaldocenteComponent implements OnInit {
   public totaltemasAsig: totalTem[] = [];
   public preguntas: any = [];
   public mostrar = false;
+  public semestre: any;
+  public tipo: any;
 
   constructor(private _service: HttpService) { }
 
   ngOnInit() {
       this._service.getFiltroUser()
-      .mergeMap(sesionUser => this._service.getAsignacionesFiltered(1, 100, 0, { programa: 0, materia: 0, cedula: sesionUser.ccid }))
+      .mergeMap(sesionUser => this._service.getAsignacionesFiltered(1, 100, 0, { programa: 0, materia: 0, cedula: sesionUser.ccid }, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno'))
       .subscribe(res => {
         this.asignaciones = res;
         this.aDone = true;
