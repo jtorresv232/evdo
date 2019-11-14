@@ -94,7 +94,7 @@ export class CrearEncuestaComponent implements OnInit {
       nombre: encuesta.get('nombre').value,
       fechaInicio: encuesta.get('fechaInicio').value,
       fechaTerminacion: encuesta.get('fechaFin').value,
-      evaluacion: 'eval20162'
+      evaluacion: 'eval20191'
     };
     this._service.addEncuesta(dat).subscribe(resultado => {
       console.log(resultado);
