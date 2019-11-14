@@ -360,7 +360,7 @@ export class AsignacionesComponent implements OnInit {
 
   perteneceFacultad(asignacion) {
     const programa = this.programas.find(x => x.programa === asignacion.programa);
-    if (programa.facultad === this.usuario.facultad) {
+    if (programa.facultad === this.usuario.facultad || this.usuario.rol === 'ADMINISTRADOR') {
       return true;
     } else {
       return false;
