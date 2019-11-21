@@ -107,7 +107,6 @@ public class AsignacionBL implements Serializable {
                         asignacion.setNombreDocente(docente.getNombreDocente());
                         asignacion.setNombreMateria(materia.getNombreMateria());
                         asignacion.setPrograma(materia.getPrograma());
-                        addAsignacion(asignacion);
                         grupo = new Grupo();
                         grupo.setSemestre(semestre);
                         grupo.setMateria(asignacion.getMateria());
@@ -117,6 +116,7 @@ public class AsignacionBL implements Serializable {
                         int numEstudiantes = ms.getEstudiantes(Long.toString(asignacion.getMateria()), Integer.toString(asignacion.getGrupo())).size();
                         grupo.setNumEstudiantes(numEstudiantes);
                         gbl.addGrupo(grupo);
+                        addAsignacion(asignacion);
                         sumaEstudiantes = sumaEstudiantes + numEstudiantes;
                         
                     }
