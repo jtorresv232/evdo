@@ -36,7 +36,7 @@
         <filter-class>co.edu.udea.oid.security.filter.SSOFilter</filter-class>
         <init-param>
             <param-name>aplicacion</param-name>
-            <param-value>Evaluacion docente</param-value>
+            <param-value>evaluaDocen</param-value>
         </init-param>
         <init-param>
             <param-name>exclude-resources</param-name>
