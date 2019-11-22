@@ -4,7 +4,7 @@
 
     <groupId>co.edu.udea.ciclo-academico</groupId>
 	<artifactId>evaluadocen</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<packaging>war</packaging>
 	<inceptionYear>2018</inceptionYear>
