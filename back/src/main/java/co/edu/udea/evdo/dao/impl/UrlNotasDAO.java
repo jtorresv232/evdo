@@ -20,6 +20,9 @@ import org.apache.log4j.Logger;
 import oracle.sql.ARRAY;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Arrays;
+import java.util.List;
+import org.apache.commons.lang.ArrayUtils;
 
 /**
  *
@@ -27,6 +30,8 @@ import java.sql.DriverManager;
  */
 public class UrlNotasDAO extends ConnectionPool{
     static final Logger logger = Logger.getLogger(UrlNotasDAO.class);
+    OracleConnection conn;
+    
     
     public UrlNotas getDatos(long semestre, long materia, int grupo, String cedula) {
         CallableStatement ps = null;
@@ -91,7 +96,7 @@ public class UrlNotasDAO extends ConnectionPool{
         return listaDatos;
     }
     
-    public Collection<UrlNotas> getTodos(long[] semestres, long[] materias, int[] grupos){
+    public Collection<UrlNotas> getTodos(String semestres, String materias, String grupos){
         CallableStatement ps = null;
         ResultSet rs = null;
         
@@ -103,17 +108,11 @@ public class UrlNotasDAO extends ConnectionPool{
             if(getConn().isWrapperFor(OracleConnection.class)){
             }
             ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("url.get.todos"));
-            ArrayDescriptor arrDescNum =
-            ArrayDescriptor.createDescriptor("EVALUADOCEN.EVDO_OBJ_NUM", getConn());
-            //ArrayDescriptor arrDescText =
-            //ArrayDescriptor.createDescriptor("EVALUADOCEN.EVDO_OBJ_ARRAY", getConn());
-            ARRAY semestresArray = new ARRAY(arrDescNum, getConn(), semestres);
-            ARRAY materiasArray = new ARRAY(arrDescNum, getConn(), materias);
-            ARRAY gruposarArray = new ARRAY(arrDescNum, getConn(), grupos);
+            
             //ARRAY cedulasArray = new ARRAY(arrDescText, getConn(), cedulas);
-            ps.setArray(1, semestresArray);
-            ps.setArray(2, materiasArray);
-            ps.setArray(3, gruposarArray);
+            ps.setString(1, semestres);
+            ps.setString(2, materias);
+            ps.setString(3, grupos);
             //ps.setArray(4, cedulasArray);
             ps.registerOutParameter(4, OracleTypes.CURSOR);
             ps.executeQuery();

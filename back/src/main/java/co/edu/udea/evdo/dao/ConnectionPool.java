@@ -33,10 +33,10 @@ public class ConnectionPool {
             } else {
                 if (dataSource == null) {
                     InitialContext initContext = new InitialContext();
-                    dataSource = (DataSource) initContext.lookup("java:comp/env/consultaevaluaDocen");
+                    dataSource = (DataSource) initContext.lookup("java:comp/env/jdbc/consultaevaluaDocen");
                 }
                 Class.forName("oracle.jdbc.OracleDriver");
-                con = DriverManager.getConnection("jdbc:oracle:thin:@172.19.0.8:1521:udeadev","evaluaDocen","evaluaDocen123");
+                con = dataSource.getConnection();
                 con.setAutoCommit(true);
             }
 
