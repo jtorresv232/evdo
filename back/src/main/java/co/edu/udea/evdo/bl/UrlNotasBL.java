@@ -129,7 +129,7 @@ public class UrlNotasBL implements Serializable{
                     lista.stream().filter(x -> x.getMateria()== item.getMateria())
                             .forEach(ins -> {
                                 resultado = resultado.concat("{\"cedula\":\"" + ins.getCedula() + "\"" + ",");
-                                resultado = resultado.concat("\"punto\":" + ins.getPunto() + ",");
+                                resultado = resultado.concat("\"punto\":" + 20 + ",");
                                 resultado = resultado.concat("\"metadato\":\"" + ins.getMetadato() + "\"" + ",");
                                 resultado = resultado + "\"encuesta\":\"" + ins.getEncuesta() + "\"}" + ",";
                             });
