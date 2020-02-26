@@ -254,7 +254,7 @@ export class AsignacionesComponent implements OnInit {
           materia: asig.materia,
           grupo: asig.grupo,
           cedula: asig.cedula,
-          encuesta: result.profesor.encuesta.identificacion,
+          encuesta: result.estudiantes.encuesta.identificacion,
           fechaEncInicio: fechaI,
           fechaEncFinal: fechaF
         };

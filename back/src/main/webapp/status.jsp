@@ -1,0 +1,1 @@
+<%= co.edu.udea.evdo.util.testConnection.getStatus()%>

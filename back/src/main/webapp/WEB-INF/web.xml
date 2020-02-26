@@ -3,7 +3,6 @@
     <servlet-mapping>
         <servlet-name>myServlet</servlet-name>
         <url-pattern>/services/*</url-pattern>
-        <url-pattern>/jonathan/*</url-pattern>
     </servlet-mapping>
     
     
@@ -32,12 +31,12 @@
         <res-auth>Container</res-auth>
     </resource-ref>
     
-<!--    <filter>
+    <filter>
         <filter-name>SSOFilter</filter-name>
         <filter-class>co.edu.udea.oid.security.filter.SSOFilter</filter-class>
         <init-param>
             <param-name>aplicacion</param-name>
-            <param-value>POSGRADOS</param-value>
+            <param-value>evaluaDocen</param-value>
         </init-param>
         <init-param>
             <param-name>exclude-resources</param-name>
@@ -49,11 +48,11 @@
         </init-param>
         <init-param>
             <param-name>tipoconexion</param-name>
-            <param-value>pruebas</param-value>
+            <param-value>produccion</param-value>
         </init-param>
     </filter>
     <filter-mapping>
         <filter-name>SSOFilter</filter-name>
         <url-pattern>/services/*</url-pattern>
-    </filter-mapping>-->
+    </filter-mapping>
 </web-app>

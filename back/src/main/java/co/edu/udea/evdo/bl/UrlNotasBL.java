@@ -12,10 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.eclipse.persistence.internal.jpa.parsing.jpql.antlr.JPQLParser;
 
 /**
  *
@@ -122,16 +120,16 @@ public class UrlNotasBL implements Serializable{
         Collection<Object> listos = new ArrayList<>();
         
         if(!lista.isEmpty()){
-            materias.stream().forEach(materia -> {
-                if(!listos.contains(materia)){
-                    listos.add(materia);
-                    resultado = resultado.concat("{\"materia\":" + materia + ",");
+            lista.stream().forEach(item -> {
+                if(!listos.contains(item.getMateria())){
+                    listos.add(item.getMateria());
+                    resultado = resultado.concat("{\"materia\":" + item.getMateria() + ",");
                     resultado = resultado.concat("\"datos\":");
                     resultado = resultado.concat("[");
-                    lista.stream().filter(x -> x.getMateria()== Long.parseLong(materia))
+                    lista.stream().filter(x -> x.getMateria()== item.getMateria())
                             .forEach(ins -> {
                                 resultado = resultado.concat("{\"cedula\":\"" + ins.getCedula() + "\"" + ",");
-                                resultado = resultado.concat("\"punto\":" + ins.getPunto() + ",");
+                                resultado = resultado.concat("\"punto\":" + 20 + ",");
                                 resultado = resultado.concat("\"metadato\":\"" + ins.getMetadato() + "\"" + ",");
                                 resultado = resultado + "\"encuesta\":\"" + ins.getEncuesta() + "\"}" + ",";
                             });

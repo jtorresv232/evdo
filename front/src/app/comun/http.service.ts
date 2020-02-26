@@ -10,10 +10,12 @@ export class HttpService {
 
   /* private url = 'http://wastest.udea.edu.co:9085/encuesta/webapi/';
   private url2 = 'http://wastest.udea.edu.co:9085/evaluacion/services/'; */
-  private url = 'http://localhost:8084/encuesta/webapi/';
-  private url2 = 'http://localhost:8084/evaluacion/services/';
+  /* private url = 'http://localhost:8084/encuesta/webapi/';
+  private url2 = 'http://localhost:8084/evaluacion/services/'; */
   /* private url = 'http://wasquality.udea.edu.co:29000/encuesta/webapi/';
   private url2 = 'http://wasquality.udea.edu.co:29000/evaluacion/services/'; */
+  private url = 'https://asone.udea.edu.co/encuestas-admin/webapi/';
+  private url2 = 'https://asone.udea.edu.co/evaluacion/services/';
 
   constructor(private http: HttpClient) { }
 
