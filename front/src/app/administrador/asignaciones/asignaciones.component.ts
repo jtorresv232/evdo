@@ -254,7 +254,7 @@ export class AsignacionesComponent implements OnInit {
           materia: asig.materia,
           grupo: asig.grupo,
           cedula: asig.cedula,
-          encuesta: result.profesor.encuesta.identificacion,
+          encuesta: result.estudiantes.encuesta.identificacion,
           fechaEncInicio: fechaI,
           fechaEncFinal: fechaF
         };
@@ -312,6 +312,7 @@ export class AsignacionesComponent implements OnInit {
   }
 
   filtrar(): void {
+    console.log(this.semestre, this.tipo);
     this.pageEvent.pageIndex = 0;
     this._service.getAsignacionesFiltered(this.pageEvent.pageIndex + 1,
       this.pageEvent.pageSize, this.facultad ? this.facultad : 0, { programa: this.programa ? this.programa : 0,
@@ -319,7 +320,7 @@ export class AsignacionesComponent implements OnInit {
          cedula: this.docente ? this.docente : ''}, this.semestre? this.semestre: 0, this.tipo? this.tipo : 'ninguno').map(response => response)
       .subscribe(res => {
         this.arrayAsignaciones = res;
-        console.log(this.arrayAsignaciones);
+        console.log(this.arrayAsignaciones.length);
         this.aDone = true;
       }, err => {
         console.log(err);
@@ -360,7 +361,7 @@ export class AsignacionesComponent implements OnInit {
 
   perteneceFacultad(asignacion) {
     const programa = this.programas.find(x => x.programa === asignacion.programa);
-    if (programa.facultad === this.usuario.facultad) {
+    if (programa.facultad === this.usuario.facultad || this.usuario.rol === 'ADMINISTRADOR') {
       return true;
     } else {
       return false;

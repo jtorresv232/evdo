@@ -84,11 +84,11 @@ export class DialogAddP implements OnInit {
       this._service.addPregunta(datos).subscribe(data => {
         resNumero = data['numero'];
         console.log(data);
-        /* this._service.addPreguntaEv({
+        this._service.addPreguntaEv({
           numero: data['numero'],
           pregunta: data['pregunta'],
           tema: data['tema']
-        }); */
+        });
         if(this.opciones.length > 0) {
           console.log(this.opciones.value);
           let opcionesData = this.opciones.value.map(x => x = {numero: data['numero'], texto: x.texto, mixta: x.mixta? 'SI' : 'NO'});

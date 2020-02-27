@@ -193,8 +193,12 @@ export class EditarCuestionarioComponent implements OnInit {
   agregarPreguntas(preguntas, encuesta) {
     let ord = 0;
     let i = 1;
-    for (const pregunta of preguntas) {
-      console.log(pregunta);
+    let calls = [];
+    let pregs = [];
+    let secciones = [];
+    let seccs = 0;
+    // let i = preguntas.length - 1; i >= 0; i--
+    for (let pregunta of preguntas) {
       ord = ord + 1;
       const datos = {
         punto: encuesta.get('punto').value,
@@ -203,13 +207,48 @@ export class EditarCuestionarioComponent implements OnInit {
         orden: ord,
         obligatoriedad: (pregunta.get('obligatoria').value) ? 'OBLIGATORIA' : 'OPCIONAL'
       };
-      console.log(datos);
+
+      if (pregunta.get('esSeccion').value) {
+        seccs = seccs + 1;
+        const seccionDatos = {
+          texto: pregunta.get('seccion').value,
+          seccion: seccs,
+          punto: encuesta.get('punto').value,
+          identificacion: encuesta.get('identificacion').value,
+          preguntaDondeArranca: pregunta.get('pregunta').value
+        };
+        secciones.push(seccionDatos);
+      }
+      /* const datos = {
+        punto: encuesta.get('punto').value,
+        identificacion: encuesta.get('identificacion').value,
+        numero: preguntas[i].get('pregunta').value,
+        orden: ord,
+        obligatoriedad: (preguntas[i].get('obligatoria').value) ? 'OBLIGATORIA' : 'OPCIONAL'
+      } */
+      pregs.push(datos);
+      //ord = ord -1;
+      /* console.log(datos);
       this._service.addPxC(datos).subscribe(resul => {
+        console.log(resul);
         this.addSeccion(pregunta,encuesta, i);
         i = i + 1;
-      });
+      }); */
+      /* calls.push(this._service.addPxC(datos)); */
       
     }
+    console.log(pregs)
+    if (secciones.length > 0) {
+      this._service.addPxC(pregs).map(res => res)
+      .mergeMap(respuesta => this._service.addSeccion(secciones))
+      .subscribe(resp => {
+        console.log(resp);
+      });
+    } else {
+      this._service.addPxC(pregs).subscribe(resp => console.log(resp));
+    }
+    /* console.log(calls);
+    Observable.forkJoin(calls).subscribe(responses => console.log(responses)); */
   }
 
   addSeccion(pregunta, encuesta, i) {

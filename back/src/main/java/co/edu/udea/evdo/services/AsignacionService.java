@@ -131,12 +131,15 @@ public class AsignacionService implements Serializable {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response poblarAsignaciones(@QueryParam("semestre")int semestre) {
-        AsignacionBL.getInstance().poblarAsignaciones(semestre);
         GenericEntity<SuccessMessage> entity;
-        entity = new GenericEntity<SuccessMessage> (new SuccessMessage("Se ha ejecutado el procedimiento correctamente")){};
+        String resultadoQuery = AsignacionBL.getInstance().cargarAsignacionSemestre(semestre);
+        if("".equals(resultadoQuery)) {
+           entity = new GenericEntity<SuccessMessage> (new SuccessMessage("Se ha ejecutado el procedimiento correctamente")){};
         return Response.ok()
                 .entity(entity)
-                .build();
-        
+                .build(); 
+        } else {
+            throw new DataNotFoundException("No se han podido cargar las asignaciones" + ", " + resultadoQuery);
+        }
     }
 }

@@ -12,10 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.eclipse.persistence.internal.jpa.parsing.jpql.antlr.JPQLParser;
 
 /**
  *
@@ -65,9 +63,13 @@ public class UrlNotasBL implements Serializable{
     }
     
     public String getAllData(String datos) {
-        List<Long> semestres = new ArrayList<>();
-        Collection<Long> materias = new ArrayList<>();
-        Collection<Integer> grupos = new ArrayList<>();
+        List<String> semestres = new ArrayList<>();
+        List<String> materias = new ArrayList<>();
+        List<String> grupos = new ArrayList<>();
+        
+        String semestresString = "-";
+        String materiasString = "-";
+        String gruposString = "-";
         //Collection<String> profesores = new ArrayList<>();
         Collection<String> total = new ArrayList<>();
         Collection<String> asignacionesArray = Stream.of(datos.split(","))
@@ -84,36 +86,50 @@ public class UrlNotasBL implements Serializable{
         AtomicInteger count = new AtomicInteger(1);
         
         total.forEach(element -> {
+            System.out.println(element);
             int contador  = count.getAndIncrement();
-            if(contador == 1) {semestres.add(Long.valueOf(element));}
-            if(contador == 2) {materias.add(Long.valueOf(element));}
-            if(contador == 3) {grupos.add(Integer.valueOf(element));count.set(1);}
+            if(contador == 1) {semestres.add(element); }
+            if(contador == 2) {materias.add(element);}
+            if(contador == 3) {grupos.add(element);count.set(1);}
             //if(contador == 4) {profesores.add(element); count.set(1);}
         });
         
-        long[] semestresArray = semestres.stream().mapToLong(l -> l).toArray();
-        long[] materiasArray = materias.stream().mapToLong(l -> l).toArray();
-        int[] gruposArray = grupos.stream().mapToInt(l -> l).toArray();
+        for(String semestre : semestres) {
+            semestresString = semestresString + semestre + "-";
+        }
+        
+        for(String materia : materias) {
+            materiasString = materiasString + materia + "-";
+        }
+        
+        for(String grupo : grupos) {
+            gruposString = gruposString + grupo + "-";
+        }
+        
+        System.out.println(semestresString);
+        System.out.println(materiasString);
+        System.out.println(gruposString);
+        
        // String[] profesoresArray = new String[profesores.size()];
         //profesoresArray = profesores.toArray(profesoresArray);
         
         Stream.of(materias).forEach(element-> System.out.println(element));
-        Collection<UrlNotas> lista = obtenerUrlNotasDAO().getTodos(semestresArray, materiasArray, gruposArray);
+        Collection<UrlNotas> lista = obtenerUrlNotasDAO().getTodos(semestresString, materiasString, gruposString);
         
         resultado = "[";
         Collection<Object> listos = new ArrayList<>();
         
         if(!lista.isEmpty()){
-            materias.stream().forEach(materia -> {
-                if(!listos.contains(materia)){
-                    listos.add(materia);
-                    resultado = resultado.concat("{\"materia\":" + materia + ",");
+            lista.stream().forEach(item -> {
+                if(!listos.contains(item.getMateria())){
+                    listos.add(item.getMateria());
+                    resultado = resultado.concat("{\"materia\":" + item.getMateria() + ",");
                     resultado = resultado.concat("\"datos\":");
                     resultado = resultado.concat("[");
-                    lista.stream().filter(x -> x.getMateria()== materia)
+                    lista.stream().filter(x -> x.getMateria()== item.getMateria())
                             .forEach(ins -> {
                                 resultado = resultado.concat("{\"cedula\":\"" + ins.getCedula() + "\"" + ",");
-                                resultado = resultado.concat("\"punto\":" + ins.getPunto() + ",");
+                                resultado = resultado.concat("\"punto\":" + 20 + ",");
                                 resultado = resultado.concat("\"metadato\":\"" + ins.getMetadato() + "\"" + ",");
                                 resultado = resultado + "\"encuesta\":\"" + ins.getEncuesta() + "\"}" + ",";
                             });

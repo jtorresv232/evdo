@@ -22,6 +22,16 @@ public class Comentario implements Serializable{
     private int materia;
     private int grupo;
     private String cedula;
+    private int programa;
+
+    public int getPrograma() {
+        return programa;
+    }
+
+    public void setPrograma(int programa) {
+        this.programa = programa;
+    }
+    
 
     public int getCodigo() {
         return codigo;
