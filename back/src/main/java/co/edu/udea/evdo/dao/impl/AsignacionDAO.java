@@ -399,6 +399,23 @@ public class AsignacionDAO extends ConnectionPool {
         return asignacion;
     }
     
+    public String cargarAsignacionesSemestre(long semestre) {
+        CallableStatement ps= null;
+        ResultSet rs= null;
+        String resultado = "";
+        try {
+            ps = getConn().prepareCall(Properties.getInstance().getEvaluacionProperties().getString("asignacion.cargar.sem"));
+            ps.setLong(1, semestre);
+            ps.registerOutParameter(2, OracleTypes.VARCHAR);
+            ps.executeQuery();
+            resultado = ps.getObject(2).toString();
+        }catch(Exception e){
+            logger.error(e);
+        }
+        
+        return resultado;
+    }
+    
     public Asignacion updateAsignacionProf(Asignacion asig) {
         CallableStatement ps = null;
         ResultSet rs = null;

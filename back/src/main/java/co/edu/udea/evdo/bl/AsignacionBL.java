@@ -143,6 +143,10 @@ public class AsignacionBL implements Serializable {
     public Asignacion updateAsignacionProf(Asignacion asignacion) {
         return obtenerAsignacionDAO().updateAsignacionProf(asignacion);
     }
+    
+    public String cargarAsignacionSemestre(long semestre) {
+        return obtenerAsignacionDAO().cargarAsignacionesSemestre(semestre);
+    }
 
     public Asignacion updatePorcentaje(Asignacion asignacion) {
         return obtenerAsignacionDAO().updatePorcentaje(asignacion);
