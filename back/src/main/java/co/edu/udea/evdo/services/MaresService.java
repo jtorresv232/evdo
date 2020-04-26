@@ -105,7 +105,7 @@ public class MaresService {
 
         try {
             OrgSistemasWebServiceClient wsClient = new OrgSistemasWebServiceClient(true);
-            wsClient.addParam("dodigoMateria", materia);
+            wsClient.addParam("codigoMateria", materia);
             //wsClient.addParam("programa", "504");
             listaPrograsmaDeRol = wsClient.obtenerBean("consultarprogramasdemateriamares", TOKEN, ProgramaMares.class);
         } catch (OrgSistemasSecurityException ex) {
