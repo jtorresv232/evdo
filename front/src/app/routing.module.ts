@@ -3,7 +3,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { ConexionMisNotasComponent } from './conexion-mis-notas/conexion-mis-notas.component';
 
 const routes: Routes = [
-{path: '', redirectTo: '/login', pathMatch: 'full'},
+{path: '', redirectTo: '/admin', pathMatch: 'full'},
 {path: 'evaluar', redirectTo: '/evaluar', pathMatch: 'full'},
 {path: 'admin', redirectTo: '/admin', pathMatch: 'full'},
 {path: 'docente', redirectTo: '/docente', pathMatch: 'full'},
